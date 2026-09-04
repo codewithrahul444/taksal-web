@@ -1,15 +1,18 @@
 # Hosting & Deployment Guide — Taksal Studio Website
 
-This comprehensive guide outlines step-by-step instructions to deploy the production-ready **Taksal Studio** official website (`https://cardmint.app`) across modern static hosting providers.
+This comprehensive guide outlines step-by-step instructions to deploy the production-ready **Taksal Studio** official website (`https://cardmint.app`) to **Cloudflare Pages** (Option A) with your verified **`app-ads.txt`** file, custom headers, and clean URL rewrites.
 
-Because the website is built with clean, semantic HTML5, CSS3 custom properties, and vanilla JavaScript without heavy framework dependencies, it requires **zero server-side runtime**, achieves near-instant TTFB (Time to First Byte), and can be hosted for **$0/month** on high-performance global CDNs.
+Because the website is built with clean, semantic HTML5, CSS3 custom properties, and vanilla JavaScript without heavy framework dependencies, it requires **zero server-side runtime**, achieves near-instant TTFB (Time to First Byte), and can be hosted for **$0/month** on Cloudflare's global edge network.
 
 ---
 
 ## Pre-Flight Verification Checklist
 
-Before publishing, verify the following files are in place in `/home/rahullagariya/AndroidStudioProjects/Taksal Web`:
+All required files are verified in `/home/rahullagariya/AndroidStudioProjects/Taksal Web`:
 
+- [x] `app-ads.txt` (Contains: `google.com, pub-7030166934019393, DIRECT, f08c47fec0942fa0`)
+- [x] `_headers` (Cloudflare Pages custom HTTP headers: MIME type for `app-ads.txt`, security headers, static caching)
+- [x] `_redirects` (Clean URL rewrites for `/privacy`, `/terms`, `/features`, `/about`, `/support`, `/faq`, `/contact`)
 - [x] `index.html` (Home Page)
 - [x] `features.html` (Deep-Dive Features & Modules)
 - [x] `about.html` (Philosophy, Architecture & Story)
@@ -28,185 +31,132 @@ Before publishing, verify the following files are in place in `/home/rahullagari
 
 ---
 
-## Hosting Option A: Cloudflare Pages (Recommended)
+## Option A: Cloudflare Pages Deployment (Step-by-Step)
 
 Cloudflare Pages provides the world's fastest Edge network, automatic Brotli compression, free wildcard SSL, and DDoS mitigation.
 
-### Step 1: Push Code to Git
-Initialize a Git repository inside the website root:
+### Method 1: Git Integration (Recommended for Continuous Deployment)
+
+#### Step 1: Create a GitHub Repository
+1. Go to [github.com/new](https://github.com/new) and create a repository named `taksal-web` (Public or Private).
+2. Push your local code from `/home/rahullagariya/AndroidStudioProjects/Taksal Web`:
+   ```bash
+   cd "/home/rahullagariya/AndroidStudioProjects/Taksal Web"
+   git remote add origin git@github.com:codewithrahul444/taksal-web.git
+   git push -u origin main
+   ```
+   *(Or use HTTPS: `https://github.com/codewithrahul444/taksal-web.git`)*
+
+#### Step 2: Connect to Cloudflare Pages
+1. Log in to your **Cloudflare Dashboard** ([dash.cloudflare.com](https://dash.cloudflare.com/)).
+2. In the left navigation, click **Compute (Workers & Pages)** > **Pages** (or **Workers & Pages** > **Create application** > **Pages**).
+3. Select **Connect to Git** and choose your repository: `codewithrahul444/taksal-web`.
+4. Configure Build Settings:
+   - **Project name:** `taksal-web` (or `cardmint`)
+   - **Production branch:** `main`
+   - **Framework preset:** `None`
+   - **Build command:** *(Leave completely blank)*
+   - **Build output directory:** `/` (or leave empty)
+5. Click **Save and Deploy**. Cloudflare will deploy your site in ~15 seconds to a live URL like `https://taksal-web.pages.dev`.
+
+---
+
+### Method 2: Direct CLI Deployment with Wrangler (Zero Git Required)
+
+If you prefer to deploy immediately from your terminal without pushing to GitHub first:
 ```bash
 cd "/home/rahullagariya/AndroidStudioProjects/Taksal Web"
-git init
-git add .
-git commit -m "feat: Initial release of Taksal Studio official website v3.0.0"
-git remote add origin git@github.com:your-username/taksal-web.git
-git branch -M main
-git push -u origin main
+npx wrangler pages deploy . --project-name=taksal-web
+```
+Wrangler will prompt you to authenticate with Cloudflare in your browser once, create the project, and upload all static files directly.
+
+---
+
+## Custom Domain Setup (`cardmint.app`)
+
+To connect your own apex domain and `www` subdomain:
+
+1. In your Cloudflare Pages project dashboard, click the **Custom domains** tab.
+2. Click **Set up a custom domain**.
+3. Enter `cardmint.app` and click **Continue**.
+4. If your domain's DNS is managed on Cloudflare:
+   - Cloudflare will automatically configure the CNAME record (with CNAME flattening at apex).
+5. If your domain is registered on another registrar (Namecheap, GoDaddy, Google Domains / Squarespace):
+   - Add the following DNS record in your registrar's DNS panel:
+     - **Type:** `CNAME`
+     - **Name:** `@` (or `cardmint.app`)
+     - **Target / Value:** `taksal-web.pages.dev`
+     - **Proxy status:** Proxied (if using Cloudflare DNS) or DNS only
+   - Repeat for `www`:
+     - **Type:** `CNAME`
+     - **Name:** `www`
+     - **Target / Value:** `taksal-web.pages.dev`
+6. Cloudflare automatically issues and renews a free universal SSL/TLS certificate.
+
+---
+
+## Verifying `app-ads.txt` for Google AdMob
+
+Google AdMob requires `app-ads.txt` to verify app ownership and protect your ad revenue from unauthorized inventory spoofing.
+
+### 1. Test in Browser / Terminal
+Once deployed, verify that `app-ads.txt` is publicly accessible at your root domain:
+```bash
+curl -I https://cardmint.app/app-ads.txt
+```
+Expected response:
+```http
+HTTP/2 200
+content-type: text/plain; charset=utf-8
+cache-control: public, max-age=3600
+access-control-allow-origin: *
+```
+And check file content:
+```bash
+curl https://cardmint.app/app-ads.txt
+```
+Output:
+```
+google.com, pub-7030166934019393, DIRECT, f08c47fec0942fa0
 ```
 
-### Step 2: Connect to Cloudflare Pages
-1. Log in to your **Cloudflare Dashboard** (`dash.cloudflare.com`).
-2. Go to **Workers & Pages** > **Create application** > **Pages** > **Connect to Git**.
-3. Select the repository `taksal-web`.
-4. Configure Build Settings:
-   - **Framework preset:** `None`
-   - **Build command:** *(Leave empty)*
-   - **Build output directory:** `/` (or root directory)
-5. Click **Save and Deploy**. Your site will be live on a `*.pages.dev` subdomain in less than 30 seconds.
+### 2. Configure Google Play Developer Console
+Google AdMob discovers your `app-ads.txt` URL by looking up the **Developer Website** listed on your Google Play Store store listing.
 
-### Step 3: Configure Custom Apex & Subdomain
-1. In the Cloudflare Pages project, click **Custom domains** > **Set up a domain**.
-2. Enter `cardmint.app` and `www.cardmint.app`.
-3. Cloudflare will automatically route DNS records (CNAME flattening) and provision an edge SSL certificate.
+1. Open [Google Play Console](https://play.google.com/console).
+2. Select your app: **Taksal** (`com.card.mint.cardbuilder`).
+3. Navigate to **Grow** > **Store presence** > **Store settings**.
+4. In the **Store listing contact details** section:
+   - **Website:** Enter `https://cardmint.app` (or your exact custom domain).
+5. Navigate to **Policy and programs** > **App content** > **Privacy Policy**:
+   - **Privacy Policy URL:** Enter `https://cardmint.app/privacy.html`.
+6. Click **Save**.
 
----
-
-## Hosting Option B: GitHub Pages
-
-GitHub Pages is simple and free directly from your repository.
-
-### Step 1: Push Repository
-Push your code to GitHub as shown in Option A.
-
-### Step 2: Enable GitHub Pages
-1. On GitHub, navigate to your repository **Settings** > **Pages**.
-2. Under **Build and deployment**:
-   - **Source:** `Deploy from a branch`
-   - **Branch:** `main` / `root (/)`
-3. Click **Save**.
-
-### Step 3: Custom Domain & Enforce HTTPS
-1. In the **Custom domain** field, enter `cardmint.app`.
-2. Add a `CNAME` file in the root if not generated automatically:
-   ```bash
-   echo "cardmint.app" > CNAME
-   ```
-3. Check the box for **Enforce HTTPS** (takes a few minutes to issue certificate).
+### 3. Check Status in Google AdMob Dashboard
+1. Open [Google AdMob](https://admob.google.com/).
+2. In the left sidebar, click **Apps** > **View all apps**.
+3. Click the **app-ads.txt** tab at the top.
+4. Locate `Taksal` (`com.card.mint.cardbuilder`).
+5. Click **Check for updates**. Google's crawler will verify:
+   - `https://cardmint.app/app-ads.txt`
+   - Publisher ID: `pub-7030166934019393`
+   - Status changes from *"Needs attention"* to **"Authorized"** (green checkmark).
 
 ---
 
-## Hosting Option C: Netlify
+## Other Hosting Alternatives (Quick Reference)
 
-Netlify offers instant drag-and-drop deployment or Git integration.
+### Option B: GitHub Pages
+1. On GitHub, navigate to repository **Settings** > **Pages**.
+2. Set Source to `Deploy from a branch` (`main` / `/root`).
+3. Enter `cardmint.app` under Custom domain, and check **Enforce HTTPS**.
 
-### Method 1: Instant Drag & Drop (Zero Git Required)
-1. Log in to `app.netlify.com`.
-2. Open the **Sites** tab and scroll to the bottom.
-3. Drag the entire `/home/rahullagariya/AndroidStudioProjects/Taksal Web` folder directly into the Netlify browser drop target.
-4. Your website is deployed instantly!
+### Option C: Netlify
+1. Drag the entire `/home/rahullagariya/AndroidStudioProjects/Taksal Web` folder into `app.netlify.com/drop`.
+2. Connect custom domain in **Domain management**.
 
-### Method 2: Git Continuous Deployment
-1. Click **Add new site** > **Import an existing project**.
-2. Connect your GitHub/GitLab account and choose `taksal-web`.
-3. Leave build command blank, publish directory set to `.`.
-4. Click **Deploy Site**.
-
----
-
-## Hosting Option D: Custom Linux VPS (Nginx on Ubuntu / Debian)
-
-If hosting on an independent virtual private server (e.g. DigitalOcean, AWS EC2, Linode, or Hetzner):
-
-### Step 1: Install Nginx & Certbot
+### Option D: Custom Linux Nginx VPS
 ```bash
-sudo apt update
-sudo apt install -y nginx certbot python3-certbot-nginx
-```
-
-### Step 2: Copy Site Files to Webroot
-```bash
-sudo mkdir -p /var/www/cardmint.app
 sudo cp -r "/home/rahullagariya/AndroidStudioProjects/Taksal Web/"* /var/www/cardmint.app/
-sudo chown -R www-data:www-data /var/www/cardmint.app
-sudo chmod -R 755 /var/www/cardmint.app
+sudo certbot --nginx -d cardmint.app -d www.cardmint.app
 ```
-
-### Step 3: Nginx VirtualHost Configuration
-Create `/etc/nginx/sites-available/cardmint.app`:
-```nginx
-server {
-    listen 80;
-    listen [::]:80;
-    server_name cardmint.app www.cardmint.app;
-
-    root /var/www/cardmint.app;
-    index index.html;
-
-    # Security Headers
-    add_header X-Frame-Options "SAMEORIGIN" always;
-    add_header X-Content-Type-Options "nosniff" always;
-    add_header Referrer-Policy "strict-origin-when-cross-origin" always;
-    add_header Content-Security-Policy "default-src 'self' https: data: 'unsafe-inline';" always;
-
-    # Static Asset Caching (1 Year for images/fonts)
-    location ~* \.(webp|png|jpg|jpeg|svg|ico|woff2)$ {
-        expires 1y;
-        add_header Cache-Control "public, no-transform, immutable";
-    }
-
-    # CSS & JavaScript Caching (7 Days)
-    location ~* \.(css|js)$ {
-        expires 7d;
-        add_header Cache-Control "public, must-revalidate";
-    }
-
-    location / {
-        try_files $uri $uri/ =404;
-    }
-}
-```
-
-Enable site and restart Nginx:
-```bash
-sudo ln -s /etc/nginx/sites-available/cardmint.app /etc/nginx/sites-enabled/
-sudo nginx -t
-sudo systemctl restart nginx
-```
-
-### Step 4: Issue Free SSL Certificate with Let's Encrypt
-```bash
-sudo certbot --nginx -d cardmint.app -d www.cardmint.app --agree-tos --email support@cardmint.app
-```
-Certbot will configure automatic renewal via systemd timer.
-
----
-
-## Domain DNS Configuration Reference
-
-Point your domain registrar (Namecheap, GoDaddy, Google Domains / Squarespace) to your host using standard DNS records:
-
-### For Cloudflare Pages or Netlify
-| Type | Host | Value / Target | TTL |
-| :--- | :--- | :--- | :--- |
-| **CNAME** | `@` (or ALIAS/ANAME) | `your-site.pages.dev` (or `your-site.netlify.app`) | Auto |
-| **CNAME** | `www` | `your-site.pages.dev` (or `your-site.netlify.app`) | Auto |
-
-### For GitHub Pages
-| Type | Host | Value | TTL |
-| :--- | :--- | :--- | :--- |
-| **A** | `@` | `185.199.108.153` | 3600 |
-| **A** | `@` | `185.199.109.153` | 3600 |
-| **A** | `@` | `185.199.110.153` | 3600 |
-| **A** | `@` | `185.199.111.153` | 3600 |
-| **CNAME** | `www` | `your-username.github.io` | 3600 |
-
-### For Custom Linux VPS
-| Type | Host | Value | TTL |
-| :--- | :--- | :--- | :--- |
-| **A** | `@` | `<YOUR_SERVER_PUBLIC_IP>` | 300 |
-| **A** | `www` | `<YOUR_SERVER_PUBLIC_IP>` | 300 |
-
----
-
-## Post-Deployment Verification
-
-1. **Test SSL / HTTPS:** Open `https://cardmint.app` and confirm the browser displays a secure lock icon without mixed-content warnings.
-2. **Test Responsive Layout:** Test page rendering across Mobile (375px), Tablet (768px), and Desktop (1200px+).
-3. **Verify Lightbox & Forms:** Confirm screenshot lightbox modal opens cleanly and the contact form validates input.
-4. **Submit Sitemap to Google Search Console:**
-   - Open `search.google.com/search-console`.
-   - Add property `https://cardmint.app`.
-   - Submit sitemap URL: `https://cardmint.app/sitemap.xml`.
-5. **Update Google Play Store Console:**
-   - Under **App Content** > **Privacy Policy**, paste: `https://cardmint.app/privacy.html`.
-   - Under **Store Listing** > **Website**, enter: `https://cardmint.app/`.
