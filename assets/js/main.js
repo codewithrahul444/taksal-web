@@ -409,7 +409,7 @@
   syncPlatformShortcuts();
 
   // ==========================================================================
-  // 5. INTERACTIVE 3D BUSINESS CARD STUDIO & REAL SVG/vCARD EXPORT
+  // 5. INTERACTIVE 3D BUSINESS CARD STUDIO & REAL SVG/PNG/vCARD EXPORT
   // ==========================================================================
   const card3D = document.getElementById('interactiveBusinessCard');
   if (card3D) {
@@ -420,6 +420,7 @@
     const cardEmailEl = document.getElementById('cardPreviewEmail');
     const cardTaglineEl = document.getElementById('cardPreviewTagline');
     const cardBackCompanyEl = document.getElementById('cardBackCompanyName');
+    const cardBackTaglineEl = document.getElementById('cardBackTagline');
 
     const inputName = document.getElementById('inputCardName');
     const inputTitle = document.getElementById('inputCardTitle');
@@ -427,12 +428,21 @@
     const inputPhone = document.getElementById('inputCardPhone');
     const inputEmail = document.getElementById('inputCardEmail');
     const inputTagline = document.getElementById('inputCardTagline');
+    const inputWebsite = document.getElementById('inputCardWebsite');
 
     const flipBtn = document.getElementById('flipCardBtn');
     const flipCardBtnText = document.getElementById('flipCardBtnText');
     const cardFlipHintText = document.getElementById('cardFlipHintText');
     const downloadSpecBtn = document.getElementById('downloadSpecBtn');
+    const downloadPngBtn = document.getElementById('downloadPngBtn');
     const copyVCardBtn = document.getElementById('copyVCardBtn');
+    const downloadVcfBtn = document.getElementById('downloadVcfBtn');
+    const resetCustomizerBtn = document.getElementById('resetCustomizerBtn');
+    const tabFrontView = document.getElementById('tabFrontView');
+    const tabBackView = document.getElementById('tabBackView');
+    const toggleBleedBtn = document.getElementById('toggleBleedBtn');
+    const toggleGlareBtn = document.getElementById('toggleGlareBtn');
+    const cardQrClickable = document.getElementById('cardQrClickable');
 
     // Theme palette definition for real-time styles and vector SVG export
     const themePalettes = {
@@ -516,6 +526,92 @@
       }
     };
 
+    // Instant Persona Profiles
+    const personaProfiles = {
+      creative: {
+        name: 'Elena Rostova',
+        title: 'Creative Director',
+        company: 'Velvet & Obsidian Ltd',
+        tagline: 'Crafting Sovereign Visuals',
+        phone: '+1 (555) 321-7890',
+        email: 'elena@velvet.design',
+        website: 'https://taksal.pages.dev/',
+        theme: 'royal',
+        finish: 'holo',
+        radius: 'rounded',
+        label: 'Art Director'
+      },
+      founder: {
+        name: 'Alex Morgan',
+        title: 'Founder & CEO',
+        company: 'Taksal Technologies Ltd',
+        tagline: 'Building Sovereign Software',
+        phone: '+1 (555) 019-2831',
+        email: 'alex@taksal.com',
+        website: 'https://taksal.pages.dev/',
+        theme: 'emerald',
+        finish: 'matte',
+        radius: 'rounded',
+        label: 'Tech Founder'
+      },
+      luxury: {
+        name: 'Vikramaditya Singhania',
+        title: 'Managing Partner',
+        company: 'Singhania Jewellers',
+        tagline: 'Fine Goldsmithing Since 1984',
+        phone: '+91 98200 12345',
+        email: 'billing@singhania.in',
+        website: 'https://taksal.pages.dev/',
+        theme: 'midnight',
+        finish: 'foil',
+        radius: 'sharp',
+        label: 'Luxury Brand'
+      },
+      minimal: {
+        name: 'Marcus Vance',
+        title: 'Principal Architect',
+        company: 'Studio Monochrome',
+        tagline: 'Form Follows Clarity',
+        phone: '+44 20 7946 0912',
+        email: 'marcus@vancestudio.co.uk',
+        website: 'https://taksal.pages.dev/',
+        theme: 'minimal',
+        finish: 'matte',
+        radius: 'sharp',
+        label: 'Minimalist'
+      },
+      ocean: {
+        name: 'Dr. Kai Thorne',
+        title: 'Marine Scientist',
+        company: 'Pacific Ocean Institute',
+        tagline: 'Restoring Ocean Sanctuaries',
+        phone: '+1 (555) 872-4019',
+        email: 'kai@pacificmarine.org',
+        website: 'https://taksal.pages.dev/',
+        theme: 'sapphire',
+        finish: 'spot-uv',
+        radius: 'rounded',
+        label: 'Marine Bio'
+      },
+      sunset: {
+        name: 'Aria Chen',
+        title: 'Lead Brand Strategist',
+        company: 'Solaris Brand Studio',
+        tagline: 'Illuminating Bold Visions',
+        phone: '+1 (555) 439-8120',
+        email: 'aria@solarisbrand.com',
+        website: 'https://taksal.pages.dev/',
+        theme: 'sunset',
+        finish: 'foil',
+        radius: 'diecut',
+        label: 'Brand Engine'
+      }
+    };
+
+    let activeThemeKey = 'royal';
+    let activeFinishKey = 'matte';
+    let activeRadiusKey = 'rounded';
+
     // Live binding between inputs and card faces
     function updateCardPreview() {
       const nameVal = inputName?.value.trim() || 'Alex Morgan';
@@ -534,45 +630,159 @@
       if (cardTaglineEl) cardTaglineEl.textContent = taglineVal;
     }
 
-    [inputName, inputTitle, inputCompany, inputPhone, inputEmail, inputTagline].forEach(inp => {
+    [inputName, inputTitle, inputCompany, inputPhone, inputEmail, inputTagline, inputWebsite].forEach(inp => {
       if (inp) {
         inp.addEventListener('input', updateCardPreview);
       }
     });
 
     // Theme selector swatches (6 themes)
-    const swatches = document.querySelectorAll('.swatch-btn');
-    swatches.forEach(swatch => {
-      swatch.addEventListener('click', () => {
-        swatches.forEach(s => {
-          s.classList.remove('active');
-          s.setAttribute('aria-checked', 'false');
-          s.setAttribute('aria-pressed', 'false');
-        });
-        swatch.classList.add('active');
-        swatch.setAttribute('aria-checked', 'true');
-        swatch.setAttribute('aria-pressed', 'true');
+    function applyTheme(themeKey, notify = true) {
+      activeThemeKey = themeKey;
+      const swatches = document.querySelectorAll('.swatch-btn');
+      swatches.forEach(s => {
+        const match = s.getAttribute('data-card-theme') === themeKey;
+        s.classList.toggle('active', match);
+        s.setAttribute('aria-checked', match ? 'true' : 'false');
+        s.setAttribute('aria-pressed', match ? 'true' : 'false');
+      });
 
-        const theme = swatch.getAttribute('data-card-theme') || 'royal';
-        const faces = card3D.querySelectorAll('.card-face');
-        faces.forEach(face => {
-          const isBack = face.classList.contains('card-face-back');
-          face.className = `card-face ${isBack ? 'card-face-back' : 'card-face-front'} theme-${theme}`;
-        });
+      const faces = card3D.querySelectorAll('.card-face');
+      faces.forEach(face => {
+        const isBack = face.classList.contains('card-face-back');
+        face.className = `card-face ${isBack ? 'card-face-back' : 'card-face-front'} theme-${themeKey} finish-${activeFinishKey}`;
+      });
 
-        const themeInfo = themePalettes[theme];
-        const label = themeInfo ? themeInfo.label : (theme.charAt(0).toUpperCase() + theme.slice(1));
+      if (notify) {
+        const label = themePalettes[themeKey]?.label || themeKey;
         window.showToast(`Applied ${label} palette`, 'info', 1800);
+      }
+    }
+
+    document.querySelectorAll('.swatch-btn').forEach(swatch => {
+      swatch.addEventListener('click', () => {
+        const theme = swatch.getAttribute('data-card-theme') || 'royal';
+        applyTheme(theme, true);
       });
     });
 
+    // Paper Finish selector (matte, foil, holo, spot-uv)
+    function applyFinish(finishKey, notify = true) {
+      activeFinishKey = finishKey;
+      const finishChips = document.querySelectorAll('.finish-chip');
+      finishChips.forEach(chip => {
+        const match = chip.getAttribute('data-finish') === finishKey;
+        chip.classList.toggle('active', match);
+        chip.setAttribute('aria-checked', match ? 'true' : 'false');
+      });
+
+      const faces = card3D.querySelectorAll('.card-face');
+      faces.forEach(face => {
+        const isBack = face.classList.contains('card-face-back');
+        face.className = `card-face ${isBack ? 'card-face-back' : 'card-face-front'} theme-${activeThemeKey} finish-${finishKey}`;
+      });
+
+      if (notify) {
+        const labels = { matte: 'Matte Silk', foil: 'Gold Foil Accent', holo: 'Holographic Sheen', 'spot-uv': 'Spot UV Gloss' };
+        window.showToast(`Applied ${labels[finishKey] || finishKey} paper finish`, 'info', 1800);
+      }
+    }
+
+    document.querySelectorAll('.finish-chip').forEach(chip => {
+      chip.addEventListener('click', () => {
+        const finish = chip.getAttribute('data-finish') || 'matte';
+        applyFinish(finish, true);
+      });
+    });
+
+    // Corner Die-Cut selector (rounded, sharp, diecut)
+    function applyCornerRadius(radiusKey, notify = true) {
+      activeRadiusKey = radiusKey;
+      const cornerChips = document.querySelectorAll('.corner-chip');
+      cornerChips.forEach(chip => {
+        const match = chip.getAttribute('data-radius') === radiusKey;
+        chip.classList.toggle('active', match);
+        chip.setAttribute('aria-checked', match ? 'true' : 'false');
+      });
+
+      card3D.classList.remove('radius-rounded', 'radius-sharp', 'radius-diecut');
+      card3D.classList.add(`radius-${radiusKey}`);
+
+      if (notify) {
+        const labels = { rounded: 'Rounded Corners (16px)', sharp: 'Sharp Precision Corners', diecut: 'Pebble Die-Cut (26px)' };
+        window.showToast(`Applied ${labels[radiusKey] || radiusKey}`, 'info', 1800);
+      }
+    }
+
+    document.querySelectorAll('.corner-chip').forEach(chip => {
+      chip.addEventListener('click', () => {
+        const radius = chip.getAttribute('data-radius') || 'rounded';
+        applyCornerRadius(radius, true);
+      });
+    });
+
+    // Persona Presets Handler
+    function applyPersona(personaKey) {
+      const persona = personaProfiles[personaKey];
+      if (!persona) return;
+
+      if (inputName) inputName.value = persona.name;
+      if (inputTitle) inputTitle.value = persona.title;
+      if (inputCompany) inputCompany.value = persona.company;
+      if (inputTagline) inputTagline.value = persona.tagline;
+      if (inputPhone) inputPhone.value = persona.phone;
+      if (inputEmail) inputEmail.value = persona.email;
+      if (inputWebsite) inputWebsite.value = persona.website;
+
+      document.querySelectorAll('.persona-chip').forEach(chip => {
+        chip.classList.toggle('active', chip.getAttribute('data-persona') === personaKey);
+      });
+
+      applyTheme(persona.theme, false);
+      applyFinish(persona.finish, false);
+      applyCornerRadius(persona.radius, false);
+      updateCardPreview();
+      window.showToast(`Loaded "${persona.label}" persona preset`, 'success', 2200);
+    }
+
+    document.querySelectorAll('.persona-chip').forEach(chip => {
+      chip.addEventListener('click', () => {
+        const pKey = chip.getAttribute('data-persona');
+        if (pKey) applyPersona(pKey);
+      });
+    });
+
+    // Reset Customizer Defaults
+    if (resetCustomizerBtn) {
+      resetCustomizerBtn.addEventListener('click', () => {
+        applyPersona('founder');
+        window.showToast('Reset card customizer to default layout', 'info', 2000);
+      });
+    }
+
+    // Synchronize View Tabs with Flipped State
+    function syncViewTabs(isFlipped) {
+      if (tabFrontView) {
+        tabFrontView.classList.toggle('active', !isFlipped);
+        tabFrontView.setAttribute('aria-selected', !isFlipped ? 'true' : 'false');
+      }
+      if (tabBackView) {
+        tabBackView.classList.toggle('active', isFlipped);
+        tabBackView.setAttribute('aria-selected', isFlipped ? 'true' : 'false');
+      }
+    }
+
     // Flip action
-    function toggleCardFlip() {
-      card3D.classList.toggle('flipped');
-      // Reset any active inline transform from mouse tilt during flip
+    function setCardFlipped(flipToBack) {
+      if (flipToBack) {
+        card3D.classList.add('flipped');
+      } else {
+        card3D.classList.remove('flipped');
+      }
       card3D.style.transform = '';
       const isFlipped = card3D.classList.contains('flipped');
       card3D.setAttribute('aria-expanded', isFlipped ? 'true' : 'false');
+      syncViewTabs(isFlipped);
 
       if (flipCardBtnText) {
         flipCardBtnText.textContent = isFlipped ? 'Flip to Front View' : 'Flip to Back View';
@@ -587,10 +797,28 @@
       }
     }
 
+    function toggleCardFlip() {
+      setCardFlipped(!card3D.classList.contains('flipped'));
+    }
+
     if (flipBtn) {
       flipBtn.addEventListener('click', (e) => {
         e.stopPropagation();
         toggleCardFlip();
+      });
+    }
+
+    if (tabFrontView) {
+      tabFrontView.addEventListener('click', (e) => {
+        e.stopPropagation();
+        setCardFlipped(false);
+      });
+    }
+
+    if (tabBackView) {
+      tabBackView.addEventListener('click', (e) => {
+        e.stopPropagation();
+        setCardFlipped(true);
       });
     }
 
@@ -605,23 +833,94 @@
       }
     });
 
-    // Subtle 3D mouse parallax tilt on desktop
+    // Bleed Margin Overlay Toggle
+    if (toggleBleedBtn) {
+      toggleBleedBtn.addEventListener('click', () => {
+        const isShowing = card3D.classList.toggle('show-bleed');
+        toggleBleedBtn.classList.toggle('active', isShowing);
+        toggleBleedBtn.setAttribute('aria-pressed', isShowing ? 'true' : 'false');
+        window.showToast(isShowing ? '0.125" Print Bleed & Safe Zone visible' : 'Print Bleed Overlay hidden', 'info', 2000);
+      });
+    }
+
+    // 3D Specular Sheen Toggle
+    if (toggleGlareBtn) {
+      toggleGlareBtn.addEventListener('click', () => {
+        const isGlaring = card3D.classList.toggle('has-glare');
+        toggleGlareBtn.classList.toggle('active', isGlaring);
+        toggleGlareBtn.setAttribute('aria-pressed', isGlaring ? 'true' : 'false');
+        window.showToast(isGlaring ? '3D Specular Sheen active' : '3D Specular Sheen disabled', 'info', 1800);
+      });
+    }
+
+    // Clickable QR Code scan simulator
+    if (cardQrClickable) {
+      cardQrClickable.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const url = (inputWebsite?.value || 'https://taksal.pages.dev/').trim();
+        window.showToast(`Verified QR Payload: ${url} (Ready for camera scan)`, 'success', 3500);
+      });
+    }
+
+    // 3D mouse parallax tilt & dynamic light glare on desktop
     const perspectiveContainer = card3D.closest('.card-perspective-container');
     if (perspectiveContainer && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+      const glares = card3D.querySelectorAll('.card-glare');
+
       perspectiveContainer.addEventListener('mousemove', (e) => {
         const rect = perspectiveContainer.getBoundingClientRect();
         const x = (e.clientX - rect.left) / rect.width - 0.5; // -0.5 to 0.5
         const y = (e.clientY - rect.top) / rect.height - 0.5;
-        const rotateX = -y * 12;
+        const rotateX = -y * 14;
         const isFlipped = card3D.classList.contains('flipped');
         const baseRotateY = isFlipped ? 180 : 0;
-        const rotateY = baseRotateY + x * 16;
+        const rotateY = baseRotateY + x * 18;
         card3D.style.transform = `rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg)`;
+
+        // Update specular light highlight coordinate
+        if (card3D.classList.contains('has-glare')) {
+          const glareX = ((x + 0.5) * 100).toFixed(1);
+          const glareY = ((y + 0.5) * 100).toFixed(1);
+          glares.forEach(glare => {
+            glare.style.background = `radial-gradient(circle at ${glareX}% ${glareY}%, rgba(255, 255, 255, 0.3) 0%, transparent 65%)`;
+          });
+        }
       });
 
       perspectiveContainer.addEventListener('mouseleave', () => {
         card3D.style.transform = '';
       });
+    }
+
+    // Format RFC 2426 vCard string
+    function generateVCardString() {
+      const name = (inputName?.value || 'Alex Morgan').trim();
+      const title = (inputTitle?.value || 'Creative Director').trim();
+      const company = (inputCompany?.value || 'Taksal Studio Ltd').trim();
+      const phone = (inputPhone?.value || '+1 (555) 321-7890').trim();
+      const email = (inputEmail?.value || 'alex@taksal.com').trim();
+      const tagline = (inputTagline?.value || 'Crafting Sovereign Visuals').trim();
+      const website = (inputWebsite?.value || 'https://taksal.pages.dev/').trim();
+
+      const nameParts = name.split(/\s+/);
+      const firstName = nameParts[0] || '';
+      const lastName = nameParts.slice(1).join(' ') || '';
+
+      return [
+        'BEGIN:VCARD',
+        'VERSION:3.0',
+        `FN;CHARSET=UTF-8:${name}`,
+        `N;CHARSET=UTF-8:${lastName};${firstName};;;`,
+        `ORG;CHARSET=UTF-8:${company}`,
+        `TITLE;CHARSET=UTF-8:${title}`,
+        `TEL;TYPE=WORK,VOICE:${phone}`,
+        `EMAIL;TYPE=PREF,INTERNET:${email}`,
+        `URL;CHARSET=UTF-8:${website}`,
+        `NOTE;CHARSET=UTF-8:${tagline} • Crafted with Taksal Studio Engine`,
+        `REV:${new Date().toISOString()}`,
+        'END:VCARD',
+        ''
+      ].join('\r\n');
     }
 
     // Genuine Vector 300 DPI SVG Spec Exporter (Front or Back)
@@ -632,10 +931,9 @@
       const phone = (inputPhone?.value || '+1 (555) 321-7890').trim();
       const email = (inputEmail?.value || 'alex@taksal.com').trim();
       const tagline = (inputTagline?.value || 'Crafting Sovereign Visuals').trim();
+      const website = (inputWebsite?.value || 'https://taksal.pages.dev/').trim();
 
-      const activeSwatch = document.querySelector('.swatch-btn.active');
-      const themeKey = activeSwatch ? (activeSwatch.getAttribute('data-card-theme') || 'royal') : 'royal';
-      const palette = themePalettes[themeKey] || themePalettes.royal;
+      const palette = themePalettes[activeThemeKey] || themePalettes.royal;
       const isFlipped = card3D.classList.contains('flipped');
 
       const qrPathMatrix = `
@@ -657,7 +955,8 @@
     <style>
       .text-back-company { font-family: 'Inter', system-ui, -apple-system, sans-serif; font-size: 34px; font-weight: 800; fill: ${palette.textColor}; text-anchor: middle; }
       .text-back-sub { font-family: 'Inter', system-ui, -apple-system, sans-serif; font-size: 20px; font-weight: 500; fill: ${palette.accentColor}; text-anchor: middle; }
-      .text-spec-note { font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 600; fill: ${palette.accentColor}; opacity: 0.8; text-anchor: middle; }
+      .text-back-url { font-family: 'JetBrains Mono', monospace; font-size: 15px; font-weight: 600; fill: ${palette.textColor}; opacity: 0.9; text-anchor: middle; }
+      .text-spec-note { font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 600; fill: ${palette.accentColor}; opacity: 0.75; text-anchor: middle; }
     </style>
   </defs>
   <rect width="1050" height="600" rx="32" fill="url(#cardGradBack)" stroke="${palette.badgeBorder || 'none'}" stroke-width="1"/>
@@ -665,14 +964,15 @@
   <rect x="38" y="38" width="974" height="524" rx="22" fill="none" stroke="${palette.guideColor}" stroke-dasharray="8 6" stroke-width="2"/>
   
   <!-- High-Resolution Centered Vector QR Code Box -->
-  <rect x="415" y="105" width="220" height="220" rx="20" fill="${palette.qrBoxBg}" stroke="${palette.qrBoxBorder}" stroke-width="2"/>
-  <g transform="translate(424, 114) scale(7.0)" shape-rendering="crispEdges">
+  <rect x="415" y="95" width="220" height="220" rx="20" fill="${palette.qrBoxBg}" stroke="${palette.qrBoxBorder}" stroke-width="2"/>
+  <g transform="translate(424, 104) scale(7.0)" shape-rendering="crispEdges">
     ${qrPathMatrix}
   </g>
 
-  <text x="525" y="380" class="text-back-company">${escapeHtml(company)}</text>
-  <text x="525" y="420" class="text-back-sub">Scan for Instant vCard &amp; Portfolio</text>
-  <text x="525" y="530" class="text-spec-note">Taksal Studio Vector Card Engine • 300 DPI CMYK Print Spec (Rear)</text>
+  <text x="525" y="365" class="text-back-company">${escapeHtml(company)}</text>
+  <text x="525" y="405" class="text-back-sub">Scan for Instant vCard &amp; Portfolio</text>
+  <text x="525" y="445" class="text-back-url">${escapeHtml(website)}</text>
+  <text x="525" y="535" class="text-spec-note">Taksal Studio Vector Engine • 300 DPI CMYK Print Spec (Rear)</text>
 </svg>`;
       }
 
@@ -722,21 +1022,20 @@
 </svg>`;
     }
 
+    // 1. Export 300 DPI SVG
     if (downloadSpecBtn) {
       downloadSpecBtn.addEventListener('click', () => {
         try {
           const svgContent = generateCardSvg();
           const isFlipped = card3D.classList.contains('flipped');
           const viewSide = isFlipped ? 'back' : 'front';
-          const activeSwatch = document.querySelector('.swatch-btn.active');
-          const themeKey = activeSwatch ? (activeSwatch.getAttribute('data-card-theme') || 'royal') : 'royal';
 
           const blob = new Blob([svgContent], { type: 'image/svg+xml;charset=utf-8' });
           const url = URL.createObjectURL(blob);
           const link = document.createElement('a');
           const cleanName = (inputName?.value || 'alex').toLowerCase().replace(/[^a-z0-9]/g, '-');
           link.href = url;
-          link.download = `taksal-card-${cleanName}-${themeKey}-${viewSide}-300dpi.svg`;
+          link.download = `taksal-card-${cleanName}-${activeThemeKey}-${viewSide}-300dpi.svg`;
           document.body.appendChild(link);
           link.click();
           document.body.removeChild(link);
@@ -748,36 +1047,85 @@
       });
     }
 
+    // 2. Export High-Res PNG (via offscreen Canvas)
+    if (downloadPngBtn) {
+      downloadPngBtn.addEventListener('click', () => {
+        try {
+          const svgContent = generateCardSvg();
+          const isFlipped = card3D.classList.contains('flipped');
+          const viewSide = isFlipped ? 'back' : 'front';
+          const cleanName = (inputName?.value || 'alex').toLowerCase().replace(/[^a-z0-9]/g, '-');
+
+          const svgBlob = new Blob([svgContent], { type: 'image/svg+xml;charset=utf-8' });
+          const url = URL.createObjectURL(svgBlob);
+          const img = new Image();
+
+          img.onload = () => {
+            try {
+              const canvas = document.createElement('canvas');
+              canvas.width = 2100;
+              canvas.height = 1200;
+              const ctx = canvas.getContext('2d');
+              ctx.fillStyle = '#FFFFFF';
+              ctx.fillRect(0, 0, 2100, 1200);
+              ctx.drawImage(img, 0, 0, 2100, 1200);
+              URL.revokeObjectURL(url);
+
+              canvas.toBlob((pngBlob) => {
+                if (pngBlob) {
+                  const pngUrl = URL.createObjectURL(pngBlob);
+                  const link = document.createElement('a');
+                  link.href = pngUrl;
+                  link.download = `taksal-card-${cleanName}-${activeThemeKey}-${viewSide}-300dpi.png`;
+                  document.body.appendChild(link);
+                  link.click();
+                  document.body.removeChild(link);
+                  URL.revokeObjectURL(pngUrl);
+                  window.showToast(`High-Res 300 DPI PNG (${isFlipped ? 'Back' : 'Front'} View) downloaded!`, 'success', 3500);
+                } else {
+                  downloadSpecBtn.click();
+                }
+              }, 'image/png');
+            } catch (canvasErr) {
+              downloadSpecBtn.click();
+            }
+          };
+
+          img.onerror = () => {
+            URL.revokeObjectURL(url);
+            downloadSpecBtn.click();
+          };
+
+          img.src = url;
+        } catch (err) {
+          downloadSpecBtn?.click();
+        }
+      });
+    }
+
+    // 3. Copy vCard (.vcf)
     if (copyVCardBtn) {
       copyVCardBtn.addEventListener('click', () => {
-        const name = (inputName?.value || 'Alex Morgan').trim();
-        const title = (inputTitle?.value || 'Creative Director').trim();
-        const company = (inputCompany?.value || 'Taksal Studio Ltd').trim();
-        const phone = (inputPhone?.value || '+1 (555) 321-7890').trim();
-        const email = (inputEmail?.value || 'alex@taksal.com').trim();
-        const tagline = (inputTagline?.value || 'Crafting Sovereign Visuals').trim();
-
-        const nameParts = name.split(/\s+/);
-        const firstName = nameParts[0] || '';
-        const lastName = nameParts.slice(1).join(' ') || '';
-
-        const vcard = [
-          'BEGIN:VCARD',
-          'VERSION:3.0',
-          `FN;CHARSET=UTF-8:${name}`,
-          `N;CHARSET=UTF-8:${lastName};${firstName};;;`,
-          `ORG;CHARSET=UTF-8:${company}`,
-          `TITLE;CHARSET=UTF-8:${title}`,
-          `TEL;TYPE=WORK,VOICE:${phone}`,
-          `EMAIL;TYPE=PREF,INTERNET:${email}`,
-          'URL;CHARSET=UTF-8:https://taksal.pages.dev/',
-          `NOTE;CHARSET=UTF-8:${tagline} • Crafted with Taksal Studio Engine`,
-          `REV:${new Date().toISOString()}`,
-          'END:VCARD',
-          ''
-        ].join('\r\n');
-
+        const vcard = generateVCardString();
         window.copyTextToClipboard(vcard, 'Digital vCard (.vcf) copied to clipboard!');
+      });
+    }
+
+    // 4. Download Contact .vcf File
+    if (downloadVcfBtn) {
+      downloadVcfBtn.addEventListener('click', () => {
+        const vcard = generateVCardString();
+        const blob = new Blob([vcard], { type: 'text/vcard;charset=utf-8' });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        const cleanName = (inputName?.value || 'contact').toLowerCase().replace(/[^a-z0-9]/g, '-');
+        link.href = url;
+        link.download = `${cleanName}.vcf`;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(url);
+        window.showToast('Contact .vcf file downloaded!', 'success', 3000);
       });
     }
   }

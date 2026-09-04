@@ -363,69 +363,113 @@
           <div class="section-pill">Interactive Browser Playground</div>
           <h2 class="section-title">Test the Studio Right in Your Browser</h2>
           <p class="section-subtitle">
-            Experience Taksal's vector card layout engine. Customize contact fields, switch print themes, and flip the 3D card to view the rear QR code layout.
+            Experience Taksal's vector card layout engine. Customize contact fields, switch print themes, toggle paper finishes, and flip the 3D card to view the rear QR code layout.
           </p>
         </div>
 
         <div class="interactive-studio-grid">
-          <!-- 3D Flippable Business Card Preview -->
-          <div class="card-perspective-container">
-            <div class="business-card-3d" id="interactiveBusinessCard" title="Click or tap card to flip front/back" role="button" tabindex="0" aria-label="Interactive 3D business card. Click or press Enter to flip." aria-expanded="false">
-              <!-- Front Face -->
-              <div class="card-face card-face-front theme-royal">
-                <div class="card-header-row">
-                  <div>
-                    <div class="card-brand-name" id="cardPreviewCompany">Taksal Studio Ltd</div>
-                    <div class="card-brand-tagline" id="cardPreviewTagline">Crafting Sovereign Visuals</div>
-                  </div>
-                  <div class="card-chip-badge">300 DPI CMYK</div>
-                </div>
-                <div class="card-user-info">
-                  <div class="card-user-name" id="cardPreviewName">Alex Morgan</div>
-                  <div class="card-user-title" id="cardPreviewTitle">Creative Director</div>
-                  <div class="card-contact-row">
-                    <div class="card-contact-item">
-                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
-                      <span id="cardPreviewPhone">+1 (555) 321-7890</span>
-                    </div>
-                    <div class="card-contact-item">
-                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-                      <span id="cardPreviewEmail">alex@taksal.com</span>
-                    </div>
-                  </div>
-                </div>
+          <!-- 3D Flippable Business Card Preview Stage -->
+          <div class="card-stage-column">
+            <!-- Stage Toolbar -->
+            <div class="card-stage-header">
+              <div class="card-view-tabs" role="tablist" aria-label="Card Face View">
+                <button type="button" class="card-view-tab active" id="tabFrontView" role="tab" aria-selected="true">Front Face</button>
+                <button type="button" class="card-view-tab" id="tabBackView" role="tab" aria-selected="false">Rear View (QR)</button>
               </div>
 
-              <!-- Back Face (Flipped) -->
-              <div class="card-face card-face-back theme-royal">
-                <div class="card-back-center">
-                  <div class="card-qr-box">
-                    <!-- High-Density Authentic SVG QR Code -->
-                    <svg width="84" height="84" viewBox="0 0 29 29" shape-rendering="crispEdges">
-                      <path fill="#0F172A" d="M2 2h7v7H2zM3 3v5h5V3zm1 1h3v3H4zM2 20h7v7H2zM3 21v5h5V21zm1 1h3v3H4zM20 2h7v7h-7zM21 3v5h5V3zm1 1h3v3h-3z"/>
-                      <path fill="#0F172A" d="M10 4h1v1h-1zM12 4h1v1h-1zM14 4h1v1h-1zM16 4h1v1h-1zM18 4h1v1h-1zM4 10h1v1h-1zM4 12h1v1h-1zM4 14h1v1h-1zM4 16h1v1h-1zM4 18h1v1h-1z"/>
-                      <path fill="#0F172A" d="M18 18h5v5h-5zM19 19v3h3v-3zm1 1h1v1h-1z"/>
-                      <path fill="#0F172A" d="M10 2h2v2h-2zM14 2h1v1h-1zM17 2h2v1h-2zM10 6h1v2h-1zM12 7h2v1h-2zM15 6h1v3h-1zM17 7h1v1h-1zM10 10h3v2h-1v-1h-2zM14 10h2v1h-2zM17 11h2v1h-2zM20 10h2v2h-1v-1h-1zM23 11h1v1h-1zM25 10h2v2h-2zM6 10h2v1H6zM10 13h1v2h-1zM12 14h3v1h-3zM16 13h2v2h-2zM19 14h1v1h-1zM21 13h2v2h-2zM24 13h2v1h-2zM27 14h1v1h-1zM10 16h2v1h-2zM13 17h1v1h-1zM15 16h3v1h-1v1h-2zM19 16h1v2h-1zM21 17h1v1h-1zM23 16h3v1h-3zM27 16h1v2h-1zM10 19h1v1h-1zM12 20h2v1h-2zM15 19h2v2h-1v-1h-1zM18 20h1v1h-1zM24 19h2v1h-2zM27 19h1v1h-1zM10 22h3v1h-3zM14 23h2v2h-2zM17 22h1v3h-1zM20 24h2v2h-2zM23 23h1v1h-1zM25 22h2v2h-1v-1h-1zM10 25h2v2h-2zM13 26h1v1h-1zM15 25h1v2h-1zM18 26h2v1h-2zM24 25h1v1h-1zM26 26h2v1h-2z"/>
-                    </svg>
-                  </div>
-                  <div style="font-weight: 800; font-size: 1.15rem;" id="cardBackCompanyName">Taksal Studio Ltd</div>
-                  <div style="font-size: 0.775rem; opacity: 0.85;">Scan for Instant vCard &amp; Portfolio</div>
-                </div>
+              <div class="card-preview-tools">
+                <button type="button" class="tool-btn" id="toggleBleedBtn" title="Toggle 0.125&quot; Print Bleed overlay" aria-pressed="false">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" stroke-dasharray="4 4"></rect><path d="M9 3v18"></path><path d="M15 3v18"></path><path d="M3 9h18"></path><path d="M3 15h18"></path></svg>
+                  <span>Bleed Box</span>
+                </button>
+                <button type="button" class="tool-btn active" id="toggleGlareBtn" title="Toggle 3D specular sheen" aria-pressed="true">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2"></path><path d="M12 20v2"></path><path d="m4.93 4.93 1.41 1.41"></path><path d="m17.66 17.66 1.41 1.41"></path><path d="M2 12h2"></path><path d="M20 12h2"></path><path d="m6.34 17.66-1.41 1.41"></path><path d="m19.07 4.93-1.41 1.41"></path></svg>
+                  <span>3D Sheen</span>
+                </button>
               </div>
             </div>
-            <div class="card-flip-hint">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8"></path><polyline points="21 3 21 8 16 8"></polyline></svg>
-              <span id="cardFlipHintText">Click or tap card to flip 3D view</span>
+
+            <!-- Perspective Card Wrapper -->
+            <div class="card-perspective-container">
+              <div class="business-card-3d has-glare radius-rounded" id="interactiveBusinessCard" title="Click or tap card to flip front/back" role="button" tabindex="0" aria-label="Interactive 3D business card. Click or press Enter to flip." aria-expanded="false">
+                <!-- Front Face -->
+                <div class="card-face card-face-front theme-royal finish-matte">
+                  <div class="card-glare" aria-hidden="true"></div>
+                  <div class="card-bleed-guide" aria-hidden="true"><span class="guide-tag">0.125&quot; BLEED SAFE</span></div>
+
+                  <div class="card-header-row">
+                    <div>
+                      <div class="card-brand-name" id="cardPreviewCompany">Taksal Studio Ltd</div>
+                      <div class="card-brand-tagline" id="cardPreviewTagline">Crafting Sovereign Visuals</div>
+                    </div>
+                    <div class="card-chip-badge">300 DPI CMYK</div>
+                  </div>
+
+                  <div class="card-user-info">
+                    <div class="card-user-name" id="cardPreviewName">Alex Morgan</div>
+                    <div class="card-user-title" id="cardPreviewTitle">Creative Director</div>
+                    <div class="card-contact-row">
+                      <div class="card-contact-item">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                        <span id="cardPreviewPhone">+1 (555) 321-7890</span>
+                      </div>
+                      <div class="card-contact-item">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                        <span id="cardPreviewEmail">alex@taksal.com</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Back Face (Flipped) -->
+                <div class="card-face card-face-back theme-royal finish-matte">
+                  <div class="card-glare" aria-hidden="true"></div>
+                  <div class="card-bleed-guide" aria-hidden="true"><span class="guide-tag">0.125&quot; BLEED SAFE</span></div>
+
+                  <div class="card-back-center">
+                    <div class="card-qr-box" id="cardQrClickable" title="Click to test QR code scan">
+                      <!-- High-Density Authentic SVG QR Code -->
+                      <svg width="84" height="84" viewBox="0 0 29 29" shape-rendering="crispEdges">
+                        <path fill="#0F172A" d="M2 2h7v7H2zM3 3v5h5V3zm1 1h3v3H4zM2 20h7v7H2zM3 21v5h5V21zm1 1h3v3H4zM20 2h7v7h-7zM21 3v5h5V3zm1 1h3v3h-3z"/>
+                        <path fill="#0F172A" d="M10 4h1v1h-1zM12 4h1v1h-1zM14 4h1v1h-1zM16 4h1v1h-1zM18 4h1v1h-1zM4 10h1v1h-1zM4 12h1v1h-1zM4 14h1v1h-1zM4 16h1v1h-1zM4 18h1v1h-1z"/>
+                        <path fill="#0F172A" d="M18 18h5v5h-5zM19 19v3h3v-3zm1 1h1v1h-1z"/>
+                        <path fill="#0F172A" d="M10 2h2v2h-2zM14 2h1v1h-1zM17 2h2v1h-2zM10 6h1v2h-1zM12 7h2v1h-2zM15 6h1v3h-1zM17 7h1v1h-1zM10 10h3v2h-1v-1h-2zM14 10h2v1h-2zM17 11h2v1h-2zM20 10h2v2h-1v-1h-1zM23 11h1v1h-1zM25 10h2v2h-2zM6 10h2v1H6zM10 13h1v2h-1zM12 14h3v1h-3zM16 13h2v2h-2zM19 14h1v1h-1zM21 13h2v2h-2zM24 13h2v1h-2zM27 14h1v1h-1zM10 16h2v1h-2zM13 17h1v1h-1zM15 16h3v1h-1v1h-2zM19 16h1v2h-1zM21 17h1v1h-1zM23 16h3v1h-3zM27 16h1v2h-1zM10 19h1v1h-1zM12 20h2v1h-2zM15 19h2v2h-1v-1h-1zM18 20h1v1h-1zM24 19h2v1h-2zM27 19h1v1h-1zM10 22h3v1h-3zM14 23h2v2h-2zM17 22h1v3h-1zM20 24h2v2h-2zM23 23h1v1h-1zM25 22h2v2h-1v-1h-1zM10 25h2v2h-2zM13 26h1v1h-1zM15 25h1v2h-1zM18 26h2v1h-2zM24 25h1v1h-1zM26 26h2v1h-2z"/>
+                      </svg>
+                    </div>
+                    <div style="font-weight: 800; font-size: 1.15rem;" id="cardBackCompanyName">Taksal Studio Ltd</div>
+                    <div style="font-size: 0.775rem; opacity: 0.85;" id="cardBackTagline">Scan for Instant vCard &amp; Portfolio</div>
+                  </div>
+                </div>
+              </div>
+              <div class="card-flip-hint">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8"></path><polyline points="21 3 21 8 16 8"></polyline></svg>
+                <span id="cardFlipHintText">Click or tap card to flip 3D view</span>
+              </div>
             </div>
           </div>
 
           <!-- Studio Live Customizer Panel -->
           <div class="studio-control-panel">
-            <h3 style="font-size: 1.25rem; margin-bottom: 8px;">Card Customizer</h3>
-            <p style="font-size: 0.875rem; color: var(--text-secondary); margin-bottom: 16px;">
-              Choose a color theme and edit fields to watch the card update in real-time.
+            <div class="customizer-section-header">
+              <h3 style="font-size: 1.25rem; margin-bottom: 0;">Card Customizer</h3>
+              <button type="button" class="btn-text-action" id="resetCustomizerBtn" title="Reset all card customizer values to defaults">Reset Defaults</button>
+            </div>
+            <p style="font-size: 0.875rem; color: var(--text-secondary); margin-bottom: 14px;">
+              Choose a color theme, paper finish, and edit fields to watch the card update in real-time.
             </p>
 
+            <!-- 1-Click Persona Presets -->
+            <label class="form-label" style="margin-bottom: 6px;">Instant Persona Presets:</label>
+            <div class="persona-presets-row" role="group" aria-label="Preset Personas">
+              <button type="button" class="persona-chip active" data-persona="creative">🎨 Art Director</button>
+              <button type="button" class="persona-chip" data-persona="founder">⚡ Tech Founder</button>
+              <button type="button" class="persona-chip" data-persona="luxury">💎 Luxury Brand</button>
+              <button type="button" class="persona-chip" data-persona="minimal">🏛️ Minimalist</button>
+              <button type="button" class="persona-chip" data-persona="ocean">🌊 Marine Bio</button>
+              <button type="button" class="persona-chip" data-persona="sunset">🔥 Brand Engine</button>
+            </div>
+
+            <!-- Theme Color Swatches -->
             <label class="form-label" style="margin-bottom: 8px;">Select Print Palette:</label>
             <div class="theme-swatches" role="radiogroup" aria-label="Select Print Palette">
               <button type="button" class="swatch-btn active" data-card-theme="royal" style="background: linear-gradient(135deg, #4A148C, #7B1FA2);" aria-label="Royal Violet Theme" title="Royal Violet" aria-checked="true" role="radio">
@@ -448,6 +492,28 @@
               </button>
             </div>
 
+            <!-- Material Finish & Edge Cuts -->
+            <div class="customizer-form-row" style="margin-bottom: 8px;">
+              <div>
+                <label class="form-label" style="margin-bottom: 6px;">Paper Material Finish:</label>
+                <div class="finish-selector" role="radiogroup" aria-label="Paper Material Finish">
+                  <button type="button" class="finish-chip active" data-finish="matte" aria-checked="true" role="radio">Matte Silk</button>
+                  <button type="button" class="finish-chip" data-finish="foil" aria-checked="false" role="radio">Gold Foil</button>
+                  <button type="button" class="finish-chip" data-finish="holo" aria-checked="false" role="radio">Holo Sheen</button>
+                  <button type="button" class="finish-chip" data-finish="spot-uv" aria-checked="false" role="radio">Spot UV</button>
+                </div>
+              </div>
+              <div>
+                <label class="form-label" style="margin-bottom: 6px;">Corner Die-Cut:</label>
+                <div class="corner-selector" role="radiogroup" aria-label="Corner Die-Cut">
+                  <button type="button" class="corner-chip active" data-radius="rounded" aria-checked="true" role="radio">Rounded</button>
+                  <button type="button" class="corner-chip" data-radius="sharp" aria-checked="false" role="radio">Sharp</button>
+                  <button type="button" class="corner-chip" data-radius="diecut" aria-checked="false" role="radio">Pebble</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Form Data Rows -->
             <div class="customizer-form-row">
               <div>
                 <label class="form-label" for="inputCardName">Full Name</label>
@@ -481,6 +547,12 @@
               </div>
             </div>
 
+            <div style="margin-bottom: 14px;">
+              <label class="form-label" for="inputCardWebsite">Website / QR Destination URL</label>
+              <input type="url" id="inputCardWebsite" class="form-control" value="https://taksal.pages.dev/" placeholder="https://yourportfolio.com">
+            </div>
+
+            <!-- Action Buttons Grid -->
             <div class="customizer-actions-row">
               <button type="button" class="btn btn-secondary" id="flipCardBtn" aria-label="Flip card view">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"></polyline><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path></svg>
@@ -490,9 +562,17 @@
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
                 Export 300 DPI SVG
               </button>
+              <button type="button" class="btn btn-secondary" id="downloadPngBtn" aria-label="Export High-Res PNG">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+                Export PNG
+              </button>
               <button type="button" class="btn btn-secondary" id="copyVCardBtn" aria-label="Copy digital vCard">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-                Copy vCard (.vcf)
+                Copy vCard
+              </button>
+              <button type="button" class="btn btn-secondary" id="downloadVcfBtn" aria-label="Download Contact .vcf file">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                Download .vcf
               </button>
             </div>
           </div>
