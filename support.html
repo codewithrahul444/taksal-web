@@ -59,6 +59,140 @@
   }
   </script>
 
+  <!-- JSON-LD HowTo Schemas -->
+  <script type="application/ld+json">
+  [
+    {
+      "@context": "https://schema.org",
+      "@type": "HowTo",
+      "name": "How to Export High-Resolution 300 DPI Business Cards in Taksal Studio",
+      "description": "Step-by-step instructions for exporting print-ready 300 DPI vector PDF and transparent PNG visiting cards for physical print shops using Taksal Studio.",
+      "image": "https://taksal.com/assets/images/screenshots/editorscreen.png",
+      "totalTime": "PT2M",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "position": 1,
+          "name": "Open Vector Editor",
+          "text": "Open your design in the Canva Vector Editor inside Taksal Studio.",
+          "url": "https://taksal.com/support.html#guide-export-300dpi"
+        },
+        {
+          "@type": "HowToStep",
+          "position": 2,
+          "name": "Trigger Export Menu",
+          "text": "Tap the Export button located on the top right app bar.",
+          "url": "https://taksal.com/support.html#guide-export-300dpi"
+        },
+        {
+          "@type": "HowToStep",
+          "position": 3,
+          "name": "Select 300 DPI Resolution",
+          "text": "Select High Quality (300 DPI) in the resolution picker dialog.",
+          "url": "https://taksal.com/support.html#guide-export-300dpi"
+        },
+        {
+          "@type": "HowToStep",
+          "position": 4,
+          "name": "Choose PDF or PNG Format",
+          "text": "Choose PDF for commercial offset printing or PNG with alpha transparency for digital sharing.",
+          "url": "https://taksal.com/support.html#guide-export-300dpi"
+        },
+        {
+          "@type": "HowToStep",
+          "position": 5,
+          "name": "Save and Compile",
+          "text": "Tap Save to Gallery or Share. The rendered file is securely compiled using iText7 and Skia rendering engines.",
+          "url": "https://taksal.com/support.html#guide-export-300dpi"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "HowTo",
+      "name": "How to Setup a Thermal POS Printer (58mm / 80mm) with Taksal Studio",
+      "description": "Learn how to pair and print retail receipts and billing slips directly to 58mm or 80mm Bluetooth or USB thermal printers from your Android phone.",
+      "image": "https://taksal.com/assets/images/screenshots/business-suite-screen.png",
+      "totalTime": "PT3M",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "position": 1,
+          "name": "Pair Thermal Printer",
+          "text": "Pair your thermal printer via Android Bluetooth settings or connect directly via USB OTG cable.",
+          "url": "https://taksal.com/support.html#guide-thermal-pos"
+        },
+        {
+          "@type": "HowToStep",
+          "position": 2,
+          "name": "Install ESC/POS Print Plugin",
+          "text": "Install your printer manufacturer's Android Print Service plugin (e.g., RawBT or generic ESC/POS service).",
+          "url": "https://taksal.com/support.html#guide-thermal-pos"
+        },
+        {
+          "@type": "HowToStep",
+          "position": 3,
+          "name": "Navigate to Receipt Generator",
+          "text": "In Taksal Studio, navigate to Business Tools > Thermal Receipt Generator.",
+          "url": "https://taksal.com/support.html#guide-thermal-pos"
+        },
+        {
+          "@type": "HowToStep",
+          "position": 4,
+          "name": "Populate Receipt Details",
+          "text": "Enter receipt line items, taxes, discounts, and customer details, then tap Print Receipt.",
+          "url": "https://taksal.com/support.html#guide-thermal-pos"
+        },
+        {
+          "@type": "HowToStep",
+          "position": 5,
+          "name": "Select Width and Print",
+          "text": "Select 58mm or 80mm paper width and choose your connected printer to initiate thermal printing.",
+          "url": "https://taksal.com/support.html#guide-thermal-pos"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "HowTo",
+      "name": "How to Configure Gemini 3.5 AI Studio API Key in Taksal Studio",
+      "description": "Step-by-step tutorial to activate generative AI design assistance and business copywriting using your Google AI Studio API key.",
+      "image": "https://taksal.com/assets/images/screenshots/ai-assistant-screen.png",
+      "totalTime": "PT2M",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "position": 1,
+          "name": "Generate Gemini API Key",
+          "text": "Visit aistudio.google.com and generate a free personal Gemini API key.",
+          "url": "https://taksal.com/support.html#guide-gemini-ai"
+        },
+        {
+          "@type": "HowToStep",
+          "position": 2,
+          "name": "Open App Settings",
+          "text": "In Taksal Studio, navigate to Settings > Gemini 3.5 AI Studio.",
+          "url": "https://taksal.com/support.html#guide-gemini-ai"
+        },
+        {
+          "@type": "HowToStep",
+          "position": 3,
+          "name": "Input and Save API Key",
+          "text": "Paste your API key into the secure configuration prompt and tap Save API Key.",
+          "url": "https://taksal.com/support.html#guide-gemini-ai"
+        },
+        {
+          "@type": "HowToStep",
+          "position": 4,
+          "name": "Hardware Encryption Verification",
+          "text": "The key is immediately encrypted at rest using Android KeyStore AES-256-GCM hardware-backed keystore for local private execution.",
+          "url": "https://taksal.com/support.html#guide-gemini-ai"
+        }
+      ]
+    }
+  ]
+  </script>
+
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
@@ -141,7 +275,7 @@
 
         <div class="bento-grid" style="margin-bottom: var(--space-4xl);">
           <!-- Guide 1 -->
-          <div class="bento-card bento-6 spotlight-card">
+          <div id="guide-export-300dpi" class="bento-card bento-6 spotlight-card">
             <div class="bento-icon-box icon-purple">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
             </div>
@@ -159,7 +293,7 @@
           </div>
 
           <!-- Guide 2 -->
-          <div class="bento-card bento-6 spotlight-card">
+          <div id="guide-thermal-pos" class="bento-card bento-6 spotlight-card">
             <div class="bento-icon-box icon-indigo">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
             </div>
@@ -177,7 +311,7 @@
           </div>
 
           <!-- Guide 3 -->
-          <div class="bento-card bento-6 spotlight-card">
+          <div id="guide-trash-vault" class="bento-card bento-6 spotlight-card">
             <div class="bento-icon-box icon-teal">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
             </div>
@@ -194,7 +328,7 @@
           </div>
 
           <!-- Guide 4 -->
-          <div class="bento-card bento-6 spotlight-card">
+          <div id="guide-gemini-ai" class="bento-card bento-6 spotlight-card">
             <div class="bento-icon-box icon-emerald">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 0 1 10 10c0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2z"></path><path d="M12 6v6l4 2"></path></svg>
             </div>
