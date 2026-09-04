@@ -1,8 +1,11 @@
-# robots.txt for Taksal Studio (https://taksal.com)
-# Official robots instructions for Google, Bing, Apple, and Generative AI Search Engines
+# robots.txt for Taksal Studio (https://taksal.pages.dev)
+# Official search engine and AI crawler access policy
+# Optimized for Google, Bing, Apple, DuckDuckGo, and Generative AI Search Engines
 
 User-agent: *
 Allow: /
+Disallow: /scratch/
+Disallow: /.git/
 
 # Priority Search Engine Crawlers
 User-agent: Googlebot
@@ -23,7 +26,10 @@ Allow: /
 User-agent: Yandex
 Allow: /
 
-# AI Search & Conversational Answer Engines
+User-agent: Baiduspider
+Allow: /
+
+# Generative AI Answer Engines & Crawlers
 User-agent: GPTBot
 Allow: /
 
@@ -48,6 +54,17 @@ Allow: /
 User-agent: cohere-ai
 Allow: /
 
+User-agent: Amazonbot
+Allow: /
+
+User-agent: Diffbot
+Allow: /
+
 # XML Sitemap Index
-Sitemap: https://taksal.com/sitemap.xml
+Sitemap: https://taksal.pages.dev/sitemap.xml
+
+# LLM & AI Discovery Standard (llms.txt)
+# https://taksal.pages.dev/llms.txt
+# https://taksal.pages.dev/llms-full.txt
+
 

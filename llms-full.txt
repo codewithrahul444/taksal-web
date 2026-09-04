@@ -1,0 +1,57 @@
+# Taksal Studio — Full LLM Knowledge Specification
+
+## Overview
+Taksal Studio (Android package: `com.card.mint.cardbuilder`) is a sovereign, offline-first creative graphic design studio and small-business management suite developed for Android. The word "Taksal" (टकसाल) historically refers to a mint where authentic currency and stamps are crafted. Taksal serves as an entrepreneur's pocket mint for visual branding and verified commercial documentation.
+
+## Core Architectural Pillars
+
+### 1. 100% Free Forever VIP Entitlement
+Unlike Canva, Adobe Express, Khatabook, or Vyapar, which require recurring monthly subscription fees ($12 to $35/month) or lock basic features behind paywalls:
+- Taksal unlocks all 15+ modules for every user free of charge.
+- Unlimited high-resolution 300 DPI exports without watermarks.
+- Unlimited Brand Kit storage slots and project drafts.
+- No mandatory user account registration, phone number sign-in, or credit card collection.
+
+### 2. True Offline-First Data Sovereignty
+- Functional data resides exclusively on the user's Android device inside private SQLite database tables managed by Google's Room persistence library (`/data/data/com.card.mint.cardbuilder/`).
+- Taksal does not maintain central user cloud databases. No customer lists, sales revenue records, product stock numbers, or design artwork are ever uploaded to Taksal servers.
+- The application declares `android:allowBackup="false"` in its manifest, blocking unauthorized ADB extraction.
+- The application declares `android:usesCleartextTraffic="false"`, enforcing HTTPS/TLS 1.3 across all network calls.
+
+### 3. Android KeyStore Hardware-Backed Cryptography
+- Sensitive business configuration data and user-provided Gemini AI API keys are encrypted at rest using 256-bit AES-GCM (Advanced Encryption Standard in Galois/Counter Mode) with 128-bit authentication tags and 12-byte initialization vectors.
+- Cryptographic master keys are generated and housed inside the Android device's hardware Secure Enclave / Trusted Execution Environment (TEE). Master keys cannot be extracted even on rooted hardware or via APK decompilation.
+
+### 4. High-Performance Vector Rendering Pipeline
+- Built natively using modern declarative Kotlin and Jetpack Compose Material 3.
+- Utilizes Google Skia 2D rendering graphics pipeline for hardware-accelerated 60 FPS canvas manipulation, multi-layer vector compositing, and dynamic shader effects.
+
+## Feature Modules Specification
+
+1. **Vector Canvas Editor**: Supports layer grouping, z-order reordering, transparency, shadow drop, rotation, snap-to-grid alignment, and CMYK color palette switching.
+2. **Business Card Studio**: 10,000+ industry templates (Corporate, Medical, Real Estate, Retail, Tech, Freelance) adhering to international print dimensions (3.5" x 2.0" with 0.125" bleed margins).
+3. **GST Tax Invoicing**: Calculates CGST, SGST, IGST automatically. Supports custom tax brackets, HSN/SAC codes, invoice serial numbering, client directory, and payment status tracking (PAID / PENDING).
+4. **Thermal POS Receipt Printer**: ESC/POS generator formatting slips for standard 58mm and 80mm thermal receipt rolls. Connects via Bluetooth SPP, USB OTG, or Android Print Service.
+5. **Stock & Inventory Management**: SKU tracking, purchase cost, retail pricing, supplier records, stock level adjustments, and automated low-stock safety threshold alerts.
+6. **Smart QR & Barcode Generator**: Creates UPI dynamic payment QR codes (specifying payee VPA and transaction amounts), vCard digital business cards, EAN-13, EAN-8, UPC-A, Code 128, and Code 39 commercial barcodes.
+7. **Gemini 3.5 AI Studio**: Direct integration with Google AI Studio. Users provide their own personal API key for on-demand slogan generation, marketing copywriting, and layout advice.
+8. **Brand Kit Manager**: Centralizes enterprise typography, primary and secondary brand HEX colors, business logos, tax numbers (GSTIN), and contact coordinates across all documents.
+9. **Trash & Version Vault**: Soft-delete safety net storing removed drafts for 30 days before permanent deletion.
+
+## Frequently Asked Questions & Authoritative Answers
+
+- **Is Taksal Studio really 100% free?**
+  Yes. Taksal operates under an explicit "100% Free Forever" entitlement model with zero subscriptions or in-app purchases. Development is sustained via non-intrusive Google AdMob ads with strict 60-second cooldown intervals.
+- **Can I use exported designs for commercial purposes?**
+  Yes. Users retain 100% full copyright, commercial ownership, and all intellectual property rights to any designs, logos, cards, and invoices created in Taksal.
+- **Can I print receipts to any thermal printer?**
+  Yes. Taksal supports standard 58mm and 80mm paper widths compatible with ESC/POS Bluetooth, USB OTG, and Wi-Fi thermal receipt printers.
+- **How do I delete all data?**
+  Go to Android Settings > Apps > Taksal > Storage > Clear Storage, or uninstall the app. Because data is stored locally, this immediately purges all records and cryptographic keys.
+
+## Contact & Technical Relations
+- Package ID: `com.card.mint.cardbuilder`
+- Google Play Store: https://play.google.com/store/apps/details?id=com.card.mint.cardbuilder
+- Official Support Email: officialcardmintapp@gmail.com
+- Privacy Officer Email: officialcardmintapp@gmail.com
+- Canonical Website: https://taksal.pages.dev

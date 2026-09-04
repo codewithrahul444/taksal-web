@@ -5,7 +5,7 @@
 **Package Identifier:** `com.card.mint.cardbuilder`  
 **Application Version:** 3.0.0 (Build 7)  
 **Developer Entity:** Card Mint / Taksal Studio  
-**Official Contact:** support@taksal.com  
+**Official Contact:** officialcardmintapp@gmail.com  
 
 ---
 
@@ -131,6 +131,6 @@ Taksal Studio is designed for commercial and general creative use. We do not kno
 If you have questions regarding this Privacy Policy or wish to submit a compliance request:
 
 * **Entity:** Card Mint / Taksal Studio Engineering Team
-* **Email:** support@taksal.com
+* **Email:** officialcardmintapp@gmail.com
 * **Package Identifier:** `com.card.mint.cardbuilder`
 * **Subject:** Privacy Compliance Inquiry — Taksal Studio

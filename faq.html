@@ -5,10 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Frequently Asked Questions — Taksal Studio</title>
   <meta name="description" content="Find comprehensive answers to frequently asked questions about Taksal Studio's free model, 300 DPI exports, GST invoicing, thermal receipts, Keystore security, and privacy.">
-  <link rel="canonical" href="https://taksal.com/faq">
-  <link rel="icon" type="image/png" href="assets/images/app-icon.png">
-  <link rel="apple-touch-icon" href="assets/images/app-icon.png">
-  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="canonical" href="https://taksal.pages.dev/faq">
+  <link rel="icon" type="image/png" href="/assets/images/app-icon.png">
+  <link rel="apple-touch-icon" href="/assets/images/app-icon.png">
+  <link rel="manifest" href="/manifest.webmanifest">
   <meta name="theme-color" content="#4A148C" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#09090B" media="(prefers-color-scheme: dark)">
 
@@ -27,10 +27,10 @@
 
   <!-- Open Graph -->
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://taksal.com/faq">
+  <meta property="og:url" content="https://taksal.pages.dev/faq">
   <meta property="og:title" content="Frequently Asked Questions — Taksal Studio">
   <meta property="og:description" content="Comprehensive answers about Taksal Studio features, exports, privacy, and free model.">
-  <meta property="og:image" content="https://taksal.com/assets/images/feature-graphic.png">
+  <meta property="og:image" content="https://taksal.pages.dev/assets/images/feature-graphic.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
 
@@ -38,7 +38,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Frequently Asked Questions — Taksal Studio">
   <meta name="twitter:description" content="Comprehensive answers about Taksal Studio features, exports, privacy, and free model.">
-  <meta name="twitter:image" content="https://taksal.com/assets/images/feature-graphic.png">
+  <meta name="twitter:image" content="https://taksal.pages.dev/assets/images/feature-graphic.png">
 
   <!-- JSON-LD FAQPage & Breadcrumb Schema -->
   <script type="application/ld+json">
@@ -51,12 +51,12 @@
           "@type": "ListItem",
           "position": 1,
           "name": "Home",
-          "item": "https://taksal.com/"
+          "item": "https://taksal.pages.dev/"
         },{
           "@type": "ListItem",
           "position": 2,
           "name": "FAQ",
-          "item": "https://taksal.com/faq"
+          "item": "https://taksal.pages.dev/faq"
         }]
       },
       {
@@ -91,7 +91,23 @@
             "name": "Are exports high enough quality for physical print shops?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Yes. Taksal renders vector graphics at 300 DPI ultra-high precision print resolution. This standard matches the technical requirements of commercial offset printing presses for business cards, merchandise, banners, and flyers without pixelation."
+              "text": "Yes. Taksal renders vector graphics at 300 DPI (dots per inch) ultra-high precision print resolution. This standard matches the technical requirements of commercial offset printing presses for business cards, merchandise, banners, and flyers without pixelation."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What formats can I export my designs in?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "You can export designs in high-resolution PNG (with transparency support), JPEG (with custom compression), crisp vector SVG, and commercial PDF documents generated directly on your device via iText7."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is the Magic Layers feature?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Magic Layers is an intelligent computer vision tool built into Taksal. It takes a flat bitmap image (such as an uploaded logo or graphic badge) and separates it into distinct, editable vector layers that you can reorder, recolor, scale, or delete individually."
             }
           },
           {
@@ -99,7 +115,23 @@
             "name": "Are the generated invoices compliant with GST regulations?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Yes. Taksal's invoice generator includes fields for your business name, address, GSTIN, customer details, itemized goods/services with tax percentage breakdowns, invoice serial number, date stamps, and payment status."
+              "text": "Yes. Taksal's invoice generator includes fields for your business name, address, GSTIN, customer details, itemized goods/services with tax percentage breakdowns, invoice serial number, date stamps, and payment status (PAID/PENDING)."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How do I print receipts on a 58mm or 80mm thermal slip printer?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Taksal's Thermal Receipt Generator prepares POS slips in standard 58mm and 80mm thermal paper widths. Connect your thermal printer via Bluetooth or USB OTG, install the printer's Android Print Service driver, and tap 'Print Receipt'."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I track product stock levels and low-inventory alerts?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. In the Inventory Manager, each item has a configurable minimum safety threshold. When stock falls to or below this level, the item is highlighted with a low-stock alert so you can replenish before running out."
             }
           },
           {
@@ -115,7 +147,15 @@
             "name": "How does the Android KeyStore Hardware Vault work?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Sensitive values are encrypted using 256-bit AES-GCM cryptography. The cryptographic master key is generated and stored inside the Android device's hardware Secure Enclave / Trusted Execution Environment (TEE), meaning the key cannot be extracted even from rooted devices or compiled APK inspection."
+              "text": "Sensitive values (such as business profile credentials and Gemini AI API keys) are encrypted using 256-bit AES-GCM cryptography. The cryptographic master key is generated and stored inside the Android device's hardware Secure Enclave / Trusted Execution Environment (TEE), meaning the key cannot be extracted even from rooted devices or compiled APK inspection."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How do I delete all my data from the app?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Because all data lives on your device, you can completely erase everything at any time by going to Android Settings > Apps > Taksal > Storage > Clear Storage, or by uninstalling the application. This immediately and permanently purges all local databases and cryptographic keys."
             }
           }
         ]
@@ -124,7 +164,7 @@
   }
   </script>
 
-  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="/assets/css/style.css">
 </head>
 <body>
   <!-- Accessible Skip Link -->
@@ -134,7 +174,7 @@
   <header class="site-header">
     <div class="container nav-container">
       <a href="/" class="brand-logo" aria-label="Taksal Home">
-        <img src="assets/images/app-icon.png" alt="Taksal Logo" class="brand-icon" width="38" height="38">
+        <img src="/assets/images/app-icon.png" alt="Taksal Logo" class="brand-icon" width="38" height="38">
         <span>Taksal</span>
         <span class="brand-badge">v3.0</span>
       </a>
@@ -216,7 +256,7 @@
       <div class="container" style="max-width: 860px;">
 
         <!-- Group 1: General & Free Model -->
-        <div style="margin-bottom: var(--space-3xl);">
+        <div class="faq-group-wrapper" style="margin-bottom: var(--space-3xl);">
           <h2 style="font-size: 1.5rem; margin-bottom: 20px; display: flex; align-items: center; gap: 10px;">
             <span class="bento-icon-box icon-purple" style="width: 32px; height: 32px; font-size: 0.9rem; margin: 0;">1</span>
             General & Free Model
@@ -256,7 +296,7 @@
         </div>
 
         <!-- Group 2: Graphic Design Studio -->
-        <div style="margin-bottom: var(--space-3xl);">
+        <div class="faq-group-wrapper" style="margin-bottom: var(--space-3xl);">
           <h2 style="font-size: 1.5rem; margin-bottom: 20px; display: flex; align-items: center; gap: 10px;">
             <span class="bento-icon-box icon-teal" style="width: 32px; height: 32px; font-size: 0.9rem; margin: 0;">2</span>
             Vector Graphic Design Studio
@@ -296,7 +336,7 @@
         </div>
 
         <!-- Group 3: Invoicing, Receipts & Business Suite -->
-        <div style="margin-bottom: var(--space-3xl);">
+        <div class="faq-group-wrapper" style="margin-bottom: var(--space-3xl);">
           <h2 style="font-size: 1.5rem; margin-bottom: 20px; display: flex; align-items: center; gap: 10px;">
             <span class="bento-icon-box icon-indigo" style="width: 32px; height: 32px; font-size: 0.9rem; margin: 0;">3</span>
             GST Invoicing, Receipts & Commerce
@@ -336,7 +376,7 @@
         </div>
 
         <!-- Group 4: Security, Storage & Privacy -->
-        <div>
+        <div class="faq-group-wrapper">
           <h2 style="font-size: 1.5rem; margin-bottom: 20px; display: flex; align-items: center; gap: 10px;">
             <span class="bento-icon-box icon-emerald" style="width: 32px; height: 32px; font-size: 0.9rem; margin: 0;">4</span>
             Security, Hardware Encryption & Privacy
@@ -390,12 +430,55 @@
 
   <!-- Site Footer -->
   <footer class="site-footer">
-    <div class="container footer-bottom">
-      <div>© 2026 Taksal Studio. All rights reserved.</div>
-      <div>Designed with Jetpack Compose & Material 3.</div>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="brand-logo">
+            <img src="/assets/images/app-icon.png" alt="Taksal Icon" class="brand-icon" width="38" height="38">
+            <span>Taksal Studio</span>
+          </div>
+          <p>The world's #1 free creative graphic studio and SME business management suite for Android.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Studio Tools</h4>
+          <ul class="footer-links">
+            <li><a href="/features#vector-canvas">Vector Canvas Editor</a></li>
+            <li><a href="/features#brand-kit-features">Brand Kit Manager</a></li>
+            <li><a href="/features#ai-studio-features">Gemini 3.5 AI Studio</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Business Suite</h4>
+          <ul class="footer-links">
+            <li><a href="/features#invoicing-suite">GST Invoices</a></li>
+            <li><a href="/features#invoicing-suite">Thermal POS Slips</a></li>
+            <li><a href="/features#inventory-management">Inventory Tracker</a></li>
+            <li><a href="/features#smart-qr-hub">Smart QR Hub</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Legal & Help</h4>
+          <ul class="footer-links">
+            <li><a href="/support">Support Hub</a></li>
+            <li><a href="/faq">FAQ</a></li>
+            <li><a href="/contact">Contact Us</a></li>
+            <li><a href="/privacy">Privacy Policy</a></li>
+            <li><a href="/terms">Terms & Conditions</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>© 2026 Taksal Studio. All rights reserved.</div>
+        <div>Package: com.card.mint.cardbuilder · Version 3.0.0</div>
+      </div>
     </div>
   </footer>
 
-  <script src="assets/js/main.js"></script>
+  <!-- Back to Top Floating Trigger -->
+  <button type="button" class="back-to-top" id="backToTop" aria-label="Back to top">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="18 15 12 9 6 15"></polyline></svg>
+  </button>
+
+  <script src="/assets/js/main.js" defer></script>
 </body>
 </html>

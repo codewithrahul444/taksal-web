@@ -5,10 +5,10 @@
 .legal-layout {
   display: grid;
   grid-template-columns: 280px 1fr;
-  gap: 48px;
+  gap: clamp(24px, 4vw, 48px);
   align-items: start;
-  padding-top: var(--space-2xl);
-  padding-bottom: var(--space-4xl);
+  padding-top: var(--space-section-sm-y, var(--space-2xl));
+  padding-bottom: var(--space-section-y, var(--space-4xl));
 }
 
 /* Sticky Sidebar Table of Contents */
@@ -22,6 +22,7 @@
   box-shadow: var(--shadow-sm);
   max-height: calc(100vh - 120px);
   overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .legal-toc h4 {
@@ -43,18 +44,21 @@
 }
 
 .toc-link {
-  display: block;
+  display: flex;
+  align-items: center;
+  min-height: 40px;
   font-size: 0.875rem;
   color: var(--text-secondary);
-  padding: 6px 10px;
+  padding: 8px 12px;
   border-radius: var(--radius-sm);
   transition: all var(--transition-fast);
   line-height: 1.4;
+  touch-action: manipulation;
 }
 
 .toc-link:hover, .toc-link.active {
   background: var(--bg-surface-variant);
-  color: var(--brand-indigo);
+  color: var(--brand-accent-text);
   font-weight: 600;
 }
 
@@ -63,8 +67,9 @@
   background: var(--bg-surface);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-xl);
-  padding: var(--space-3xl);
+  padding: clamp(20px, 4.5vw, var(--space-3xl));
   box-shadow: var(--shadow-sm);
+  overflow: hidden;
 }
 
 .legal-header {
@@ -238,13 +243,57 @@
 @media (max-width: 900px) {
   .legal-layout {
     grid-template-columns: 1fr;
+    gap: 28px;
   }
   .legal-toc {
     position: static;
     max-height: none;
   }
+  .formats-download-bar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .formats-links {
+    width: 100%;
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 480px) {
   .legal-article {
-    padding: var(--space-xl);
+    padding: 18px 14px;
+    border-radius: var(--radius-lg);
+  }
+  .legal-title {
+    font-size: 1.75rem;
+  }
+  .legal-section h2 {
+    font-size: 1.25rem;
+  }
+  .legal-section h3 {
+    font-size: 1.05rem;
+  }
+  .legal-meta {
+    gap: 10px;
+    font-size: 0.8rem;
+  }
+  .data-table th, .data-table td {
+    padding: 10px 12px;
+    font-size: 0.825rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .legal-article {
+    padding: 14px 10px;
+  }
+  .legal-title {
+    font-size: 1.5rem;
+  }
+  .callout-box {
+    padding: 10px 12px;
+    font-size: 0.875rem;
   }
 }
 

@@ -31,12 +31,12 @@
   "shortcuts": [
     {
       "name": "Features & Tools",
-      "url": "/features.html",
+      "url": "/features",
       "description": "Explore 15+ built-in graphic and billing tools"
     },
     {
       "name": "GST Invoicing",
-      "url": "/features.html#invoicing",
+      "url": "/features#invoicing-suite",
       "description": "GST & Thermal POS invoice generator"
     },
     {

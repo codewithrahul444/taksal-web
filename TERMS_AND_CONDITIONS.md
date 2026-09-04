@@ -5,7 +5,7 @@
 **Package Identifier:** `com.card.mint.cardbuilder`  
 **Application Version:** 3.0.0 (Build 7)  
 **Developer Entity:** Card Mint / Taksal Studio  
-**Official Contact:** support@taksal.com  
+**Official Contact:** officialcardmintapp@gmail.com  
 
 ---
 
@@ -98,6 +98,6 @@ We reserve the right to revise these Terms periodically. Changes take effect upo
 
 For inquiries or legal notices regarding these Terms:
 * **Entity:** Card Mint / Taksal Studio Legal Department
-* **Email:** support@taksal.com
+* **Email:** officialcardmintapp@gmail.com
 * **Package Identifier:** `com.card.mint.cardbuilder`
 * **Subject:** Legal Terms Inquiry — Taksal Studio

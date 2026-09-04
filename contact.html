@@ -5,10 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Contact Us — Taksal Studio Support & Engineering</title>
   <meta name="description" content="Get in touch with the Taksal Studio developer and support team. Submit bug reports, feature suggestions, business inquiries, and privacy requests.">
-  <link rel="canonical" href="https://taksal.com/contact">
-  <link rel="icon" type="image/png" href="assets/images/app-icon.png">
-  <link rel="apple-touch-icon" href="assets/images/app-icon.png">
-  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="canonical" href="https://taksal.pages.dev/contact">
+  <link rel="icon" type="image/png" href="/assets/images/app-icon.png">
+  <link rel="apple-touch-icon" href="/assets/images/app-icon.png">
+  <link rel="manifest" href="/manifest.webmanifest">
   <meta name="theme-color" content="#4A148C" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#09090B" media="(prefers-color-scheme: dark)">
 
@@ -27,10 +27,10 @@
 
   <!-- Open Graph -->
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://taksal.com/contact">
+  <meta property="og:url" content="https://taksal.pages.dev/contact">
   <meta property="og:title" content="Contact Us — Taksal Studio Support & Engineering">
   <meta property="og:description" content="Get in touch with the Taksal Studio developer and support team.">
-  <meta property="og:image" content="https://taksal.com/assets/images/feature-graphic.png">
+  <meta property="og:image" content="https://taksal.pages.dev/assets/images/feature-graphic.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
 
@@ -38,28 +38,69 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Contact Us — Taksal Studio Support & Engineering">
   <meta name="twitter:description" content="Get in touch with the Taksal Studio developer and support team.">
-  <meta name="twitter:image" content="https://taksal.com/assets/images/feature-graphic.png">
+  <meta name="twitter:image" content="https://taksal.pages.dev/assets/images/feature-graphic.png">
 
-  <!-- JSON-LD Breadcrumb Schema -->
+  <!-- JSON-LD Structured Data (Breadcrumbs, ContactPage & Organization) -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": [{
-      "@type": "ListItem",
-      "position": 1,
-      "name": "Home",
-      "item": "https://taksal.com/"
-    },{
-      "@type": "ListItem",
-      "position": 2,
-      "name": "Contact",
-      "item": "https://taksal.com/contact"
-    }]
+    "@graph": [
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://taksal.pages.dev/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Contact",
+            "item": "https://taksal.pages.dev/contact"
+          }
+        ]
+      },
+      {
+        "@type": "ContactPage",
+        "@id": "https://taksal.pages.dev/contact#webpage",
+        "url": "https://taksal.pages.dev/contact",
+        "name": "Contact Taksal Studio — Engineering & User Support",
+        "description": "Get in direct contact with the Taksal Studio engineering team for technical support, bug reports, and data privacy governance.",
+        "isPartOf": {
+          "@type": "WebSite",
+          "@id": "https://taksal.pages.dev/#website",
+          "url": "https://taksal.pages.dev/",
+          "name": "Taksal Studio"
+        }
+      },
+      {
+        "@type": "Organization",
+        "@id": "https://taksal.pages.dev/#organization",
+        "name": "Taksal Studio",
+        "url": "https://taksal.pages.dev/",
+        "logo": "https://taksal.pages.dev/assets/images/app-icon.png",
+        "contactPoint": [
+          {
+            "@type": "ContactPoint",
+            "email": "officialcardmintapp@gmail.com",
+            "contactType": "technical support",
+            "availableLanguage": ["English", "Hindi"]
+          },
+          {
+            "@type": "ContactPoint",
+            "email": "officialcardmintapp@gmail.com",
+            "contactType": "customer service",
+            "availableLanguage": ["English", "Hindi"]
+          }
+        ]
+      }
+    ]
   }
   </script>
 
-  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="/assets/css/style.css">
 </head>
 <body>
   <!-- Accessible Skip Link -->
@@ -69,7 +110,7 @@
   <header class="site-header">
     <div class="container nav-container">
       <a href="/" class="brand-logo" aria-label="Taksal Home">
-        <img src="assets/images/app-icon.png" alt="Taksal Logo" class="brand-icon" width="38" height="38">
+        <img src="/assets/images/app-icon.png" alt="Taksal Logo" class="brand-icon" width="38" height="38">
         <span>Taksal</span>
         <span class="brand-badge">v3.0</span>
       </a>
@@ -160,7 +201,7 @@
                 <div>
                   <h3 style="font-size: 1.1rem; margin-bottom: 4px;">Direct Email Support</h3>
                   <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 8px;">For technical support, bug reports, and printer configuration.</p>
-                  <a href="mailto:support@taksal.com" style="color: var(--brand-indigo); font-weight: 700; font-size: 1rem;">support@taksal.com</a>
+                  <a href="mailto:officialcardmintapp@gmail.com" style="color: var(--brand-indigo); font-weight: 700; font-size: 1rem;">officialcardmintapp@gmail.com</a>
                 </div>
               </div>
             </div>
@@ -173,7 +214,7 @@
                 <div>
                   <h3 style="font-size: 1.1rem; margin-bottom: 4px;">Privacy & Compliance</h3>
                   <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 8px;">For GDPR, CCPA, and data privacy governance inquiries.</p>
-                  <a href="mailto:privacy@taksal.com" style="color: var(--brand-indigo); font-weight: 700; font-size: 1rem;">privacy@taksal.com</a>
+                  <a href="mailto:officialcardmintapp@gmail.com" style="color: var(--brand-indigo); font-weight: 700; font-size: 1rem;">officialcardmintapp@gmail.com</a>
                 </div>
               </div>
             </div>
@@ -186,7 +227,7 @@
                 <div>
                   <h3 style="font-size: 1.1rem; margin-bottom: 4px;">Official Domain</h3>
                   <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 8px;">Authorized production web presence.</p>
-                  <a href="https://taksal.com" style="color: var(--brand-indigo); font-weight: 700; font-size: 1rem;">https://taksal.com</a>
+                  <a href="https://taksal.pages.dev" style="color: var(--brand-indigo); font-weight: 700; font-size: 1rem;">https://taksal.pages.dev</a>
                 </div>
               </div>
             </div>
@@ -201,6 +242,9 @@
               </p>
 
               <form id="taksalContactForm" novalidate>
+                <!-- Anti-spam Honeypot Field -->
+                <input type="text" id="website_url_hp" name="website_url_hp" class="honeypot-field" tabindex="-1" autocomplete="off" aria-hidden="true">
+
                 <div class="form-group">
                   <label class="form-label" for="userName">Full Name *</label>
                   <input type="text" id="userName" class="form-control" placeholder="e.g. Rahul Sharma" required aria-required="true">
@@ -243,12 +287,55 @@
 
   <!-- Site Footer -->
   <footer class="site-footer">
-    <div class="container footer-bottom">
-      <div>© 2026 Taksal Studio. All rights reserved.</div>
-      <div>Direct Communications &amp; Developer Relations.</div>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="brand-logo">
+            <img src="/assets/images/app-icon.png" alt="Taksal Icon" class="brand-icon" width="38" height="38">
+            <span>Taksal Studio</span>
+          </div>
+          <p>The world's #1 free creative graphic studio and SME business management suite for Android.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Studio Tools</h4>
+          <ul class="footer-links">
+            <li><a href="/features#vector-canvas">Vector Canvas Editor</a></li>
+            <li><a href="/features#brand-kit-features">Brand Kit Manager</a></li>
+            <li><a href="/features#ai-studio-features">Gemini 3.5 AI Studio</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Business Suite</h4>
+          <ul class="footer-links">
+            <li><a href="/features#invoicing-suite">GST Invoices</a></li>
+            <li><a href="/features#invoicing-suite">Thermal POS Slips</a></li>
+            <li><a href="/features#inventory-management">Inventory Tracker</a></li>
+            <li><a href="/features#smart-qr-hub">Smart QR Hub</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Legal & Help</h4>
+          <ul class="footer-links">
+            <li><a href="/support">Support Hub</a></li>
+            <li><a href="/faq">FAQ</a></li>
+            <li><a href="/contact">Contact Us</a></li>
+            <li><a href="/privacy">Privacy Policy</a></li>
+            <li><a href="/terms">Terms & Conditions</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>© 2026 Taksal Studio. All rights reserved.</div>
+        <div>Package: com.card.mint.cardbuilder · Version 3.0.0</div>
+      </div>
     </div>
   </footer>
 
-  <script src="assets/js/main.js"></script>
+  <!-- Back to Top Floating Trigger -->
+  <button type="button" class="back-to-top" id="backToTop" aria-label="Back to top">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="18 15 12 9 6 15"></polyline></svg>
+  </button>
+
+  <script src="/assets/js/main.js" defer></script>
 </body>
 </html>

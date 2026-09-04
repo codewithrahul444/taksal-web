@@ -1,0 +1,32 @@
+# Taksal Studio
+> The #1 Free Creative Graphic Studio and SME Business Management Suite for Android. 100% Free Forever, Offline-First Architecture.
+
+Taksal Studio (`com.card.mint.cardbuilder`) is a native Android application designed for independent entrepreneurs, retail merchants, graphic designers, and micro-enterprises. It unifies a 300 DPI vector graphic design studio with a comprehensive SME commerce toolset (GST invoicing, thermal POS receipts, inventory management, and QR payments).
+
+## Core Capabilities
+- **Vector Canvas Editor**: High-precision Skia canvas supporting layers, CMYK color palettes, custom typography, SVG shapes, and print bleed margins.
+- **300 DPI Print Export**: Produces commercial offset print-ready vector PDF, transparent PNG, SVG, and high-compression JPEG formats without watermarks.
+- **GST Invoicing Suite**: Issues compliant tax invoices, quotations, and estimates with automated CGST/SGST/IGST tax calculation and customizable letterheads.
+- **Thermal POS Generator**: Formats instant 58mm and 80mm ESC/POS thermal billing slips printable via Bluetooth, USB OTG, or network printers.
+- **Stock & Inventory Tracker**: Tracks product stock, safety thresholds, cost prices, profit margins, and issues low-stock replenishment alerts.
+- **Smart QR & Barcode Hub**: Generates dynamic UPI payment QR codes, vCard 3.0 digital contact cards, EAN-13, and Code 128 barcodes.
+- **Gemini 3.5 AI Studio**: Integrates Google AI Studio Gemini API keys for automated marketing copywriting, slogan creation, and layout prompts.
+- **Hardware-Backed Cryptography**: All business records, customer databases, and API keys are encrypted at rest using 256-bit AES-GCM via the Android KeyStore hardware Trusted Execution Environment (TEE).
+- **Offline Sovereignty**: Zero cloud user database. No mandatory account registration, email verification, or cloud lock-in.
+
+## Key Information
+- **Platform**: Android 9.0 (API Level 28) and higher
+- **License**: 100% Free Forever (No subscriptions, no in-app purchases)
+- **Monetization**: Non-intrusive Google AdMob with strict 60s cooldown intervals and Google UMP user consent
+- **Package ID**: `com.card.mint.cardbuilder`
+- **Google Play Link**: https://play.google.com/store/apps/details?id=com.card.mint.cardbuilder
+- **Official Website**: https://taksal.pages.dev
+
+## Documentation Links
+- [Features & Tools](https://taksal.pages.dev/features): Full breakdown of all 15+ built-in creative and business modules.
+- [Philosophy & Architecture](https://taksal.pages.dev/about): The contrarian story behind offline-first local business software.
+- [Setup & Troubleshooting](https://taksal.pages.dev/support): Guides for 300 DPI exports, thermal printer pairing, and draft restoration.
+- [Frequently Asked Questions](https://taksal.pages.dev/faq): Answers to licensing, data privacy, and technical queries.
+- [Privacy Policy](https://taksal.pages.dev/privacy): Details on on-device Room SQLite storage and zero cloud data collection.
+- [Terms & Conditions](https://taksal.pages.dev/terms): Complete user ownership of all created designs and commercial invoices.
+- [Support & Contact](https://taksal.pages.dev/contact): Direct developer communications and technical assistance.

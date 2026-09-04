@@ -99,7 +99,7 @@ On Cloudflare Pages, the [`_headers`](_headers) file ensures this is served with
 ### Linking to Google Play Store
 1. Open [Google Play Console](https://play.google.com/console) > Select **Taksal** (`com.card.mint.cardbuilder`).
 2. Go to **Grow** > **Store presence** > **Store settings**.
-3. Under **Store listing contact details**, set **Website** to your domain (e.g. `https://taksal.com` or your Cloudflare Pages URL).
+3. Under **Store listing contact details**, set **Website** to your domain (e.g. `https://taksal.pages.dev` or your Cloudflare Pages URL).
 4. In [Google AdMob](https://admob.google.com/), open **Apps** > **app-ads.txt** > Click **Check for updates**. Status will update to **Authorized** (green checkmark).
 
 ---
@@ -168,9 +168,9 @@ Open your browser and navigate to `http://localhost:8000`.
 ## 📬 Contact & Support
 
 * **Developer Entity:** Card Mint / Taksal Studio Engineering Team
-* **Official Support Email:** [support@taksal.com](mailto:support@taksal.com)
+* **Official Support Email:** [officialcardmintapp@gmail.com](mailto:officialcardmintapp@gmail.com)
 * **Application Package:** `com.card.mint.cardbuilder`
-* **Official Website:** [https://taksal.com](https://taksal.com)
+* **Official Website:** [https://taksal.pages.dev](https://taksal.pages.dev)
 
 ---
 

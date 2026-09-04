@@ -1,6 +1,6 @@
 # Hosting & Deployment Guide — Taksal Studio Website
 
-This comprehensive guide outlines step-by-step instructions to deploy the production-ready **Taksal Studio** official website (`https://taksal.com`) to **Cloudflare Pages** (Option A) with your verified **`app-ads.txt`** file, custom headers, and clean URL rewrites.
+This comprehensive guide outlines step-by-step instructions to deploy the production-ready **Taksal Studio** official website (`https://taksal.pages.dev`) to **Cloudflare Pages** (Option A) with your verified **`app-ads.txt`** file, custom headers, and clean URL rewrites.
 
 Because the website is built with clean, semantic HTML5, CSS3 custom properties, and vanilla JavaScript without heavy framework dependencies, it requires **zero server-side runtime**, achieves near-instant TTFB (Time to First Byte), and can be hosted for **$0/month** on Cloudflare's global edge network.
 
@@ -102,7 +102,7 @@ Google AdMob requires `app-ads.txt` to verify app ownership and protect your ad 
 ### 1. Test in Browser / Terminal
 Once deployed, verify that `app-ads.txt` is publicly accessible at your root domain:
 ```bash
-curl -I https://taksal.com/app-ads.txt
+curl -I https://taksal.pages.dev/app-ads.txt
 ```
 Expected response:
 ```http
@@ -113,7 +113,7 @@ access-control-allow-origin: *
 ```
 And check file content:
 ```bash
-curl https://taksal.com/app-ads.txt
+curl https://taksal.pages.dev/app-ads.txt
 ```
 Output:
 ```
@@ -127,9 +127,9 @@ Google AdMob discovers your `app-ads.txt` URL by looking up the **Developer Webs
 2. Select your app: **Taksal** (`com.card.mint.cardbuilder`).
 3. Navigate to **Grow** > **Store presence** > **Store settings**.
 4. In the **Store listing contact details** section:
-   - **Website:** Enter `https://taksal.com` (or your exact custom domain).
+   - **Website:** Enter `https://taksal.pages.dev` (or your exact custom domain).
 5. Navigate to **Policy and programs** > **App content** > **Privacy Policy**:
-   - **Privacy Policy URL:** Enter `https://taksal.com/privacy.html`.
+   - **Privacy Policy URL:** Enter `https://taksal.pages.dev/privacy.html`.
 6. Click **Save**.
 
 ### 3. Check Status in Google AdMob Dashboard
@@ -138,7 +138,7 @@ Google AdMob discovers your `app-ads.txt` URL by looking up the **Developer Webs
 3. Click the **app-ads.txt** tab at the top.
 4. Locate `Taksal` (`com.card.mint.cardbuilder`).
 5. Click **Check for updates**. Google's crawler will verify:
-   - `https://taksal.com/app-ads.txt`
+   - `https://taksal.pages.dev/app-ads.txt`
    - Publisher ID: `pub-7030166934019393`
    - Status changes from *"Needs attention"* to **"Authorized"** (green checkmark).
 
