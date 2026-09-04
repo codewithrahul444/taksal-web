@@ -4,8 +4,8 @@ Application Name: Taksal (Taksal Studio)
 Application Package ID: com.card.mint.cardbuilder
 Version: 3.0.0 (Build 7)
 Developer: Card Mint / Taksal Studio
-Contact: support@cardmint.app
-Website: https://cardmint.app
+Contact: support@taksal.com
+Website: https://taksal.com
 
 ================================================================================
 1. OVERVIEW & DATA SOVEREIGNTY
@@ -97,6 +97,6 @@ knowingly collect personal information from children.
 ================================================================================
 For questions or privacy requests:
 Card Mint / Taksal Studio Engineering Team
-Email: support@cardmint.app
+Email: support@taksal.com
 Package ID: com.card.mint.cardbuilder
 Subject: Privacy Compliance Inquiry — Taksal Studio

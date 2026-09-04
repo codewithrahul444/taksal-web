@@ -198,7 +198,7 @@
         if (statusEl) {
           statusEl.style.display = 'block';
           statusEl.className = 'form-status success';
-          statusEl.textContent = 'Thank you! Your message has been routed to support@cardmint.app. Our engineering team typically responds within 24–48 hours.';
+          statusEl.textContent = 'Thank you! Your message has been routed to our engineering support team (support@taksal.com). We typically respond within 24–48 hours.';
         }
         contactForm.reset();
         if (submitBtn) {

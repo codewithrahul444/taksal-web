@@ -1,6 +1,6 @@
 # Hosting & Deployment Guide — Taksal Studio Website
 
-This comprehensive guide outlines step-by-step instructions to deploy the production-ready **Taksal Studio** official website (`https://cardmint.app`) to **Cloudflare Pages** (Option A) with your verified **`app-ads.txt`** file, custom headers, and clean URL rewrites.
+This comprehensive guide outlines step-by-step instructions to deploy the production-ready **Taksal Studio** official website (`https://taksal.com`) to **Cloudflare Pages** (Option A) with your verified **`app-ads.txt`** file, custom headers, and clean URL rewrites.
 
 Because the website is built with clean, semantic HTML5, CSS3 custom properties, and vanilla JavaScript without heavy framework dependencies, it requires **zero server-side runtime**, achieves near-instant TTFB (Time to First Byte), and can be hosted for **$0/month** on Cloudflare's global edge network.
 
@@ -72,19 +72,19 @@ Wrangler will prompt you to authenticate with Cloudflare in your browser once, c
 
 ---
 
-## Custom Domain Setup (`cardmint.app`)
+## Custom Domain Setup (`taksal.com`)
 
 To connect your own apex domain and `www` subdomain:
 
 1. In your Cloudflare Pages project dashboard, click the **Custom domains** tab.
 2. Click **Set up a custom domain**.
-3. Enter `cardmint.app` and click **Continue**.
+3. Enter `taksal.com` and click **Continue**.
 4. If your domain's DNS is managed on Cloudflare:
    - Cloudflare will automatically configure the CNAME record (with CNAME flattening at apex).
 5. If your domain is registered on another registrar (Namecheap, GoDaddy, Google Domains / Squarespace):
    - Add the following DNS record in your registrar's DNS panel:
      - **Type:** `CNAME`
-     - **Name:** `@` (or `cardmint.app`)
+     - **Name:** `@` (or `taksal.com`)
      - **Target / Value:** `taksal-web.pages.dev`
      - **Proxy status:** Proxied (if using Cloudflare DNS) or DNS only
    - Repeat for `www`:
@@ -102,7 +102,7 @@ Google AdMob requires `app-ads.txt` to verify app ownership and protect your ad 
 ### 1. Test in Browser / Terminal
 Once deployed, verify that `app-ads.txt` is publicly accessible at your root domain:
 ```bash
-curl -I https://cardmint.app/app-ads.txt
+curl -I https://taksal.com/app-ads.txt
 ```
 Expected response:
 ```http
@@ -113,7 +113,7 @@ access-control-allow-origin: *
 ```
 And check file content:
 ```bash
-curl https://cardmint.app/app-ads.txt
+curl https://taksal.com/app-ads.txt
 ```
 Output:
 ```
@@ -127,9 +127,9 @@ Google AdMob discovers your `app-ads.txt` URL by looking up the **Developer Webs
 2. Select your app: **Taksal** (`com.card.mint.cardbuilder`).
 3. Navigate to **Grow** > **Store presence** > **Store settings**.
 4. In the **Store listing contact details** section:
-   - **Website:** Enter `https://cardmint.app` (or your exact custom domain).
+   - **Website:** Enter `https://taksal.com` (or your exact custom domain).
 5. Navigate to **Policy and programs** > **App content** > **Privacy Policy**:
-   - **Privacy Policy URL:** Enter `https://cardmint.app/privacy.html`.
+   - **Privacy Policy URL:** Enter `https://taksal.com/privacy.html`.
 6. Click **Save**.
 
 ### 3. Check Status in Google AdMob Dashboard
@@ -138,7 +138,7 @@ Google AdMob discovers your `app-ads.txt` URL by looking up the **Developer Webs
 3. Click the **app-ads.txt** tab at the top.
 4. Locate `Taksal` (`com.card.mint.cardbuilder`).
 5. Click **Check for updates**. Google's crawler will verify:
-   - `https://cardmint.app/app-ads.txt`
+   - `https://taksal.com/app-ads.txt`
    - Publisher ID: `pub-7030166934019393`
    - Status changes from *"Needs attention"* to **"Authorized"** (green checkmark).
 
@@ -149,7 +149,7 @@ Google AdMob discovers your `app-ads.txt` URL by looking up the **Developer Webs
 ### Option B: GitHub Pages
 1. On GitHub, navigate to repository **Settings** > **Pages**.
 2. Set Source to `Deploy from a branch` (`main` / `/root`).
-3. Enter `cardmint.app` under Custom domain, and check **Enforce HTTPS**.
+3. Enter `taksal.com` under Custom domain, and check **Enforce HTTPS**.
 
 ### Option C: Netlify
 1. Drag the entire `/home/rahullagariya/AndroidStudioProjects/Taksal Web` folder into `app.netlify.com/drop`.
@@ -157,6 +157,6 @@ Google AdMob discovers your `app-ads.txt` URL by looking up the **Developer Webs
 
 ### Option D: Custom Linux Nginx VPS
 ```bash
-sudo cp -r "/home/rahullagariya/AndroidStudioProjects/Taksal Web/"* /var/www/cardmint.app/
-sudo certbot --nginx -d cardmint.app -d www.cardmint.app
+sudo cp -r "/home/rahullagariya/AndroidStudioProjects/Taksal Web/"* /var/www/taksal.com/
+sudo certbot --nginx -d taksal.com -d www.taksal.com
 ```
