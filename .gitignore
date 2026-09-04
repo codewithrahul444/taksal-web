@@ -11,3 +11,4 @@ Thumbs.db
 # Node modules (if any tools are run locally)
 node_modules/
 .wrangler/
+*.zip
