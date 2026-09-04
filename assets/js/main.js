@@ -123,28 +123,53 @@
   // 4. GLOBAL COMMAND PALETTE (CMD+K / CTRL+K) WITH XSS PROTECTION
   // ==========================================================================
   const searchIndex = [
-    { title: 'Home', subtitle: 'Main landing & overview', url: '/', category: 'Navigation', icon: 'home' },
-    { title: 'All 15+ Features', subtitle: 'Complete creative & business suite', url: '/features', category: 'Navigation', icon: 'grid' },
-    { title: 'Vector Canvas Editor', subtitle: '300 DPI vector graphic engine', url: '/features#vector-canvas', category: 'Creative Tools', icon: 'pen' },
-    { title: 'Business Card Maker', subtitle: 'Multi-layer templates & print specs', url: '/features#business-cards', category: 'Creative Tools', icon: 'card' },
-    { title: 'Logo Studio', subtitle: 'Vector shapes, geometry & brand seals', url: '/features#logo-creator', category: 'Creative Tools', icon: 'pen' },
-    { title: 'Brand Kit Manager', subtitle: 'Hex swatches, typestyles & assets', url: '/features#brand-kit-features', category: 'Creative Tools', icon: 'card' },
-    { title: 'GST Invoice Generator', subtitle: 'Tax slabs, HSN codes, instant PDF', url: '/features#invoicing-suite', category: 'Business Suite', icon: 'file-text' },
-    { title: 'Thermal Receipt Generator', subtitle: '58mm & 80mm ESC/POS slip print', url: '/features#receipts', category: 'Business Suite', icon: 'printer' },
-    { title: 'Estimates & Quotations', subtitle: 'Formal pricing quotes & conversions', url: '/features#quotations', category: 'Business Suite', icon: 'file-text' },
-    { title: 'Inventory & Stock Manager', subtitle: 'Low-stock alerts & SKU tracking', url: '/features#inventory-management', category: 'Business Suite', icon: 'box' },
-    { title: 'Smart QR & Barcode Hub', subtitle: 'UPI, WiFi, vCard, Code-128', url: '/features#smart-qr-hub', category: 'Business Suite', icon: 'qr' },
-    { title: 'Gemini 3.5 AI Studio', subtitle: 'Hardware-encrypted ephemeral AI', url: '/features#ai-studio-features', category: 'AI & Keystore', icon: 'sparkles' },
-    { title: 'Security & Keystore', subtitle: 'AES-256 hardware encryption', url: '/features#security-features', category: 'AI & Keystore', icon: 'shield' },
-    { title: 'Support & Documentation', subtitle: 'Thermal setup, printing, backups', url: '/support', category: 'Support', icon: 'help' },
-    { title: 'Frequently Asked Questions', subtitle: 'Free model, security, offline database', url: '/faq', category: 'Support', icon: 'message-circle' },
-    { title: 'Contact Engineering', subtitle: 'officialcardmintapp@gmail.com', url: '/contact', category: 'Support', icon: 'mail' },
-    { title: 'Privacy Policy', subtitle: 'Zero cloud lock-in, Android Keystore', url: '/privacy', category: 'Legal', icon: 'shield' },
-    { title: 'Terms & Conditions', subtitle: 'Commercial copyright & license terms', url: '/terms', category: 'Legal', icon: 'file' },
-    { title: 'Toggle Dark / Light Theme', subtitle: 'Switch interface contrast', action: 'toggleTheme', category: 'Actions', icon: 'moon' },
-    { title: 'Download on Google Play', subtitle: 'Get Taksal Studio Android APK', action: 'downloadApp', category: 'Actions', icon: 'download' },
-    { title: 'Copy App-Ads.txt Record', subtitle: 'Google AdMob publisher verification', action: 'copyAdsTxt', category: 'Actions', icon: 'copy' }
+    { title: 'Home', subtitle: 'Main landing & overview', url: '/', category: 'Navigation', icon: 'home', keywords: 'home taksal main start app landing' },
+    { title: 'All 15+ Features', subtitle: 'Complete creative & business suite', url: '/features', category: 'Navigation', icon: 'grid', keywords: 'features all overview list capabilities tools suite modules' },
+    { title: 'Vector Canvas Editor', subtitle: '300 DPI vector graphic engine', url: '/features#vector-canvas', category: 'Creative Tools', icon: 'pen', keywords: 'vector canvas editor 300 dpi design graphics drawing typography layers svg export' },
+    { title: 'Business Card Maker', subtitle: 'Multi-layer templates & print specs', url: '/features#business-cards', category: 'Creative Tools', icon: 'card', keywords: 'business cards visiting card templates 3d vcard mockup print bleed cut margins visiting' },
+    { title: 'Logo Studio', subtitle: 'Vector shapes, geometry & brand seals', url: '/features#logo-creator', category: 'Creative Tools', icon: 'pen', keywords: 'logo maker brand identity vector icon creator emblem monogram watermark seal shapes' },
+    { title: 'Brand Kit Manager', subtitle: 'Hex swatches, typestyles & assets', url: '/features#brand-kit-features', category: 'Creative Tools', icon: 'card', keywords: 'brand kit colors hex typography fonts swatches assets palette identity' },
+    { title: 'GST Invoice Generator', subtitle: 'Tax slabs, HSN codes, instant PDF', url: '/features#invoicing-suite', category: 'Business Suite', icon: 'file-text', keywords: 'gst invoice billing tax hsn sac cgst sgst igst pdf bill pos thermal receipts calculation' },
+    { title: 'Thermal Receipt Generator', subtitle: '58mm & 80mm ESC/POS slip print', url: '/features#receipts', category: 'Business Suite', icon: 'printer', keywords: 'thermal receipt printer 58mm 80mm esc pos bluetooth usb billing slips pos slip print' },
+    { title: 'Estimates & Quotations', subtitle: 'Formal pricing quotes & conversions', url: '/features#quotations', category: 'Business Suite', icon: 'file-text', keywords: 'quotations estimates pricing quotes convert invoice proforma billing formal proposals' },
+    { title: 'Inventory & Stock Manager', subtitle: 'Low-stock alerts & SKU tracking', url: '/features#inventory-management', category: 'Business Suite', icon: 'box', keywords: 'inventory stock manager warehouse sku barcode low stock alerts tracking items products' },
+    { title: 'Smart QR & Barcode Hub', subtitle: 'UPI, WiFi, vCard, Code-128', url: '/features#smart-qr-hub', category: 'Business Suite', icon: 'qr', keywords: 'qr code barcode generator upi payment wifi vcard code 128 ean scanner quick response' },
+    { title: 'Gemini 3.5 AI Studio', subtitle: 'Hardware-encrypted ephemeral AI', url: '/features#ai-studio-features', category: 'AI & Keystore', icon: 'sparkles', keywords: 'ai studio gemini 3.5 flash copywriting product descriptions prompt encryption intelligence assistant' },
+    { title: 'Security & Keystore', subtitle: 'AES-256 hardware encryption', url: '/features#security-features', category: 'AI & Keystore', icon: 'shield', keywords: 'security keystore encryption aes-256 hardware enclave privacy offline zero-knowledge cipher protect' },
+    { title: 'Support & Documentation', subtitle: 'Thermal setup, printing, backups', url: '/support', category: 'Support', icon: 'help', keywords: 'support documentation help docs guides manual thermal setup printer backup restore troubleshoot guide' },
+    { title: 'Frequently Asked Questions', subtitle: 'Free model, security, offline database', url: '/faq', category: 'Support', icon: 'message-circle', keywords: 'faq questions answers help free security offline cost pricing license sqlite safe data' },
+    { title: 'Contact Engineering', subtitle: 'officialcardmintapp@gmail.com', url: '/contact', category: 'Support', icon: 'mail', keywords: 'contact support email help team engineering feedback bug report inquiry officialcardmintapp@gmail.com' },
+    { title: 'Privacy Policy', subtitle: 'Zero cloud lock-in, Android Keystore', url: '/privacy', category: 'Legal', icon: 'shield', keywords: 'privacy policy legal data protection terms gdpr security permissions privacy rights' },
+    { title: 'Terms & Conditions', subtitle: 'Commercial copyright & license terms', url: '/terms', category: 'Legal', icon: 'file', keywords: 'terms conditions service legal rights copyright license agreement commercial terms' },
+    { title: 'Toggle Dark / Light Theme', subtitle: 'Switch interface contrast', action: 'toggleTheme', category: 'Actions', icon: 'moon', keywords: 'dark mode light theme toggle appearance contrast colors theme night day' },
+    { title: 'Download on Google Play', subtitle: 'Get Taksal Studio Android APK', action: 'downloadApp', category: 'Actions', icon: 'download', keywords: 'download install google play android app apk free store get application' },
+    { title: 'Copy App-Ads.txt Record', subtitle: 'Google AdMob publisher verification', action: 'copyAdsTxt', category: 'Actions', icon: 'copy', keywords: 'app-ads.txt admob google ads verification publisher record copy code' }
   ];
+
+  let lastActiveSearchElement = null;
+
+  // Detect Platform Shortcut: ⌘K for Apple (macOS / iOS / iPadOS), Ctrl K for Windows / Linux / Android
+  function getShortcutInfo() {
+    const ua = navigator.userAgent || '';
+    const plat = (navigator.userAgentData && navigator.userAgentData.platform) || navigator.platform || '';
+    const isApple = /Mac|iPhone|iPad|iPod/i.test(plat) || /Macintosh|Mac OS X/i.test(ua);
+    return {
+      isApple,
+      symbol: isApple ? '⌘K' : 'Ctrl K',
+      aria: isApple ? 'Cmd+K' : 'Ctrl+K'
+    };
+  }
+
+  function syncPlatformShortcuts() {
+    const { symbol, aria } = getShortcutInfo();
+    document.querySelectorAll('.cmd-palette-btn, .mobile-search-trigger, [data-action="command-palette"]').forEach(el => {
+      const kbd = el.querySelector('.cmd-kbd, .cmd-kbd-badge, .cmd-kbd-shortcut');
+      if (kbd) kbd.textContent = symbol;
+      if (el.hasAttribute('aria-label') && (el.getAttribute('aria-label').includes('Command Palette') || el.getAttribute('aria-label').includes('Search'))) {
+        el.setAttribute('aria-label', `Open Command Palette (${aria})`);
+      }
+    });
+  }
 
   function createCommandPalette() {
     let overlay = document.querySelector('.cmd-palette-overlay');
@@ -154,14 +179,17 @@
     overlay.className = 'cmd-palette-overlay';
     overlay.setAttribute('role', 'dialog');
     overlay.setAttribute('aria-modal', 'true');
-    overlay.setAttribute('aria-label', 'Search documentation and tools');
+    overlay.setAttribute('aria-label', 'Search documentation, features, and tools');
 
     overlay.innerHTML = `
       <div class="cmd-palette-modal">
         <div class="cmd-search-header">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-          <input type="text" class="cmd-search-input" placeholder="Type a feature, tool, page, or action... (e.g. GST, Card, Theme)" aria-label="Command search input" autofocus>
-          <span class="cmd-kbd">ESC</span>
+          <svg class="cmd-search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          <input type="text" class="cmd-search-input" placeholder="Type a feature, tool, page, or action... (e.g. GST, Card, Theme)" aria-label="Command search input" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+          <button type="button" class="cmd-close-btn" aria-label="Close search (Escape)">
+            <span class="cmd-kbd cmd-kbd-esc">ESC</span>
+            <svg class="cmd-close-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+          </button>
         </div>
         <div class="cmd-results-list" role="listbox" id="cmdResultsList"></div>
         <div class="cmd-palette-footer">
@@ -175,13 +203,23 @@
 
     const input = overlay.querySelector('.cmd-search-input');
     const resultsContainer = overlay.querySelector('#cmdResultsList');
+    const closeBtn = overlay.querySelector('.cmd-close-btn');
+
+    if (closeBtn) {
+      closeBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        window.closeCommandPalette();
+      });
+    }
 
     function renderResults(filterText = '') {
       const q = filterText.toLowerCase().trim();
       const matched = searchIndex.filter(item => 
         item.title.toLowerCase().includes(q) || 
         item.subtitle.toLowerCase().includes(q) || 
-        item.category.toLowerCase().includes(q)
+        item.category.toLowerCase().includes(q) ||
+        (item.keywords && item.keywords.toLowerCase().includes(q))
       );
 
       if (matched.length === 0) {
@@ -239,9 +277,23 @@
       const url = itemEl.getAttribute('data-url');
       const action = itemEl.getAttribute('data-action');
 
-      closePalette();
+      window.closeCommandPalette();
 
       if (url) {
+        if (url.includes('#')) {
+          const [path, hash] = url.split('#');
+          const currentPath = window.location.pathname.replace(/\/index\.html$/, '/');
+          const normalizedPath = path.replace(/\/index\.html$/, '/');
+
+          if (currentPath === normalizedPath || (currentPath === '/' && normalizedPath === '') || (currentPath.includes('features') && normalizedPath.includes('features'))) {
+            const targetEl = document.getElementById(hash);
+            if (targetEl) {
+              history.pushState(null, '', '#' + hash);
+              targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              return;
+            }
+          }
+        }
         window.location.href = url;
       } else if (action === 'toggleTheme') {
         const next = getActiveTheme() === 'dark' ? 'light' : 'dark';
@@ -288,54 +340,72 @@
     });
 
     overlay.addEventListener('click', e => {
-      if (e.target === overlay) closePalette();
+      if (e.target === overlay) window.closeCommandPalette();
     });
-
-    function closePalette() {
-      overlay.classList.remove('open');
-      document.body.style.overflow = '';
-    }
 
     return overlay;
   }
 
-  window.toggleCommandPalette = function () {
+  window.openCommandPalette = function () {
+    // If mobile navigation drawer is open, cleanly close it
+    const mobileDrawer = document.querySelector('.mobile-nav-drawer');
+    const hamburgerBtn = document.querySelector('.hamburger-btn');
+    if (mobileDrawer && mobileDrawer.classList.contains('open')) {
+      mobileDrawer.classList.remove('open');
+      if (hamburgerBtn) hamburgerBtn.setAttribute('aria-expanded', 'false');
+    }
+
+    lastActiveSearchElement = document.activeElement;
     const overlay = createCommandPalette();
-    const isOpen = overlay.classList.contains('open');
-    if (isOpen) {
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+
+    const input = overlay.querySelector('.cmd-search-input');
+    if (input) {
+      input.value = '';
+      const event = new Event('input');
+      input.dispatchEvent(event);
+      setTimeout(() => {
+        input.focus();
+      }, 50);
+    }
+  };
+
+  window.closeCommandPalette = function () {
+    const overlay = document.querySelector('.cmd-palette-overlay');
+    if (overlay && overlay.classList.contains('open')) {
       overlay.classList.remove('open');
       document.body.style.overflow = '';
-    } else {
-      overlay.classList.add('open');
-      document.body.style.overflow = 'hidden';
-      const input = overlay.querySelector('.cmd-search-input');
-      if (input) {
-        input.value = '';
-        input.focus();
-        const event = new Event('input');
-        input.dispatchEvent(event);
+      if (lastActiveSearchElement && typeof lastActiveSearchElement.focus === 'function') {
+        try { lastActiveSearchElement.focus(); } catch (_) {}
       }
     }
   };
 
-  // Keyboard shortcut listener for Cmd+K / Ctrl+K
+  window.toggleCommandPalette = function () {
+    const overlay = document.querySelector('.cmd-palette-overlay');
+    if (overlay && overlay.classList.contains('open')) {
+      window.closeCommandPalette();
+    } else {
+      window.openCommandPalette();
+    }
+  };
+
+  // Keyboard shortcut listener for Cmd+K / Ctrl+K & Escape
   document.addEventListener('keydown', e => {
-    if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+    if ((e.metaKey || e.ctrlKey) && (e.key === 'k' || e.key === 'K' || e.code === 'KeyK')) {
       e.preventDefault();
       window.toggleCommandPalette();
     } else if (e.key === 'Escape') {
       const overlay = document.querySelector('.cmd-palette-overlay');
       if (overlay && overlay.classList.contains('open')) {
-        overlay.classList.remove('open');
-        document.body.style.overflow = '';
+        window.closeCommandPalette();
       }
     }
   });
 
-  // Attach to header search buttons
-  document.querySelectorAll('.cmd-palette-btn').forEach(btn => {
-    btn.addEventListener('click', window.toggleCommandPalette);
-  });
+  // Sync shortcuts on DOM load
+  syncPlatformShortcuts();
 
   // ==========================================================================
   // 5. INTERACTIVE 3D BUSINESS CARD STUDIO & REAL SVG/vCARD EXPORT
@@ -935,19 +1005,24 @@
   }
 
   // ==========================================================================
-  // 14. UNOBTRUSIVE GLOBAL EVENT HANDLERS (DATA-ACTION)
+  // 14. UNOBTRUSIVE GLOBAL EVENT HANDLERS (DATA-ACTION & SEARCH TRIGGERS)
   // ==========================================================================
   document.addEventListener('click', e => {
-    const actionEl = e.target.closest('[data-action]');
-    if (!actionEl) return;
-    const action = actionEl.getAttribute('data-action');
+    const triggerEl = e.target.closest('.cmd-palette-btn, .mobile-search-trigger, [data-action]');
+    if (!triggerEl) return;
 
+    if (triggerEl.classList.contains('cmd-palette-btn') || 
+        triggerEl.classList.contains('mobile-search-trigger') || 
+        triggerEl.getAttribute('data-action') === 'command-palette') {
+      e.preventDefault();
+      window.openCommandPalette();
+      return;
+    }
+
+    const action = triggerEl.getAttribute('data-action');
     if (action === 'print') {
       e.preventDefault();
       window.print();
-    } else if (action === 'command-palette') {
-      e.preventDefault();
-      window.toggleCommandPalette();
     }
   });
 
