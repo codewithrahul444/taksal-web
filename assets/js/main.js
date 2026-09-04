@@ -72,6 +72,30 @@
     }, duration);
   };
 
+  window.copyTextToClipboard = function (text, successMsg = 'Copied to clipboard!') {
+    if (!navigator.clipboard) {
+      const textarea = document.createElement('textarea');
+      textarea.value = text;
+      textarea.style.position = 'fixed';
+      textarea.style.opacity = '0';
+      document.body.appendChild(textarea);
+      textarea.select();
+      try {
+        document.execCommand('copy');
+        window.showToast(successMsg, 'success');
+      } catch (err) {
+        window.showToast('Failed to copy', 'info');
+      }
+      document.body.removeChild(textarea);
+      return;
+    }
+    navigator.clipboard.writeText(text).then(() => {
+      window.showToast(successMsg, 'success');
+    }).catch(() => {
+      window.showToast('Failed to copy to clipboard', 'info');
+    });
+  };
+
   // ==========================================================================
   // 3. THEME MANAGEMENT (ZERO-FOUC & SYSTEM PREFERENCE SYNC)
   // ==========================================================================
@@ -120,34 +144,92 @@
   });
 
   // ==========================================================================
-  // 4. GLOBAL COMMAND PALETTE (CMD+K / CTRL+K) WITH XSS PROTECTION
+  // 4. GLOBAL COMMAND PALETTE (CMD+K / CTRL+K) WITH INSTANT SEARCH & FILTERS
   // ==========================================================================
   const searchIndex = [
-    { title: 'Home', subtitle: 'Main landing & overview', url: '/', category: 'Navigation', icon: 'home', keywords: 'home taksal main start app landing' },
-    { title: 'All 15+ Features', subtitle: 'Complete creative & business suite', url: '/features', category: 'Navigation', icon: 'grid', keywords: 'features all overview list capabilities tools suite modules' },
-    { title: 'Vector Canvas Editor', subtitle: '300 DPI vector graphic engine', url: '/features#vector-canvas', category: 'Creative Tools', icon: 'pen', keywords: 'vector canvas editor 300 dpi design graphics drawing typography layers svg export' },
-    { title: 'Business Card Maker', subtitle: 'Multi-layer templates & print specs', url: '/features#business-cards', category: 'Creative Tools', icon: 'card', keywords: 'business cards visiting card templates 3d vcard mockup print bleed cut margins visiting' },
-    { title: 'Interactive Browser Playground', subtitle: 'Live 3D card preview & vector customizer', url: '/#interactive-studio', category: 'Creative Tools', icon: 'card', keywords: 'interactive browser playground test studio 3d business card customizer flip vcard export svg vector preview cmyk 300 dpi' },
-    { title: 'Logo Studio', subtitle: 'Vector shapes, geometry & brand seals', url: '/features#logo-creator', category: 'Creative Tools', icon: 'pen', keywords: 'logo maker brand identity vector icon creator emblem monogram watermark seal shapes' },
-    { title: 'Brand Kit Manager', subtitle: 'Hex swatches, typestyles & assets', url: '/features#brand-kit-features', category: 'Creative Tools', icon: 'card', keywords: 'brand kit colors hex typography fonts swatches assets palette identity' },
-    { title: 'GST Invoice Generator', subtitle: 'Tax slabs, HSN codes, instant PDF', url: '/features#invoicing-suite', category: 'Business Suite', icon: 'file-text', keywords: 'gst invoice billing tax hsn sac cgst sgst igst pdf bill pos thermal receipts calculation' },
-    { title: 'Thermal Receipt Generator', subtitle: '58mm & 80mm ESC/POS slip print', url: '/features#receipts', category: 'Business Suite', icon: 'printer', keywords: 'thermal receipt printer 58mm 80mm esc pos bluetooth usb billing slips pos slip print' },
-    { title: 'Estimates & Quotations', subtitle: 'Formal pricing quotes & conversions', url: '/features#quotations', category: 'Business Suite', icon: 'file-text', keywords: 'quotations estimates pricing quotes convert invoice proforma billing formal proposals' },
-    { title: 'Inventory & Stock Manager', subtitle: 'Low-stock alerts & SKU tracking', url: '/features#inventory-management', category: 'Business Suite', icon: 'box', keywords: 'inventory stock manager warehouse sku barcode low stock alerts tracking items products' },
-    { title: 'Smart QR & Barcode Hub', subtitle: 'UPI, WiFi, vCard, Code-128', url: '/features#smart-qr-hub', category: 'Business Suite', icon: 'qr', keywords: 'qr code barcode generator upi payment wifi vcard code 128 ean scanner quick response' },
-    { title: 'Gemini 3.5 AI Studio', subtitle: 'Hardware-encrypted ephemeral AI', url: '/features#ai-studio-features', category: 'AI & Keystore', icon: 'sparkles', keywords: 'ai studio gemini 3.5 flash copywriting product descriptions prompt encryption intelligence assistant' },
-    { title: 'Security & Keystore', subtitle: 'AES-256 hardware encryption', url: '/features#security-features', category: 'AI & Keystore', icon: 'shield', keywords: 'security keystore encryption aes-256 hardware enclave privacy offline zero-knowledge cipher protect' },
-    { title: 'Support & Documentation', subtitle: 'Thermal setup, printing, backups', url: '/support', category: 'Support', icon: 'help', keywords: 'support documentation help docs guides manual thermal setup printer backup restore troubleshoot guide' },
-    { title: 'Frequently Asked Questions', subtitle: 'Free model, security, offline database', url: '/faq', category: 'Support', icon: 'message-circle', keywords: 'faq questions answers help free security offline cost pricing license sqlite safe data' },
-    { title: 'Contact Engineering', subtitle: 'officialcardmintapp@gmail.com', url: '/contact', category: 'Support', icon: 'mail', keywords: 'contact support email help team engineering feedback bug report inquiry officialcardmintapp@gmail.com' },
-    { title: 'Privacy Policy', subtitle: 'Zero cloud lock-in, Android Keystore', url: '/privacy', category: 'Legal', icon: 'shield', keywords: 'privacy policy legal data protection terms gdpr security permissions privacy rights' },
-    { title: 'Terms & Conditions', subtitle: 'Commercial copyright & license terms', url: '/terms', category: 'Legal', icon: 'file', keywords: 'terms conditions service legal rights copyright license agreement commercial terms' },
-    { title: 'Toggle Dark / Light Theme', subtitle: 'Switch interface contrast', action: 'toggleTheme', category: 'Actions', icon: 'moon', keywords: 'dark mode light theme toggle appearance contrast colors theme night day' },
-    { title: 'Download on Google Play', subtitle: 'Get Taksal Studio Android APK', action: 'downloadApp', category: 'Actions', icon: 'download', keywords: 'download install google play android app apk free store get application' },
-    { title: 'Copy App-Ads.txt Record', subtitle: 'Google AdMob publisher verification', action: 'copyAdsTxt', category: 'Actions', icon: 'copy', keywords: 'app-ads.txt admob google ads verification publisher record copy code' }
+    { id: 'home', title: 'Home', subtitle: 'Main landing, capabilities & mobile app overview', url: '/', category: 'Pages', icon: 'home', keywords: 'home taksal main start app landing overview showcase' },
+    { id: 'features', title: 'All 15+ Features', subtitle: 'Explore the full creative & business suite', url: '/features', category: 'Pages', icon: 'grid', keywords: 'features all overview list capabilities tools suite modules full' },
+    { id: 'playground', title: 'Interactive Browser Playground', subtitle: 'Live 3D card preview, palettes & vector customizer', url: '/#interactive-studio', category: 'Creative Tools', icon: 'playground', keywords: 'interactive browser playground test studio 3d business card customizer flip vcard export svg vector preview cmyk 300 dpi demo test card' },
+    { id: 'vector-canvas', title: 'Vector Canvas Editor', subtitle: '300 DPI vector graphic engine with CMYK export', url: '/features#vector-canvas', category: 'Creative Tools', icon: 'pen', keywords: 'vector canvas editor 300 dpi design graphics drawing typography layers svg export cmyk resolution' },
+    { id: 'business-cards', title: 'Business Card Maker', subtitle: 'Multi-layer templates, print bleeds & live mockups', url: '/features#business-cards', category: 'Creative Tools', icon: 'card', keywords: 'business cards visiting card templates 3d vcard mockup print bleed cut margins visiting' },
+    { id: 'logo-creator', title: 'Logo Studio', subtitle: 'Vector shapes, geometric grids & brand seals', url: '/features#logo-creator', category: 'Creative Tools', icon: 'pen', keywords: 'logo maker brand identity vector icon creator emblem monogram watermark seal shapes brandmark' },
+    { id: 'brand-kit', title: 'Brand Kit Manager', subtitle: 'Hex swatches, typestyles & vector assets', url: '/features#brand-kit-features', category: 'Creative Tools', icon: 'palette', keywords: 'brand kit colors hex typography fonts swatches assets palette identity style guide' },
+    { id: 'invoicing', title: 'GST Invoice Generator', subtitle: 'Automated tax slabs (CGST, SGST, IGST), HSN codes, instant PDF', url: '/features#invoicing-suite', category: 'Business Suite', icon: 'receipt', keywords: 'gst invoice billing tax hsn sac cgst sgst igst pdf bill pos thermal receipts calculation bill maker' },
+    { id: 'receipts', title: 'Thermal Receipt Generator', subtitle: '58mm & 80mm ESC/POS slip print via USB & Bluetooth', url: '/features#receipts', category: 'Business Suite', icon: 'printer', keywords: 'thermal receipt printer 58mm 80mm esc pos bluetooth usb billing slips pos slip print cashier roll' },
+    { id: 'quotations', title: 'Estimates & Quotations', subtitle: 'Formal pricing quotes with one-tap invoice conversion', url: '/features#quotations', category: 'Business Suite', icon: 'file-text', keywords: 'quotations estimates pricing quotes convert invoice proforma billing formal proposals bidding' },
+    { id: 'inventory', title: 'Inventory & Stock Manager', subtitle: 'Low-stock warnings, barcode lookups & SKU tracking', url: '/features#inventory-management', category: 'Business Suite', icon: 'box', keywords: 'inventory stock manager warehouse sku barcode low stock alerts tracking items products quantities' },
+    { id: 'qr-hub', title: 'Smart QR & Barcode Hub', subtitle: 'Instant UPI payments, WiFi credentials, vCard & Code-128', url: '/features#smart-qr-hub', category: 'Business Suite', icon: 'qr', keywords: 'qr code barcode generator upi payment wifi vcard code 128 ean scanner quick response contact link' },
+    { id: 'ai-studio', title: 'Gemini 3.5 AI Studio', subtitle: 'Hardware-encrypted ephemeral AI for marketing copy', url: '/features#ai-studio-features', category: 'AI & Keystore', icon: 'sparkles', keywords: 'ai studio gemini 3.5 flash copywriting product descriptions prompt encryption intelligence assistant writing' },
+    { id: 'security', title: 'Hardware Keystore & AES-256', subtitle: 'Zero-cloud lock-in, hardware enclave SQLite storage', url: '/features#security-features', category: 'AI & Keystore', icon: 'shield', keywords: 'security keystore encryption aes-256 hardware enclave privacy offline zero-knowledge cipher protect safe database' },
+    { id: 'about', title: 'About Taksal Studio', subtitle: 'Silicon Valley design meets offline sovereignty', url: '/about', category: 'Pages', icon: 'file-text', keywords: 'about taksal story philosophy team mission creators tech stack' },
+    { id: 'support', title: 'Support & Documentation', subtitle: 'Thermal printer setup, backup procedures & troubleshooting', url: '/support', category: 'Support', icon: 'help', keywords: 'support documentation help docs guides manual thermal setup printer backup restore troubleshoot guide tutorial' },
+    { id: 'faq', title: 'Frequently Asked Questions', subtitle: '100% Free model, security, offline database & licensing', url: '/faq', category: 'Support', icon: 'message-circle', keywords: 'faq questions answers help free security offline cost pricing license sqlite safe data questions' },
+    { id: 'contact', title: 'Contact Engineering', subtitle: 'officialcardmintapp@gmail.com — Get in touch', url: '/contact', category: 'Support', icon: 'mail', keywords: 'contact support email help team engineering feedback bug report inquiry officialcardmintapp@gmail.com write reach' },
+    { id: 'privacy', title: 'Privacy Policy', subtitle: 'Zero cloud lock-in, strict offline privacy guarantee', url: '/privacy', category: 'Legal', icon: 'shield', keywords: 'privacy policy legal data protection terms gdpr security permissions privacy rights' },
+    { id: 'terms', title: 'Terms & Conditions', subtitle: 'Commercial copyright, perpetual license & use terms', url: '/terms', category: 'Legal', icon: 'file', keywords: 'terms conditions service legal rights copyright license agreement commercial terms' },
+    { id: 'toggleTheme', title: 'Toggle Dark / Light Theme', subtitle: 'Switch system appearance contrast mode', action: 'toggleTheme', category: 'Actions', icon: 'moon', keywords: 'dark mode light theme toggle appearance contrast colors theme night day mode' },
+    { id: 'downloadApp', title: 'Download Free Android App', subtitle: 'Install Taksal Studio direct from Google Play Store', action: 'downloadApp', category: 'Actions', icon: 'download', keywords: 'download install google play android app apk free store get application install' },
+    { id: 'copyAdsTxt', title: 'Copy App-Ads.txt Record', subtitle: 'Copy verified Google AdMob publisher record to clipboard', action: 'copyAdsTxt', category: 'Actions', icon: 'copy', keywords: 'app-ads.txt admob google ads verification publisher record copy code admob pub' }
   ];
 
   let lastActiveSearchElement = null;
+  let activePaletteCategory = 'all';
+
+  function getCmdIconSvg(iconName) {
+    switch (iconName) {
+      case 'home':
+        return '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>';
+      case 'grid':
+        return '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>';
+      case 'pen':
+        return '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19l7-7 3 3-7 7-3-3z"></path><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"></path><path d="M2 2l7.586 7.586"></path><circle cx="11" cy="11" r="2"></circle></svg>';
+      case 'card':
+        return '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"></rect><line x1="2" y1="10" x2="22" y2="10"></line></svg>';
+      case 'playground':
+        return '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>';
+      case 'palette':
+        return '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r=".5"></circle><circle cx="17.5" cy="10.5" r=".5"></circle><circle cx="8.5" cy="7.5" r=".5"></circle><circle cx="6.5" cy="12.5" r=".5"></circle><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"></path></svg>';
+      case 'receipt':
+        return '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16l3-2 3 2 3-2 3 2 3-2 3 2V4a2 2 0 0 0-2-2z"></path><line x1="8" y1="6" x2="16" y2="6"></line><line x1="8" y1="10" x2="16" y2="10"></line><line x1="8" y1="14" x2="12" y2="14"></line></svg>';
+      case 'printer':
+        return '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>';
+      case 'file-text':
+        return '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>';
+      case 'box':
+        return '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>';
+      case 'qr':
+        return '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect><path d="M14 14h3v3h-3z"></path><path d="M20 14h1v3h-1z"></path><path d="M14 20h7v1h-7z"></path></svg>';
+      case 'sparkles':
+        return '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.912 5.885L20 12l-6.088 3.115L12 21l-1.912-5.885L4 12l6.088-3.115L12 3z"></path></svg>';
+      case 'shield':
+        return '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>';
+      case 'help':
+        return '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>';
+      case 'message-circle':
+        return '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>';
+      case 'mail':
+        return '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>';
+      case 'moon':
+        return '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>';
+      case 'download':
+        return '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>';
+      case 'copy':
+        return '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>';
+      case 'file':
+        return '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><polyline points="13 2 13 9 20 9"></polyline></svg>';
+      default:
+        return '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>';
+    }
+  }
+
+  function highlightMatches(text, query) {
+    if (!text) return '';
+    if (!query || query.trim() === '') return escapeHtml(text);
+    const escapedText = escapeHtml(text);
+    const escapedQuery = query.trim().replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const regex = new RegExp(`(${escapedQuery})`, 'gi');
+    return escapedText.replace(regex, '<mark class="cmd-highlight">$1</mark>');
+  }
 
   // Detect Platform Shortcut: ⌘K for Apple (macOS / iOS / iPadOS), Ctrl K for Windows / Linux / Android
   function getShortcutInfo() {
@@ -172,6 +254,23 @@
     });
   }
 
+  // Bind direct click listeners to all trigger buttons
+  function bindSearchTriggers() {
+    const triggers = document.querySelectorAll('.cmd-palette-btn, .mobile-search-trigger, [data-action="command-palette"]');
+    triggers.forEach(btn => {
+      btn.style.cursor = 'pointer';
+      btn.setAttribute('aria-haspopup', 'dialog');
+      btn.setAttribute('aria-expanded', 'false');
+      btn.addEventListener('click', e => {
+        e.preventDefault();
+        e.stopPropagation();
+        window.openCommandPalette();
+      });
+    });
+  }
+
+  let paletteRenderer = null;
+
   function createCommandPalette() {
     let overlay = document.querySelector('.cmd-palette-overlay');
     if (overlay) return overlay;
@@ -183,18 +282,28 @@
     overlay.setAttribute('aria-label', 'Search documentation, features, and tools');
 
     overlay.innerHTML = `
-      <div class="cmd-palette-modal">
+      <div class="cmd-palette-modal" id="cmdPaletteModal">
         <div class="cmd-search-header">
           <svg class="cmd-search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-          <input type="text" class="cmd-search-input" placeholder="Type a feature, tool, page, or action... (e.g. GST, Card, Theme)" aria-label="Command search input" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+          <input type="text" class="cmd-search-input" placeholder="Search features, tools, pages, or actions... (e.g. GST, Card, Theme)" aria-label="Command search input" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+          <button type="button" class="cmd-clear-btn" aria-label="Clear search">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+          </button>
           <button type="button" class="cmd-close-btn" aria-label="Close search (Escape)">
             <span class="cmd-kbd cmd-kbd-esc">ESC</span>
             <svg class="cmd-close-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
           </button>
         </div>
+        <div class="cmd-filter-bar" role="tablist" aria-label="Filter search by category">
+          <button type="button" class="cmd-filter-chip active" data-category="all" role="tab" aria-selected="true">All</button>
+          <button type="button" class="cmd-filter-chip" data-category="tools" role="tab" aria-selected="false">🎨 Creative</button>
+          <button type="button" class="cmd-filter-chip" data-category="business" role="tab" aria-selected="false">💼 Business</button>
+          <button type="button" class="cmd-filter-chip" data-category="pages" role="tab" aria-selected="false">📄 Pages</button>
+          <button type="button" class="cmd-filter-chip" data-category="actions" role="tab" aria-selected="false">⚡ Actions</button>
+        </div>
         <div class="cmd-results-list" role="listbox" id="cmdResultsList"></div>
         <div class="cmd-palette-footer">
-          <div>Navigate <span class="cmd-kbd">↑</span> <span class="cmd-kbd">↓</span> &nbsp; Select <span class="cmd-kbd">↵</span></div>
+          <div>Navigate <span class="cmd-kbd">↑</span> <span class="cmd-kbd">↓</span> &nbsp; Select <span class="cmd-kbd">↵</span> &nbsp; Close <span class="cmd-kbd">ESC</span></div>
           <div>Taksal Command Hub</div>
         </div>
       </div>
@@ -203,36 +312,70 @@
     document.body.appendChild(overlay);
 
     const input = overlay.querySelector('.cmd-search-input');
-    const resultsContainer = overlay.querySelector('#cmdResultsList');
+    const clearBtn = overlay.querySelector('.cmd-clear-btn');
     const closeBtn = overlay.querySelector('.cmd-close-btn');
+    const resultsContainer = overlay.querySelector('#cmdResultsList');
+    const filterChips = overlay.querySelectorAll('.cmd-filter-chip');
 
-    if (closeBtn) {
-      closeBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        window.closeCommandPalette();
-      });
+    function matchesCategoryFilter(cat, filterKey) {
+      if (!filterKey || filterKey === 'all') return true;
+      if (filterKey === 'tools') return cat === 'Creative Tools';
+      if (filterKey === 'business') return cat === 'Business Suite';
+      if (filterKey === 'pages') return ['Pages', 'Navigation', 'Support', 'Legal', 'AI & Keystore'].includes(cat);
+      if (filterKey === 'actions') return cat === 'Actions';
+      return true;
     }
 
-    function renderResults(filterText = '') {
+    function renderResults(filterText = '', category = activePaletteCategory) {
       const q = filterText.toLowerCase().trim();
-      const matched = searchIndex.filter(item => 
-        item.title.toLowerCase().includes(q) || 
-        item.subtitle.toLowerCase().includes(q) || 
-        item.category.toLowerCase().includes(q) ||
-        (item.keywords && item.keywords.toLowerCase().includes(q))
-      );
+
+      let matched = searchIndex.filter(item => {
+        const matchesCat = matchesCategoryFilter(item.category, category);
+        if (!matchesCat) return false;
+        if (!q) return true;
+        return (
+          item.title.toLowerCase().includes(q) ||
+          item.subtitle.toLowerCase().includes(q) ||
+          item.category.toLowerCase().includes(q) ||
+          (item.keywords && item.keywords.toLowerCase().includes(q))
+        );
+      });
+
+      // Show/hide clear button
+      if (clearBtn) {
+        clearBtn.style.display = q.length > 0 ? 'inline-flex' : 'none';
+      }
 
       if (matched.length === 0) {
-        const emptyDiv = document.createElement('div');
-        emptyDiv.className = 'cmd-empty-state';
-        emptyDiv.textContent = `No matching tools or pages found for "${filterText}"`;
-        resultsContainer.innerHTML = '';
-        resultsContainer.appendChild(emptyDiv);
+        resultsContainer.innerHTML = `
+          <div class="cmd-empty-box">
+            <div class="cmd-empty-icon">
+              <svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="8" y1="11" x2="14" y2="11"></line></svg>
+            </div>
+            <div class="cmd-empty-title">No tools or pages found</div>
+            <div class="cmd-empty-hint">We couldn't find anything matching "${escapeHtml(filterText)}". Try one of these:</div>
+            <div class="cmd-empty-tags">
+              <button type="button" class="cmd-empty-tag" data-suggest="card">3D Business Card</button>
+              <button type="button" class="cmd-empty-tag" data-suggest="gst">GST Invoice</button>
+              <button type="button" class="cmd-empty-tag" data-suggest="thermal">Thermal Slip</button>
+              <button type="button" class="cmd-empty-tag" data-suggest="qr">QR Code</button>
+              <button type="button" class="cmd-empty-tag" data-suggest="theme">Dark / Light Mode</button>
+            </div>
+          </div>
+        `;
+
+        resultsContainer.querySelectorAll('.cmd-empty-tag').forEach(tag => {
+          tag.addEventListener('click', () => {
+            const sug = tag.getAttribute('data-suggest');
+            input.value = sug;
+            renderResults(sug, activePaletteCategory);
+            input.focus();
+          });
+        });
         return;
       }
 
-      // Group by category
+      // Group matching items by category
       const groups = {};
       matched.forEach(item => {
         if (!groups[item.category]) groups[item.category] = [];
@@ -245,7 +388,7 @@
       for (const [cat, items] of Object.entries(groups)) {
         const groupTitle = document.createElement('div');
         groupTitle.className = 'cmd-result-group-title';
-        groupTitle.textContent = cat;
+        groupTitle.innerHTML = `<span>${escapeHtml(cat)}</span><span style="font-size: 0.65rem; opacity: 0.7;">${items.length}</span>`;
         resultsContainer.appendChild(groupTitle);
 
         items.forEach(item => {
@@ -256,63 +399,87 @@
           if (item.url) itemEl.setAttribute('data-url', item.url);
           if (item.action) itemEl.setAttribute('data-action', item.action);
 
+          const iconSvg = getCmdIconSvg(item.icon);
+          const highlightedTitle = highlightMatches(item.title, q);
+          const highlightedSub = highlightMatches(item.subtitle, q);
+          const actionText = item.action ? (item.action === 'toggleTheme' ? 'Toggle' : (item.action === 'downloadApp' ? 'Get App' : 'Copy')) : 'Jump';
+
           itemEl.innerHTML = `
             <div class="cmd-result-item-left">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
-              <div>
-                <div style="font-weight: 600;">${escapeHtml(item.title)}</div>
-                <div style="font-size: 0.8rem; color: var(--text-muted);">${escapeHtml(item.subtitle)}</div>
+              <div class="cmd-item-icon-box">${iconSvg}</div>
+              <div class="cmd-item-text">
+                <div class="cmd-item-title">${highlightedTitle}</div>
+                <div class="cmd-item-subtitle">${highlightedSub}</div>
               </div>
             </div>
-            <span class="cmd-kbd">${item.action ? 'Action' : 'Jump'}</span>
+            <div class="cmd-item-right">
+              <span class="cmd-item-badge">${escapeHtml(item.category)}</span>
+              <span class="cmd-item-action-hint">↵ ${actionText}</span>
+            </div>
           `;
 
-          itemEl.addEventListener('click', () => executeCommandItem(itemEl));
+          itemEl.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            executeCommandItem(itemEl);
+          });
+
           resultsContainer.appendChild(itemEl);
           itemIndex++;
         });
       }
     }
 
-    function executeCommandItem(itemEl) {
-      const url = itemEl.getAttribute('data-url');
-      const action = itemEl.getAttribute('data-action');
+    paletteRenderer = renderResults;
 
-      window.closeCommandPalette();
+    // Filter Chips click handlers
+    filterChips.forEach(chip => {
+      chip.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        filterChips.forEach(c => {
+          c.classList.remove('active');
+          c.setAttribute('aria-selected', 'false');
+        });
+        chip.classList.add('active');
+        chip.setAttribute('aria-selected', 'true');
+        activePaletteCategory = chip.getAttribute('data-category') || 'all';
+        renderResults(input.value, activePaletteCategory);
+      });
+    });
 
-      if (url) {
-        if (url.includes('#')) {
-          const [path, hash] = url.split('#');
-          const currentPath = window.location.pathname.replace(/\/index\.html$/, '/');
-          const normalizedPath = path.replace(/\/index\.html$/, '/');
+    if (clearBtn) {
+      clearBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        input.value = '';
+        renderResults('', activePaletteCategory);
+        input.focus();
+      });
+    }
 
-          if (currentPath === normalizedPath || (currentPath === '/' && normalizedPath === '') || (currentPath.includes('features') && normalizedPath.includes('features'))) {
-            const targetEl = document.getElementById(hash);
-            if (targetEl) {
-              history.pushState(null, '', '#' + hash);
-              targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
-              return;
-            }
-          }
-        }
-        window.location.href = url;
-      } else if (action === 'toggleTheme') {
-        const next = getActiveTheme() === 'dark' ? 'light' : 'dark';
-        applyTheme(next, true);
-      } else if (action === 'downloadApp') {
-        window.open('https://play.google.com/store/apps/details?id=com.card.mint.cardbuilder', '_blank', 'noopener,noreferrer');
-      } else if (action === 'copyAdsTxt') {
-        window.copyTextToClipboard('google.com, pub-7030166934019393, DIRECT, f08c47fec0942fa0', 'App-ads.txt record copied!');
-      }
+    if (closeBtn) {
+      closeBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        window.closeCommandPalette();
+      });
     }
 
     input.addEventListener('input', e => {
-      renderResults(e.target.value);
+      renderResults(e.target.value, activePaletteCategory);
     });
 
     // Keyboard navigation within palette
     overlay.addEventListener('keydown', e => {
       const items = resultsContainer.querySelectorAll('.cmd-result-item');
+
+      if (e.key === 'Escape') {
+        e.preventDefault();
+        window.closeCommandPalette();
+        return;
+      }
+
       if (items.length === 0) return;
 
       let currentSelectedIndex = -1;
@@ -341,10 +508,49 @@
     });
 
     overlay.addEventListener('click', e => {
-      if (e.target === overlay) window.closeCommandPalette();
+      if (e.target === overlay) {
+        window.closeCommandPalette();
+      }
     });
 
     return overlay;
+  }
+
+  function executeCommandItem(itemEl) {
+    const url = itemEl.getAttribute('data-url');
+    const action = itemEl.getAttribute('data-action');
+
+    window.closeCommandPalette();
+
+    if (action === 'toggleTheme') {
+      const next = getActiveTheme() === 'dark' ? 'light' : 'dark';
+      applyTheme(next, true);
+      return;
+    } else if (action === 'downloadApp') {
+      window.open('https://play.google.com/store/apps/details?id=com.card.mint.cardbuilder', '_blank', 'noopener,noreferrer');
+      return;
+    } else if (action === 'copyAdsTxt') {
+      window.copyTextToClipboard('google.com, pub-7030166934019393, DIRECT, f08c47fec0942fa0', 'App-ads.txt record copied!');
+      return;
+    }
+
+    if (url) {
+      if (url.includes('#')) {
+        const parts = url.split('#');
+        const hash = parts[1];
+        if (hash) {
+          const targetEl = document.getElementById(hash);
+          if (targetEl) {
+            history.pushState(null, '', '#' + hash);
+            targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            targetEl.classList.add('jump-highlight');
+            setTimeout(() => targetEl.classList.remove('jump-highlight'), 1800);
+            return;
+          }
+        }
+      }
+      window.location.href = url;
+    }
   }
 
   window.openCommandPalette = function () {
@@ -361,11 +567,26 @@
     overlay.classList.add('open');
     document.body.style.overflow = 'hidden';
 
+    // Update aria-expanded on trigger buttons
+    document.querySelectorAll('.cmd-palette-btn, .mobile-search-trigger, [data-action="command-palette"]').forEach(btn => {
+      btn.setAttribute('aria-expanded', 'true');
+    });
+
     const input = overlay.querySelector('.cmd-search-input');
     if (input) {
       input.value = '';
-      const event = new Event('input');
-      input.dispatchEvent(event);
+      activePaletteCategory = 'all';
+      const allFilterChips = overlay.querySelectorAll('.cmd-filter-chip');
+      allFilterChips.forEach(c => {
+        const isAll = c.getAttribute('data-category') === 'all';
+        c.classList.toggle('active', isAll);
+        c.setAttribute('aria-selected', isAll ? 'true' : 'false');
+      });
+
+      if (paletteRenderer) {
+        paletteRenderer('', 'all');
+      }
+
       setTimeout(() => {
         input.focus();
       }, 50);
@@ -377,6 +598,11 @@
     if (overlay && overlay.classList.contains('open')) {
       overlay.classList.remove('open');
       document.body.style.overflow = '';
+      
+      document.querySelectorAll('.cmd-palette-btn, .mobile-search-trigger, [data-action="command-palette"]').forEach(btn => {
+        btn.setAttribute('aria-expanded', 'false');
+      });
+
       if (lastActiveSearchElement && typeof lastActiveSearchElement.focus === 'function') {
         try { lastActiveSearchElement.focus(); } catch (_) {}
       }
@@ -405,8 +631,9 @@
     }
   });
 
-  // Sync shortcuts on DOM load
+  // Sync shortcuts & bind search trigger buttons on DOM load
   syncPlatformShortcuts();
+  bindSearchTriggers();
 
   // ==========================================================================
   // 5. INTERACTIVE 3D BUSINESS CARD STUDIO & REAL SVG/PNG/vCARD EXPORT
@@ -637,7 +864,7 @@
     });
 
     // Theme selector swatches (6 themes)
-    function applyTheme(themeKey, notify = true) {
+    function applyCardTheme(themeKey, notify = true) {
       activeThemeKey = themeKey;
       const swatches = document.querySelectorAll('.swatch-btn');
       swatches.forEach(s => {
@@ -662,7 +889,7 @@
     document.querySelectorAll('.swatch-btn').forEach(swatch => {
       swatch.addEventListener('click', () => {
         const theme = swatch.getAttribute('data-card-theme') || 'royal';
-        applyTheme(theme, true);
+        applyCardTheme(theme, true);
       });
     });
 
@@ -738,7 +965,7 @@
         chip.classList.toggle('active', chip.getAttribute('data-persona') === personaKey);
       });
 
-      applyTheme(persona.theme, false);
+      applyCardTheme(persona.theme, false);
       applyFinish(persona.finish, false);
       applyCornerRadius(persona.radius, false);
       updateCardPreview();
@@ -1253,6 +1480,11 @@
         }
       });
 
+      const clearBtn = featureSearchInput ? featureSearchInput.parentElement.querySelector('.search-clear-btn') : null;
+      if (clearBtn) {
+        clearBtn.style.display = q ? 'inline-flex' : 'none';
+      }
+
       // Handle empty state
       let emptyMsg = document.querySelector('.feature-empty-state');
       if (matchCount === 0) {
@@ -1271,6 +1503,23 @@
 
     if (featureSearchInput) {
       featureSearchInput.addEventListener('input', filterFeatures);
+
+      // Create clear button if not already present
+      const wrap = featureSearchInput.closest('.feature-search-bar-wrap');
+      if (wrap && !wrap.querySelector('.search-clear-btn')) {
+        const clearBtn = document.createElement('button');
+        clearBtn.type = 'button';
+        clearBtn.className = 'search-clear-btn';
+        clearBtn.setAttribute('aria-label', 'Clear search text');
+        clearBtn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>';
+        clearBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          featureSearchInput.value = '';
+          filterFeatures();
+          featureSearchInput.focus();
+        });
+        wrap.appendChild(clearBtn);
+      }
     }
 
     filterChips.forEach(chip => {
@@ -1294,7 +1543,7 @@
   const faqItems = document.querySelectorAll('.faq-item');
 
   if (faqSearchInput && faqItems.length > 0) {
-    faqSearchInput.addEventListener('input', () => {
+    function filterFaqs() {
       const q = faqSearchInput.value.toLowerCase().trim();
       let totalVisible = 0;
 
@@ -1312,6 +1561,11 @@
           item.style.display = 'none';
         }
       });
+
+      const clearBtn = faqSearchInput ? faqSearchInput.parentElement.querySelector('.search-clear-btn') : null;
+      if (clearBtn) {
+        clearBtn.style.display = q ? 'inline-flex' : 'none';
+      }
 
       // Group header awareness
       document.querySelectorAll('.faq-group-wrapper').forEach(group => {
@@ -1332,7 +1586,26 @@
       } else if (emptyFaqMsg) {
         emptyFaqMsg.style.display = 'none';
       }
-    });
+    }
+
+    faqSearchInput.addEventListener('input', filterFaqs);
+
+    // Create clear button if not already present
+    const wrap = faqSearchInput.closest('.feature-search-bar-wrap');
+    if (wrap && !wrap.querySelector('.search-clear-btn')) {
+      const clearBtn = document.createElement('button');
+      clearBtn.type = 'button';
+      clearBtn.className = 'search-clear-btn';
+      clearBtn.setAttribute('aria-label', 'Clear search text');
+      clearBtn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>';
+      clearBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        faqSearchInput.value = '';
+        filterFaqs();
+        faqSearchInput.focus();
+      });
+      wrap.appendChild(clearBtn);
+    }
   }
 
   // FAQ Accordion Click Behavior
