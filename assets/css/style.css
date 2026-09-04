@@ -966,15 +966,16 @@ h1, h2, h3, h4, h5, h6 {
   padding: 24px;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.1);
+  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(255, 255, 255, 0.1);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   overflow: hidden;
+  transform: translateZ(1px);
 }
 
 .card-face-back {
-  transform: rotateY(180deg);
+  transform: rotateY(180deg) translateZ(1px);
 }
 
 /* Card Themes */
@@ -993,11 +994,63 @@ h1, h2, h3, h4, h5, h6 {
   color: #FFFFFF;
 }
 
+.theme-sapphire {
+  background: linear-gradient(135deg, #0F172A 0%, #1E40AF 100%);
+  color: #FFFFFF;
+}
+
+.theme-sunset {
+  background: linear-gradient(135deg, #881337 0%, #E11D48 100%);
+  color: #FFFFFF;
+}
+
 .theme-minimal {
   background: #FFFFFF;
   color: #0F172A;
-  border: 1px solid #E2E8F0;
+  border: 1px solid #CBD5E1;
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+}
+
+.theme-minimal .card-brand-name {
+  color: #0F172A;
+}
+
+.theme-minimal .card-brand-tagline,
+.theme-minimal .card-user-title {
+  color: #64748B;
+  opacity: 1;
+}
+
+.theme-minimal .card-user-name {
+  color: #0F172A;
+}
+
+.theme-minimal .card-chip-badge {
+  background: #F1F5F9;
+  color: #4338CA;
+  border: 1px solid #CBD5E1;
+}
+
+.theme-minimal .card-contact-row {
+  color: #334155;
+  opacity: 1;
+}
+
+.theme-minimal .card-contact-item svg {
+  color: #4F46E5;
+}
+
+.theme-minimal .card-qr-box {
+  background: #F8FAFC;
+  border: 1px solid #E2E8F0;
+}
+
+.theme-minimal #cardBackCompanyName {
+  color: #0F172A;
+}
+
+.theme-minimal .card-back-center > div:last-child {
+  color: #64748B;
 }
 
 .card-header-row {
@@ -1071,6 +1124,19 @@ h1, h2, h3, h4, h5, h6 {
   padding: 8px;
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-flip-hint {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-top: 14px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  user-select: none;
 }
 
 /* Studio Editor Panel */
@@ -1086,7 +1152,7 @@ h1, h2, h3, h4, h5, h6 {
   display: flex;
   gap: 12px;
   flex-wrap: wrap;
-  margin: 12px 0 20px 0;
+  margin: 10px 0 18px 0;
 }
 
 .swatch-btn {
@@ -1097,13 +1163,65 @@ h1, h2, h3, h4, h5, h6 {
   border-radius: var(--radius-full);
   cursor: pointer;
   border: 2px solid transparent;
-  transition: transform var(--transition-fast), border-color var(--transition-fast);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-fast);
   touch-action: manipulation;
+  position: relative;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.swatch-btn:hover {
+  transform: scale(1.08);
 }
 
 .swatch-btn.active {
   transform: scale(1.12);
-  border-color: var(--brand-violet);
+  box-shadow: 0 0 0 3px var(--bg-surface), 0 0 0 5px var(--brand-indigo);
+}
+
+.swatch-btn svg {
+  display: none;
+  width: 18px;
+  height: 18px;
+  pointer-events: none;
+}
+
+.swatch-btn.active svg {
+  display: block;
+}
+
+.customizer-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.customizer-actions-row {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 16px;
+}
+
+@media (max-width: 580px) {
+  .customizer-form-row {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .customizer-actions-row {
+    flex-direction: column;
+    gap: 10px;
+  }
+  .customizer-actions-row .btn {
+    width: 100%;
+    justify-content: center;
+  }
 }
 
 /* 2. Interactive GST Invoice Calculator & POS Simulator */

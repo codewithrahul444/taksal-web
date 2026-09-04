@@ -370,7 +370,7 @@
         <div class="interactive-studio-grid">
           <!-- 3D Flippable Business Card Preview -->
           <div class="card-perspective-container">
-            <div class="business-card-3d" id="interactiveBusinessCard" title="Click anywhere on card to flip front/back">
+            <div class="business-card-3d" id="interactiveBusinessCard" title="Click or tap card to flip front/back" role="button" tabindex="0" aria-label="Interactive 3D business card. Click or press Enter to flip." aria-expanded="false">
               <!-- Front Face -->
               <div class="card-face card-face-front theme-royal">
                 <div class="card-header-row">
@@ -400,15 +400,22 @@
               <div class="card-face card-face-back theme-royal">
                 <div class="card-back-center">
                   <div class="card-qr-box">
-                    <!-- Clean SVG QR Code Mockup -->
-                    <svg width="74" height="74" viewBox="0 0 24 24" fill="#18181B">
-                      <path d="M2 2h8v8H2V2zm2 2v4h4V4H4zm8-2h8v8h-8V2zm2 2v4h4V4h-4zM2 14h8v8H2v-8zm2 2v4h4v-4H4zm11 0h2v2h-2v-2zm-3 0h2v2h-2v-2zm5 5h2v2h-2v-2zm-2-2h2v2h-2v-2zm4-3h2v2h-2v-2zm-2 5h2v2h-2v-2z"/>
+                    <!-- High-Density Authentic SVG QR Code -->
+                    <svg width="84" height="84" viewBox="0 0 29 29" shape-rendering="crispEdges">
+                      <path fill="#0F172A" d="M2 2h7v7H2zM3 3v5h5V3zm1 1h3v3H4zM2 20h7v7H2zM3 21v5h5V21zm1 1h3v3H4zM20 2h7v7h-7zM21 3v5h5V3zm1 1h3v3h-3z"/>
+                      <path fill="#0F172A" d="M10 4h1v1h-1zM12 4h1v1h-1zM14 4h1v1h-1zM16 4h1v1h-1zM18 4h1v1h-1zM4 10h1v1h-1zM4 12h1v1h-1zM4 14h1v1h-1zM4 16h1v1h-1zM4 18h1v1h-1z"/>
+                      <path fill="#0F172A" d="M18 18h5v5h-5zM19 19v3h3v-3zm1 1h1v1h-1z"/>
+                      <path fill="#0F172A" d="M10 2h2v2h-2zM14 2h1v1h-1zM17 2h2v1h-2zM10 6h1v2h-1zM12 7h2v1h-2zM15 6h1v3h-1zM17 7h1v1h-1zM10 10h3v2h-1v-1h-2zM14 10h2v1h-2zM17 11h2v1h-2zM20 10h2v2h-1v-1h-1zM23 11h1v1h-1zM25 10h2v2h-2zM6 10h2v1H6zM10 13h1v2h-1zM12 14h3v1h-3zM16 13h2v2h-2zM19 14h1v1h-1zM21 13h2v2h-2zM24 13h2v1h-2zM27 14h1v1h-1zM10 16h2v1h-2zM13 17h1v1h-1zM15 16h3v1h-1v1h-2zM19 16h1v2h-1zM21 17h1v1h-1zM23 16h3v1h-3zM27 16h1v2h-1zM10 19h1v1h-1zM12 20h2v1h-2zM15 19h2v2h-1v-1h-1zM18 20h1v1h-1zM24 19h2v1h-2zM27 19h1v1h-1zM10 22h3v1h-3zM14 23h2v2h-2zM17 22h1v3h-1zM20 24h2v2h-2zM23 23h1v1h-1zM25 22h2v2h-1v-1h-1zM10 25h2v2h-2zM13 26h1v1h-1zM15 25h1v2h-1zM18 26h2v1h-2zM24 25h1v1h-1zM26 26h2v1h-2z"/>
                     </svg>
                   </div>
-                  <div style="font-weight: 800; font-size: 1.1rem;" id="cardBackCompanyName">Taksal Studio Ltd</div>
-                  <div style="font-size: 0.75rem; opacity: 0.85;">Scan for Instant vCard & Portfolio</div>
+                  <div style="font-weight: 800; font-size: 1.15rem;" id="cardBackCompanyName">Taksal Studio Ltd</div>
+                  <div style="font-size: 0.775rem; opacity: 0.85;">Scan for Instant vCard &amp; Portfolio</div>
                 </div>
               </div>
+            </div>
+            <div class="card-flip-hint">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8"></path><polyline points="21 3 21 8 16 8"></polyline></svg>
+              <span id="cardFlipHintText">Click or tap card to flip 3D view</span>
             </div>
           </div>
 
@@ -419,46 +426,71 @@
               Choose a color theme and edit fields to watch the card update in real-time.
             </p>
 
-            <label class="form-label" style="margin-bottom: 6px;">Select Print Palette:</label>
-            <div class="theme-swatches">
-              <button type="button" class="swatch-btn active" data-card-theme="royal" style="background: #7B1FA2;" aria-label="Royal Purple Theme"></button>
-              <button type="button" class="swatch-btn" data-card-theme="midnight" style="background: #27272A;" aria-label="Midnight Dark Theme"></button>
-              <button type="button" class="swatch-btn" data-card-theme="emerald" style="background: #059669;" aria-label="Emerald Tech Theme"></button>
-              <button type="button" class="swatch-btn" data-card-theme="minimal" style="background: #FFFFFF; border: 1px solid #CBD5E1;" aria-label="Clean Minimalist Theme"></button>
+            <label class="form-label" style="margin-bottom: 8px;">Select Print Palette:</label>
+            <div class="theme-swatches" role="radiogroup" aria-label="Select Print Palette">
+              <button type="button" class="swatch-btn active" data-card-theme="royal" style="background: linear-gradient(135deg, #4A148C, #7B1FA2);" aria-label="Royal Violet Theme" title="Royal Violet" aria-checked="true" role="radio">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              </button>
+              <button type="button" class="swatch-btn" data-card-theme="midnight" style="background: linear-gradient(135deg, #18181B, #27272A);" aria-label="Midnight Onyx Theme" title="Midnight Onyx" aria-checked="false" role="radio">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              </button>
+              <button type="button" class="swatch-btn" data-card-theme="emerald" style="background: linear-gradient(135deg, #064E3B, #059669);" aria-label="Emerald Tech Theme" title="Emerald Tech" aria-checked="false" role="radio">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              </button>
+              <button type="button" class="swatch-btn" data-card-theme="sapphire" style="background: linear-gradient(135deg, #0F172A, #1E40AF);" aria-label="Ocean Sapphire Theme" title="Ocean Sapphire" aria-checked="false" role="radio">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              </button>
+              <button type="button" class="swatch-btn" data-card-theme="sunset" style="background: linear-gradient(135deg, #881337, #E11D48);" aria-label="Crimson Sunset Theme" title="Crimson Sunset" aria-checked="false" role="radio">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              </button>
+              <button type="button" class="swatch-btn" data-card-theme="minimal" style="background: #FFFFFF; border: 1px solid #CBD5E1;" aria-label="Clean Minimalist Theme" title="Clean Minimalist" aria-checked="false" role="radio">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#0F172A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              </button>
             </div>
 
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px;">
+            <div class="customizer-form-row">
               <div>
                 <label class="form-label" for="inputCardName">Full Name</label>
-                <input type="text" id="inputCardName" class="form-control" value="Alex Morgan">
+                <input type="text" id="inputCardName" class="form-control" value="Alex Morgan" autocomplete="name" placeholder="e.g. Alex Morgan">
               </div>
               <div>
                 <label class="form-label" for="inputCardTitle">Job Title</label>
-                <input type="text" id="inputCardTitle" class="form-control" value="Creative Director">
+                <input type="text" id="inputCardTitle" class="form-control" value="Creative Director" placeholder="e.g. Creative Director">
               </div>
             </div>
 
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px;">
+            <div class="customizer-form-row">
               <div>
                 <label class="form-label" for="inputCardCompany">Company Name</label>
-                <input type="text" id="inputCardCompany" class="form-control" value="Taksal Studio Ltd">
+                <input type="text" id="inputCardCompany" class="form-control" value="Taksal Studio Ltd" autocomplete="organization" placeholder="e.g. Taksal Studio Ltd">
+              </div>
+              <div>
+                <label class="form-label" for="inputCardTagline">Brand Tagline</label>
+                <input type="text" id="inputCardTagline" class="form-control" value="Crafting Sovereign Visuals" placeholder="e.g. Crafting Sovereign Visuals">
+              </div>
+            </div>
+
+            <div class="customizer-form-row">
+              <div>
+                <label class="form-label" for="inputCardPhone">Phone Number</label>
+                <input type="tel" id="inputCardPhone" class="form-control" value="+1 (555) 321-7890" autocomplete="tel" placeholder="e.g. +1 (555) 321-7890">
               </div>
               <div>
                 <label class="form-label" for="inputCardEmail">Email Address</label>
-                <input type="email" id="inputCardEmail" class="form-control" value="alex@taksal.com">
+                <input type="email" id="inputCardEmail" class="form-control" value="alex@taksal.com" autocomplete="email" placeholder="e.g. alex@taksal.com">
               </div>
             </div>
 
-            <div style="display: flex; gap: 12px; flex-wrap: wrap;">
-              <button type="button" class="btn btn-secondary" id="flipCardBtn">
+            <div class="customizer-actions-row">
+              <button type="button" class="btn btn-secondary" id="flipCardBtn" aria-label="Flip card view">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"></polyline><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path></svg>
-                Flip to Back View
+                <span id="flipCardBtnText">Flip to Back View</span>
               </button>
-              <button type="button" class="btn btn-primary" id="downloadSpecBtn">
+              <button type="button" class="btn btn-primary" id="downloadSpecBtn" aria-label="Export 300 DPI Vector SVG">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
                 Export 300 DPI SVG
               </button>
-              <button type="button" class="btn btn-secondary" id="copyVCardBtn">
+              <button type="button" class="btn btn-secondary" id="copyVCardBtn" aria-label="Copy digital vCard">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
                 Copy vCard (.vcf)
               </button>

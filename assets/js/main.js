@@ -127,6 +127,7 @@
     { title: 'All 15+ Features', subtitle: 'Complete creative & business suite', url: '/features', category: 'Navigation', icon: 'grid', keywords: 'features all overview list capabilities tools suite modules' },
     { title: 'Vector Canvas Editor', subtitle: '300 DPI vector graphic engine', url: '/features#vector-canvas', category: 'Creative Tools', icon: 'pen', keywords: 'vector canvas editor 300 dpi design graphics drawing typography layers svg export' },
     { title: 'Business Card Maker', subtitle: 'Multi-layer templates & print specs', url: '/features#business-cards', category: 'Creative Tools', icon: 'card', keywords: 'business cards visiting card templates 3d vcard mockup print bleed cut margins visiting' },
+    { title: 'Interactive Browser Playground', subtitle: 'Live 3D card preview & vector customizer', url: '/#interactive-studio', category: 'Creative Tools', icon: 'card', keywords: 'interactive browser playground test studio 3d business card customizer flip vcard export svg vector preview cmyk 300 dpi' },
     { title: 'Logo Studio', subtitle: 'Vector shapes, geometry & brand seals', url: '/features#logo-creator', category: 'Creative Tools', icon: 'pen', keywords: 'logo maker brand identity vector icon creator emblem monogram watermark seal shapes' },
     { title: 'Brand Kit Manager', subtitle: 'Hex swatches, typestyles & assets', url: '/features#brand-kit-features', category: 'Creative Tools', icon: 'card', keywords: 'brand kit colors hex typography fonts swatches assets palette identity' },
     { title: 'GST Invoice Generator', subtitle: 'Tax slabs, HSN codes, instant PDF', url: '/features#invoicing-suite', category: 'Business Suite', icon: 'file-text', keywords: 'gst invoice billing tax hsn sac cgst sgst igst pdf bill pos thermal receipts calculation' },
@@ -428,55 +429,202 @@
     const inputTagline = document.getElementById('inputCardTagline');
 
     const flipBtn = document.getElementById('flipCardBtn');
+    const flipCardBtnText = document.getElementById('flipCardBtnText');
+    const cardFlipHintText = document.getElementById('cardFlipHintText');
     const downloadSpecBtn = document.getElementById('downloadSpecBtn');
     const copyVCardBtn = document.getElementById('copyVCardBtn');
 
-    // Live binding
+    // Theme palette definition for real-time styles and vector SVG export
+    const themePalettes = {
+      royal: {
+        label: 'Royal Violet',
+        gradStart: '#4A148C',
+        gradEnd: '#7B1FA2',
+        textColor: '#FFFFFF',
+        accentColor: '#D8B4FE',
+        badgeBg: 'rgba(255, 255, 255, 0.18)',
+        badgeText: '#D8B4FE',
+        guideColor: 'rgba(255, 255, 255, 0.22)',
+        qrBoxBg: '#FFFFFF',
+        qrBoxBorder: 'rgba(255, 255, 255, 0.2)',
+        qrColor: '#0F172A'
+      },
+      midnight: {
+        label: 'Midnight Onyx',
+        gradStart: '#18181B',
+        gradEnd: '#27272A',
+        textColor: '#FFFFFF',
+        accentColor: '#A1A1AA',
+        badgeBg: 'rgba(255, 255, 255, 0.12)',
+        badgeText: '#E4E4E7',
+        guideColor: 'rgba(255, 255, 255, 0.18)',
+        qrBoxBg: '#FFFFFF',
+        qrBoxBorder: 'rgba(255, 255, 255, 0.15)',
+        qrColor: '#0F172A'
+      },
+      emerald: {
+        label: 'Emerald Tech',
+        gradStart: '#064E3B',
+        gradEnd: '#059669',
+        textColor: '#FFFFFF',
+        accentColor: '#6EE7B7',
+        badgeBg: 'rgba(255, 255, 255, 0.18)',
+        badgeText: '#6EE7B7',
+        guideColor: 'rgba(255, 255, 255, 0.22)',
+        qrBoxBg: '#FFFFFF',
+        qrBoxBorder: 'rgba(255, 255, 255, 0.2)',
+        qrColor: '#0F172A'
+      },
+      sapphire: {
+        label: 'Ocean Sapphire',
+        gradStart: '#0F172A',
+        gradEnd: '#1E40AF',
+        textColor: '#FFFFFF',
+        accentColor: '#93C5FD',
+        badgeBg: 'rgba(255, 255, 255, 0.18)',
+        badgeText: '#93C5FD',
+        guideColor: 'rgba(255, 255, 255, 0.22)',
+        qrBoxBg: '#FFFFFF',
+        qrBoxBorder: 'rgba(255, 255, 255, 0.2)',
+        qrColor: '#0F172A'
+      },
+      sunset: {
+        label: 'Crimson Sunset',
+        gradStart: '#881337',
+        gradEnd: '#E11D48',
+        textColor: '#FFFFFF',
+        accentColor: '#FDA4AF',
+        badgeBg: 'rgba(255, 255, 255, 0.18)',
+        badgeText: '#FDA4AF',
+        guideColor: 'rgba(255, 255, 255, 0.22)',
+        qrBoxBg: '#FFFFFF',
+        qrBoxBorder: 'rgba(255, 255, 255, 0.2)',
+        qrColor: '#0F172A'
+      },
+      minimal: {
+        label: 'Clean Minimalist',
+        gradStart: '#FFFFFF',
+        gradEnd: '#F8FAFC',
+        textColor: '#0F172A',
+        accentColor: '#64748B',
+        badgeBg: '#F1F5F9',
+        badgeText: '#4338CA',
+        guideColor: '#CBD5E1',
+        qrBoxBg: '#F8FAFC',
+        qrBoxBorder: '#CBD5E1',
+        qrColor: '#0F172A'
+      }
+    };
+
+    // Live binding between inputs and card faces
     function updateCardPreview() {
-      if (cardNameEl && inputName) cardNameEl.textContent = inputName.value.trim() || 'Alex Morgan';
-      if (cardTitleEl && inputTitle) cardTitleEl.textContent = inputTitle.value.trim() || 'Creative Director';
-      if (cardCompanyEl && inputCompany) cardCompanyEl.textContent = inputCompany.value.trim() || 'Taksal Studio Ltd';
-      if (cardBackCompanyEl && inputCompany) cardBackCompanyEl.textContent = inputCompany.value.trim() || 'Taksal Studio Ltd';
-      if (cardPhoneEl && inputPhone) cardPhoneEl.textContent = inputPhone.value.trim() || '+1 (555) 321-7890';
-      if (cardEmailEl && inputEmail) cardEmailEl.textContent = inputEmail.value.trim() || 'alex@taksal.com';
-      if (cardTaglineEl && inputTagline) cardTaglineEl.textContent = inputTagline.value.trim() || 'Crafting Sovereign Visuals';
+      const nameVal = inputName?.value.trim() || 'Alex Morgan';
+      const titleVal = inputTitle?.value.trim() || 'Creative Director';
+      const companyVal = inputCompany?.value.trim() || 'Taksal Studio Ltd';
+      const phoneVal = inputPhone?.value.trim() || '+1 (555) 321-7890';
+      const emailVal = inputEmail?.value.trim() || 'alex@taksal.com';
+      const taglineVal = inputTagline?.value.trim() || 'Crafting Sovereign Visuals';
+
+      if (cardNameEl) cardNameEl.textContent = nameVal;
+      if (cardTitleEl) cardTitleEl.textContent = titleVal;
+      if (cardCompanyEl) cardCompanyEl.textContent = companyVal;
+      if (cardBackCompanyEl) cardBackCompanyEl.textContent = companyVal;
+      if (cardPhoneEl) cardPhoneEl.textContent = phoneVal;
+      if (cardEmailEl) cardEmailEl.textContent = emailVal;
+      if (cardTaglineEl) cardTaglineEl.textContent = taglineVal;
     }
 
     [inputName, inputTitle, inputCompany, inputPhone, inputEmail, inputTagline].forEach(inp => {
-      if (inp) inp.addEventListener('input', updateCardPreview);
+      if (inp) {
+        inp.addEventListener('input', updateCardPreview);
+      }
     });
 
-    // Theme selector swatches
+    // Theme selector swatches (6 themes)
     const swatches = document.querySelectorAll('.swatch-btn');
     swatches.forEach(swatch => {
       swatch.addEventListener('click', () => {
         swatches.forEach(s => {
           s.classList.remove('active');
+          s.setAttribute('aria-checked', 'false');
           s.setAttribute('aria-pressed', 'false');
         });
         swatch.classList.add('active');
+        swatch.setAttribute('aria-checked', 'true');
         swatch.setAttribute('aria-pressed', 'true');
 
-        const theme = swatch.getAttribute('data-card-theme');
+        const theme = swatch.getAttribute('data-card-theme') || 'royal';
         const faces = card3D.querySelectorAll('.card-face');
         faces.forEach(face => {
-          face.className = `card-face ${face.classList.contains('card-face-back') ? 'card-face-back' : 'card-face-front'} theme-${theme}`;
+          const isBack = face.classList.contains('card-face-back');
+          face.className = `card-face ${isBack ? 'card-face-back' : 'card-face-front'} theme-${theme}`;
         });
-        window.showToast(`Applied ${theme.toUpperCase()} card template`, 'info', 1500);
+
+        const themeInfo = themePalettes[theme];
+        const label = themeInfo ? themeInfo.label : (theme.charAt(0).toUpperCase() + theme.slice(1));
+        window.showToast(`Applied ${label} palette`, 'info', 1800);
       });
     });
 
     // Flip action
     function toggleCardFlip() {
       card3D.classList.toggle('flipped');
+      // Reset any active inline transform from mouse tilt during flip
+      card3D.style.transform = '';
       const isFlipped = card3D.classList.contains('flipped');
-      if (flipBtn) flipBtn.textContent = isFlipped ? 'Flip to Front View' : 'Flip to Back View';
+      card3D.setAttribute('aria-expanded', isFlipped ? 'true' : 'false');
+
+      if (flipCardBtnText) {
+        flipCardBtnText.textContent = isFlipped ? 'Flip to Front View' : 'Flip to Back View';
+      } else if (flipBtn) {
+        flipBtn.textContent = isFlipped ? 'Flip to Front View' : 'Flip to Back View';
+      }
+
+      if (cardFlipHintText) {
+        cardFlipHintText.textContent = isFlipped
+          ? 'Showing rear QR code view (click to flip back)'
+          : 'Click or tap card to flip 3D view';
+      }
     }
 
-    if (flipBtn) flipBtn.addEventListener('click', toggleCardFlip);
-    card3D.addEventListener('click', toggleCardFlip);
+    if (flipBtn) {
+      flipBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        toggleCardFlip();
+      });
+    }
 
-    // Genuine Vector 300 DPI SVG Spec Exporter
+    card3D.addEventListener('click', () => {
+      toggleCardFlip();
+    });
+
+    card3D.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        toggleCardFlip();
+      }
+    });
+
+    // Subtle 3D mouse parallax tilt on desktop
+    const perspectiveContainer = card3D.closest('.card-perspective-container');
+    if (perspectiveContainer && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+      perspectiveContainer.addEventListener('mousemove', (e) => {
+        const rect = perspectiveContainer.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width - 0.5; // -0.5 to 0.5
+        const y = (e.clientY - rect.top) / rect.height - 0.5;
+        const rotateX = -y * 12;
+        const isFlipped = card3D.classList.contains('flipped');
+        const baseRotateY = isFlipped ? 180 : 0;
+        const rotateY = baseRotateY + x * 16;
+        card3D.style.transform = `rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg)`;
+      });
+
+      perspectiveContainer.addEventListener('mouseleave', () => {
+        card3D.style.transform = '';
+      });
+    }
+
+    // Genuine Vector 300 DPI SVG Spec Exporter (Front or Back)
     function generateCardSvg() {
       const name = (inputName?.value || 'Alex Morgan').trim();
       const title = (inputTitle?.value || 'Creative Director').trim();
@@ -486,42 +634,91 @@
       const tagline = (inputTagline?.value || 'Crafting Sovereign Visuals').trim();
 
       const activeSwatch = document.querySelector('.swatch-btn.active');
-      const theme = activeSwatch ? activeSwatch.getAttribute('data-card-theme') : 'royal';
+      const themeKey = activeSwatch ? (activeSwatch.getAttribute('data-card-theme') || 'royal') : 'royal';
+      const palette = themePalettes[themeKey] || themePalettes.royal;
+      const isFlipped = card3D.classList.contains('flipped');
 
-      let gradStart = '#4A148C', gradEnd = '#7B1FA2', textColor = '#FFFFFF', accentColor = '#BABEFF';
-      if (theme === 'midnight') {
-        gradStart = '#18181B'; gradEnd = '#27272A'; textColor = '#FFFFFF'; accentColor = '#A1A1AA';
-      } else if (theme === 'emerald') {
-        gradStart = '#064E3B'; gradEnd = '#059669'; textColor = '#FFFFFF'; accentColor = '#6EE7B7';
-      } else if (theme === 'minimal') {
-        gradStart = '#FFFFFF'; gradEnd = '#F8FAFC'; textColor = '#0F172A'; accentColor = '#7C3AED';
+      const qrPathMatrix = `
+        <path fill="${palette.qrColor}" d="M2 2h7v7H2zM3 3v5h5V3zm1 1h3v3H4zM2 20h7v7H2zM3 21v5h5V21zm1 1h3v3H4zM20 2h7v7h-7zM21 3v5h5V3zm1 1h3v3h-3z"/>
+        <path fill="${palette.qrColor}" d="M10 4h1v1h-1zM12 4h1v1h-1zM14 4h1v1h-1zM16 4h1v1h-1zM18 4h1v1h-1zM4 10h1v1h-1zM4 12h1v1h-1zM4 14h1v1h-1zM4 16h1v1h-1zM4 18h1v1h-1z"/>
+        <path fill="${palette.qrColor}" d="M18 18h5v5h-5zM19 19v3h3v-3zm1 1h1v1h-1z"/>
+        <path fill="${palette.qrColor}" d="M10 2h2v2h-2zM14 2h1v1h-1zM17 2h2v1h-2zM10 6h1v2h-1zM12 7h2v1h-2zM15 6h1v3h-1zM17 7h1v1h-1zM10 10h3v2h-1v-1h-2zM14 10h2v1h-2zM17 11h2v1h-2zM20 10h2v2h-1v-1h-1zM23 11h1v1h-1zM25 10h2v2h-2zM6 10h2v1H6zM10 13h1v2h-1zM12 14h3v1h-3zM16 13h2v2h-2zM19 14h1v1h-1zM21 13h2v2h-2zM24 13h2v1h-2zM27 14h1v1h-1zM10 16h2v1h-2zM13 17h1v1h-1zM15 16h3v1h-1v1h-2zM19 16h1v2h-1zM21 17h1v1h-1zM23 16h3v1h-3zM27 16h1v2h-1zM10 19h1v1h-1zM12 20h2v1h-2zM15 19h2v2h-1v-1h-1zM18 20h1v1h-1zM24 19h2v1h-2zM27 19h1v1h-1zM10 22h3v1h-3zM14 23h2v2h-2zM17 22h1v3h-1zM20 24h2v2h-2zM23 23h1v1h-1zM25 22h2v2h-1v-1h-1zM10 25h2v2h-2zM13 26h1v1h-1zM15 25h1v2h-1zM18 26h2v1h-2zM24 25h1v1h-1zM26 26h2v1h-2z"/>
+      `;
+
+      if (isFlipped) {
+        // Back View SVG
+        return `<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1050 600" width="1050" height="600">
+  <defs>
+    <linearGradient id="cardGradBack" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="${palette.gradStart}"/>
+      <stop offset="100%" stop-color="${palette.gradEnd}"/>
+    </linearGradient>
+    <style>
+      .text-back-company { font-family: 'Inter', system-ui, -apple-system, sans-serif; font-size: 34px; font-weight: 800; fill: ${palette.textColor}; text-anchor: middle; }
+      .text-back-sub { font-family: 'Inter', system-ui, -apple-system, sans-serif; font-size: 20px; font-weight: 500; fill: ${palette.accentColor}; text-anchor: middle; }
+      .text-spec-note { font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 600; fill: ${palette.accentColor}; opacity: 0.8; text-anchor: middle; }
+    </style>
+  </defs>
+  <rect width="1050" height="600" rx="32" fill="url(#cardGradBack)" stroke="${palette.badgeBorder || 'none'}" stroke-width="1"/>
+  <!-- 0.125in Print Bleed Safe Area -->
+  <rect x="38" y="38" width="974" height="524" rx="22" fill="none" stroke="${palette.guideColor}" stroke-dasharray="8 6" stroke-width="2"/>
+  
+  <!-- High-Resolution Centered Vector QR Code Box -->
+  <rect x="415" y="105" width="220" height="220" rx="20" fill="${palette.qrBoxBg}" stroke="${palette.qrBoxBorder}" stroke-width="2"/>
+  <g transform="translate(424, 114) scale(7.0)" shape-rendering="crispEdges">
+    ${qrPathMatrix}
+  </g>
+
+  <text x="525" y="380" class="text-back-company">${escapeHtml(company)}</text>
+  <text x="525" y="420" class="text-back-sub">Scan for Instant vCard &amp; Portfolio</text>
+  <text x="525" y="530" class="text-spec-note">Taksal Studio Vector Card Engine • 300 DPI CMYK Print Spec (Rear)</text>
+</svg>`;
       }
 
+      // Front View SVG
       return `<?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1050 600" width="1050" height="600">
   <defs>
-    <linearGradient id="cardGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="${gradStart}"/>
-      <stop offset="100%" stop-color="${gradEnd}"/>
+    <linearGradient id="cardGradFront" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="${palette.gradStart}"/>
+      <stop offset="100%" stop-color="${palette.gradEnd}"/>
     </linearGradient>
     <style>
-      .text-title { font-family: 'Inter', system-ui, sans-serif; font-size: 46px; font-weight: 800; fill: ${textColor}; }
-      .text-sub { font-family: 'Inter', system-ui, sans-serif; font-size: 24px; font-weight: 500; fill: ${accentColor}; }
-      .text-body { font-family: 'Inter', system-ui, sans-serif; font-size: 22px; font-weight: 400; fill: ${textColor}; }
-      .brand-title { font-family: 'Inter', system-ui, sans-serif; font-size: 38px; font-weight: 800; fill: ${textColor}; }
-      .badge-text { font-family: 'JetBrains Mono', monospace; font-size: 18px; font-weight: 700; fill: ${accentColor}; }
+      .brand-title { font-family: 'Inter', system-ui, -apple-system, sans-serif; font-size: 38px; font-weight: 800; fill: ${palette.textColor}; letter-spacing: -0.5px; }
+      .brand-tagline { font-family: 'Inter', system-ui, -apple-system, sans-serif; font-size: 22px; font-weight: 500; fill: ${palette.accentColor}; }
+      .badge-bg { fill: ${palette.badgeBg}; rx: 20px; }
+      .badge-text { font-family: 'JetBrains Mono', monospace; font-size: 16px; font-weight: 700; fill: ${palette.badgeText}; text-anchor: middle; }
+      .text-title { font-family: 'Inter', system-ui, -apple-system, sans-serif; font-size: 46px; font-weight: 800; fill: ${palette.textColor}; letter-spacing: -0.5px; }
+      .text-sub { font-family: 'Inter', system-ui, -apple-system, sans-serif; font-size: 24px; font-weight: 500; fill: ${palette.accentColor}; }
+      .text-body { font-family: 'Inter', system-ui, -apple-system, sans-serif; font-size: 22px; font-weight: 400; fill: ${palette.textColor}; }
+      .bleed-guide { font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 600; fill: ${palette.accentColor}; opacity: 0.65; text-anchor: end; }
     </style>
   </defs>
-  <rect width="1050" height="600" rx="32" fill="url(#cardGrad)"/>
-  <rect x="30" y="30" width="990" height="540" rx="24" fill="none" stroke="rgba(255,255,255,0.2)" stroke-dasharray="8 6"/>
-  <text x="70" y="95" class="brand-title">${escapeHtml(company)}</text>
-  <text x="70" y="135" class="text-sub">${escapeHtml(tagline)}</text>
-  <rect x="800" y="65" width="180" height="42" rx="21" fill="rgba(255,255,255,0.15)"/>
-  <text x="890" y="92" class="badge-text" text-anchor="middle">300 DPI CMYK</text>
-  <text x="70" y="380" class="text-title">${escapeHtml(name)}</text>
-  <text x="70" y="420" class="text-sub">${escapeHtml(title)}</text>
-  <text x="70" y="510" class="text-body">Phone: ${escapeHtml(phone)}</text>
-  <text x="500" y="510" class="text-body">Email: ${escapeHtml(email)}</text>
+  <rect width="1050" height="600" rx="32" fill="url(#cardGradFront)" stroke="${palette.badgeBorder || 'none'}" stroke-width="1"/>
+  <!-- 0.125in Print Bleed Safe Area -->
+  <rect x="38" y="38" width="974" height="524" rx="22" fill="none" stroke="${palette.guideColor}" stroke-dasharray="8 6" stroke-width="2"/>
+  
+  <!-- Top Header Row -->
+  <text x="75" y="98" class="brand-title">${escapeHtml(company)}</text>
+  <text x="75" y="138" class="brand-tagline">${escapeHtml(tagline)}</text>
+  <rect x="805" y="65" width="170" height="42" class="badge-bg"/>
+  <text x="890" y="92" class="badge-text">300 DPI CMYK</text>
+
+  <!-- User Identity & Title -->
+  <text x="75" y="375" class="text-title">${escapeHtml(name)}</text>
+  <text x="75" y="415" class="text-sub">${escapeHtml(title)}</text>
+
+  <!-- Contact Coordinates -->
+  <g transform="translate(75, 492)">
+    <text x="0" y="18" class="text-body">&#9742;  ${escapeHtml(phone)}</text>
+  </g>
+  <g transform="translate(500, 492)">
+    <text x="0" y="18" class="text-body">&#9993;  ${escapeHtml(email)}</text>
+  </g>
+
+  <!-- Bleed Label -->
+  <text x="980" y="550" class="bleed-guide">0.125&quot; BLEED SAFE ZONE</text>
 </svg>`;
     }
 
@@ -529,17 +726,22 @@
       downloadSpecBtn.addEventListener('click', () => {
         try {
           const svgContent = generateCardSvg();
+          const isFlipped = card3D.classList.contains('flipped');
+          const viewSide = isFlipped ? 'back' : 'front';
+          const activeSwatch = document.querySelector('.swatch-btn.active');
+          const themeKey = activeSwatch ? (activeSwatch.getAttribute('data-card-theme') || 'royal') : 'royal';
+
           const blob = new Blob([svgContent], { type: 'image/svg+xml;charset=utf-8' });
           const url = URL.createObjectURL(blob);
           const link = document.createElement('a');
           const cleanName = (inputName?.value || 'alex').toLowerCase().replace(/[^a-z0-9]/g, '-');
           link.href = url;
-          link.download = `taksal-business-card-${cleanName}-300dpi.svg`;
+          link.download = `taksal-card-${cleanName}-${themeKey}-${viewSide}-300dpi.svg`;
           document.body.appendChild(link);
           link.click();
           document.body.removeChild(link);
           URL.revokeObjectURL(url);
-          window.showToast('300 DPI Vector SVG Spec downloaded!', 'success', 3500);
+          window.showToast(`300 DPI Vector SVG (${isFlipped ? 'Back' : 'Front'} View) downloaded!`, 'success', 3500);
         } catch (err) {
           window.showToast('Generating 300 DPI Spec (Print Ready 3.5" x 2.0")...', 'success', 3500);
         }
@@ -553,9 +755,29 @@
         const company = (inputCompany?.value || 'Taksal Studio Ltd').trim();
         const phone = (inputPhone?.value || '+1 (555) 321-7890').trim();
         const email = (inputEmail?.value || 'alex@taksal.com').trim();
+        const tagline = (inputTagline?.value || 'Crafting Sovereign Visuals').trim();
 
-        const vcard = `BEGIN:VCARD\r\nVERSION:3.0\r\nFN:${name}\r\nORG:${company}\r\nTITLE:${title}\r\nTEL;TYPE=CELL:${phone}\r\nEMAIL:${email}\r\nNOTE:Generated by Taksal Studio (https://taksal.pages.dev)\r\nEND:VCARD\r\n`;
-        window.copyTextToClipboard(vcard, 'Digital vCard copied to clipboard!');
+        const nameParts = name.split(/\s+/);
+        const firstName = nameParts[0] || '';
+        const lastName = nameParts.slice(1).join(' ') || '';
+
+        const vcard = [
+          'BEGIN:VCARD',
+          'VERSION:3.0',
+          `FN;CHARSET=UTF-8:${name}`,
+          `N;CHARSET=UTF-8:${lastName};${firstName};;;`,
+          `ORG;CHARSET=UTF-8:${company}`,
+          `TITLE;CHARSET=UTF-8:${title}`,
+          `TEL;TYPE=WORK,VOICE:${phone}`,
+          `EMAIL;TYPE=PREF,INTERNET:${email}`,
+          'URL;CHARSET=UTF-8:https://taksal.pages.dev/',
+          `NOTE;CHARSET=UTF-8:${tagline} • Crafted with Taksal Studio Engine`,
+          `REV:${new Date().toISOString()}`,
+          'END:VCARD',
+          ''
+        ].join('\r\n');
+
+        window.copyTextToClipboard(vcard, 'Digital vCard (.vcf) copied to clipboard!');
       });
     }
   }
