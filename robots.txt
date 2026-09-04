@@ -1,0 +1,6 @@
+# robots.txt for Taksal Studio (https://cardmint.app)
+User-agent: *
+Allow: /
+
+# Sitemap Index
+Sitemap: https://cardmint.app/sitemap.xml

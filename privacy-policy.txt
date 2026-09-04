@@ -1,0 +1,102 @@
+PRIVACY POLICY FOR TAKSAL STUDIO
+Effective Date: September 4, 2026
+Application Name: Taksal (Taksal Studio)
+Application Package ID: com.card.mint.cardbuilder
+Version: 3.0.0 (Build 7)
+Developer: Card Mint / Taksal Studio
+Contact: support@cardmint.app
+Website: https://cardmint.app
+
+================================================================================
+1. OVERVIEW & DATA SOVEREIGNTY
+================================================================================
+This Privacy Policy governs the manner in which Taksal Studio (com.card.mint.cardbuilder)
+handles information. Taksal operates on a strict Offline-First architecture.
+We do not operate central cloud servers to collect, harvest, aggregate, or sell
+your commercial business records, customer contact books, tax documents, or
+creative designs. All operations and database entries occur natively on your device.
+
+================================================================================
+2. INFORMATION ARCHITECTURE & LOCAL STORAGE
+================================================================================
+All user-generated business and creative data is stored exclusively on your physical
+device within application-private SQLite database tables managed by Room:
+- Design Artifacts: Canvas elements, fonts, coordinates, and layers (designs table).
+- Business Profile: Business name, address, phone, email, GSTIN, and UPI ID (brand_kits).
+- Invoices & Estimates: Client names, emails, items, tax rates, sums, status (invoices/quotations).
+- Point of Sale Receipts: Slip numbers, payment methods, timestamps (receipts).
+- Inventory Records: Product names, SKUs, stock levels, costs, suppliers (products).
+- Expense Ledgers: Expenditure categories, amounts, dates (expenses).
+
+Zero Cloud Transmission: None of the above data is uploaded to our servers.
+It resides entirely in your device's private sandboxed storage.
+
+================================================================================
+3. HARDWARE-BACKED ENCRYPTION VAULT (ANDROID KEYSTORE)
+================================================================================
+To protect sensitive credentials and API keys:
+- 256-bit AES (Advanced Encryption Standard) in GCM (Galois/Counter Mode) with
+  128-bit authentication tags and 12-byte random IVs.
+- Master cryptographic keys are generated and stored in your device's hardware
+  Secure Enclave / Trusted Execution Environment (TEE).
+- Manifest sets android:allowBackup="false" to prevent unauthorized ADB extraction.
+- Manifest sets android:usesCleartextTraffic="false" mandating TLS/HTTPS encryption.
+
+================================================================================
+4. ANDROID DEVICE PERMISSIONS
+================================================================================
+- android.permission.INTERNET: Delivers AdMob ads, Gemini AI requests, Iconify icons.
+- android.permission.ACCESS_NETWORK_STATE: Checks connectivity before network calls.
+- android.permission.ACCESS_WIFI_STATE: Optimizes ad rendering bitrate.
+- android.permission.READ_MEDIA_IMAGES (API 33+): Imports photos/logos from gallery.
+- android.permission.READ_EXTERNAL_STORAGE (API <= 32): Legacy media picker permission.
+- android.permission.WRITE_EXTERNAL_STORAGE (API <= 28): Legacy export save permission.
+- com.google.android.gms.permission.AD_ID: Google Advertising ID for ad attribution.
+
+Permissions NOT Requested:
+Camera, Location, Microphone/Audio, Contacts, SMS, and Phone State are NOT accessed.
+
+================================================================================
+5. ADVERTISING & GOOGLE USER MESSAGING PLATFORM (UMP)
+================================================================================
+Taksal is 100% free forever without paywalls. Development is supported by Google
+AdMob advertisements.
+- Google User Messaging Platform (UMP): Certified consent form presented to users
+  in the EEA, UK, and Switzerland for GDPR compliance.
+- Consent Management: Users can change choices anytime in Settings > Consent & Privacy Choices.
+- 60-Second Cooldown: Interstitial ads only show at natural milestones with an enforced
+  60-second minimum cooldown timer. Ads never display during active canvas editing.
+
+================================================================================
+6. GEMINI 3.5 AI STUDIO
+================================================================================
+Optional generative AI features use Google's Gemini models:
+- Ephemeral Memory: Chats are kept in temporary memory during the active session only
+  and are never written to disk. Exiting the screen clears the conversation.
+- Encrypted Keys: Custom API keys are encrypted on-device via Android KeyStore AES-256-GCM
+  and transmitted solely to Google's official endpoint (generativelanguage.googleapis.com).
+
+================================================================================
+7. USER RIGHTS & COMPLETE DATA DELETION
+================================================================================
+Users have complete autonomy over their data:
+- To reset preferences: Settings > Reset All Settings.
+- To purge deleted designs: Settings > Trash & Version Vault > Empty Vault.
+- To completely wipe all local databases: Android Settings > Apps > Taksal > Storage > Clear Storage.
+- To permanently erase everything: Uninstalling the app permanently purges all local databases
+  and hardware KeyStore cryptographic keys.
+
+================================================================================
+8. CHILDREN'S PRIVACY
+================================================================================
+Taksal Studio is not directed to children under 13 (or 16 in the EU). We do not
+knowingly collect personal information from children.
+
+================================================================================
+9. LEGAL CONTACT
+================================================================================
+For questions or privacy requests:
+Card Mint / Taksal Studio Engineering Team
+Email: support@cardmint.app
+Package ID: com.card.mint.cardbuilder
+Subject: Privacy Compliance Inquiry — Taksal Studio

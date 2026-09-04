@@ -1,0 +1,8 @@
+# Cloudflare Pages Clean URL Rewrites
+/privacy    /privacy.html    200
+/terms      /terms.html      200
+/features   /features.html   200
+/about      /about.html      200
+/support    /support.html    200
+/contact    /contact.html    200
+/faq        /faq.html        200

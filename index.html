@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Taksal Studio — Free Graphic Design Studio & SME Business Management Suite</title>
+  <meta name="description" content="Taksal Studio is the #1 free creative graphic design studio and SME business suite for Android. Design 300 DPI business cards, logos, posters & create GST invoices, quotes, receipts, QR codes with zero subscription fees.">
+  <meta name="keywords" content="Taksal, Taksal Studio, business card maker, logo designer, GST invoice generator, thermal receipt maker, quotation generator, SME business tools, vector editor, Android Keystore, free graphic design app">
+  <link rel="canonical" href="https://cardmint.app/">
+  <link rel="icon" type="image/png" href="assets/images/app-icon.png">
+
+  <!-- Open Graph / Facebook / LinkedIn -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://cardmint.app/">
+  <meta property="og:title" content="Taksal Studio — Free Graphic Design & SME Business Suite">
+  <meta property="og:description" content="Design 300 DPI vector business cards, logos, and posters. Create GST invoices, thermal receipts, estimates, and QR payments offline on Android. 100% Free Forever.">
+  <meta property="og:image" content="https://cardmint.app/assets/images/feature-graphic.png">
+  <meta property="og:site_name" content="Taksal Studio">
+
+  <!-- Twitter Cards -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Taksal Studio — Free Graphic Design & SME Business Suite">
+  <meta name="twitter:description" content="Design 300 DPI vector cards, logos & create GST bills, POS receipts and QR codes offline on Android. 100% Free Forever.">
+  <meta name="twitter:image" content="https://cardmint.app/assets/images/feature-graphic.png">
+
+  <!-- Schema.org JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Taksal",
+    "alternateName": "Taksal Studio",
+    "operatingSystem": "Android 9.0 (Pie) and higher",
+    "applicationCategory": "BusinessApplication",
+    "applicationSubCategory": "DesignApplication",
+    "softwareVersion": "3.0.0",
+    "fileSize": "15MB",
+    "offers": {
+      "@type": "Offer",
+      "price": "0.00",
+      "priceCurrency": "USD"
+    },
+    "description": "Professional 300 DPI vector graphic design studio and complete SME business management suite including GST invoicing, thermal receipts, quotations, inventory, and QR code payments.",
+    "screenshot": [
+      "https://cardmint.app/assets/images/screenshots/homescreen.png",
+      "https://cardmint.app/assets/images/screenshots/editorscreen.png",
+      "https://cardmint.app/assets/images/screenshots/business-suite-screen.png",
+      "https://cardmint.app/assets/images/screenshots/expense-inventory-quotation-and-invoice-screen.png"
+    ],
+    "downloadUrl": "https://play.google.com/store/apps/details?id=com.card.mint.cardbuilder",
+    "author": {
+      "@type": "Organization",
+      "name": "Card Mint / Taksal Studio"
+    }
+  }
+  </script>
+
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+  <!-- Site Header -->
+  <header class="site-header">
+    <div class="container nav-container">
+      <a href="index.html" class="brand-logo" aria-label="Taksal Home">
+        <img src="assets/images/app-icon.png" alt="Taksal Logo" class="brand-icon">
+        <span>Taksal</span>
+        <span class="brand-badge">v3.0</span>
+      </a>
+
+      <nav aria-label="Primary Navigation">
+        <ul class="nav-menu">
+          <li><a href="index.html" class="nav-link active">Home</a></li>
+          <li><a href="features.html" class="nav-link">Features</a></li>
+          <li><a href="about.html" class="nav-link">About</a></li>
+          <li><a href="support.html" class="nav-link">Support</a></li>
+          <li><a href="faq.html" class="nav-link">FAQ</a></li>
+          <li><a href="contact.html" class="nav-link">Contact</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <button type="button" class="theme-toggle-btn" aria-label="Toggle dark/light theme">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+        </button>
+        <a href="https://play.google.com/store/apps/details?id=com.card.mint.cardbuilder" target="_blank" rel="noopener noreferrer" class="nav-cta-btn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M3 20.5V3.5C3 2.91 3.34 2.39 3.84 2.15L13.69 12L3.84 21.85C3.34 21.6 3 21.09 3 20.5M16.81 15.12L6.05 21.34L14.54 12.85L16.81 15.12M20.16 10.81C20.5 11.08 20.75 11.5 20.75 12C20.75 12.5 20.53 12.9 20.18 13.18L17.89 14.5L15.39 12L17.89 9.5L20.16 10.81M6.05 2.66L16.81 8.88L14.54 11.15L6.05 2.66Z"/></svg>
+          Get Free App
+        </a>
+        <button type="button" class="hamburger-btn" aria-label="Open mobile menu" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Navigation Drawer -->
+  <div class="mobile-nav-drawer" role="dialog" aria-modal="true" aria-label="Mobile Navigation">
+    <a href="index.html" class="mobile-nav-link">Home</a>
+    <a href="features.html" class="mobile-nav-link">Features</a>
+    <a href="about.html" class="mobile-nav-link">About</a>
+    <a href="support.html" class="mobile-nav-link">Support & Documentation</a>
+    <a href="faq.html" class="mobile-nav-link">Frequently Asked Questions</a>
+    <a href="contact.html" class="mobile-nav-link">Contact Support</a>
+    <a href="privacy.html" class="mobile-nav-link">Privacy Policy</a>
+    <a href="terms.html" class="mobile-nav-link">Terms & Conditions</a>
+    <div style="margin-top: 20px;">
+      <a href="https://play.google.com/store/apps/details?id=com.card.mint.cardbuilder" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="width: 100%;">
+        Download on Google Play
+      </a>
+    </div>
+  </div>
+
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-pill-badge">
+          <span class="badge-dot"></span>
+          <span>Version 3.0 Free Studio · 100% Free Forever</span>
+        </div>
+        <h1 class="hero-title">
+          Create. Design.<br>
+          <span class="text-gradient">Grow Your Business.</span>
+        </h1>
+        <p class="hero-lead">
+          The all-in-one Android powerhouse that replaces expensive design subscriptions and complex billing software. Craft 300 DPI vector branding, run GST invoicing, print thermal POS receipts, manage stock, and collect instant UPI payments — completely offline with hardware-backed encryption.
+        </p>
+
+        <div class="hero-actions">
+          <a href="https://play.google.com/store/apps/details?id=com.card.mint.cardbuilder" target="_blank" rel="noopener noreferrer" class="play-store-btn" aria-label="Get it on Google Play">
+            <img src="assets/images/badges/google-play-badge.svg" alt="Google Play Icon" class="play-icon">
+            <div>
+              <span class="btn-text-small">Get it on</span>
+              <span class="btn-text-large">Google Play</span>
+            </div>
+          </a>
+          <a href="features.html" class="btn btn-secondary">
+            Explore All 15+ Tools
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </a>
+        </div>
+
+        <!-- Trust Badges -->
+        <div class="trust-badges-row">
+          <div class="trust-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            <span>100% Free Forever</span>
+          </div>
+          <div class="trust-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            <span>300 DPI Vector Skia Engine</span>
+          </div>
+          <div class="trust-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            <span>Android Keystore AES-256</span>
+          </div>
+          <div class="trust-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            <span>Zero Mandatory Cloud Sign-In</span>
+          </div>
+        </div>
+
+        <!-- Hero Mockup Frame -->
+        <div class="hero-showcase">
+          <div class="hero-mockup-frame">
+            <picture>
+              <source srcset="assets/images/screenshots/homescreen.webp" type="image/webp">
+              <img src="assets/images/screenshots/homescreen.png" alt="Taksal Studio App Dashboard Interface" class="hero-mockup-img" loading="eager">
+            </picture>
+
+            <!-- Floating UI Chips -->
+            <div class="floating-chip chip-left">
+              <div class="bento-icon-box icon-purple" style="width: 32px; height: 32px; margin: 0;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
+              </div>
+              <div>
+                <span style="display:block; font-size: 0.75rem; color: var(--text-secondary);">Vector Canvas</span>
+                <span style="color: var(--text-primary);">300 DPI Ready</span>
+              </div>
+            </div>
+
+            <div class="floating-chip chip-right">
+              <div class="bento-icon-box icon-emerald" style="width: 32px; height: 32px; margin: 0;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+              </div>
+              <div>
+                <span style="display:block; font-size: 0.75rem; color: var(--text-secondary);">Security Enclave</span>
+                <span style="color: var(--text-primary);">Hardware Keystore</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Statistics Row -->
+  <section class="stats-section">
+    <div class="container">
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-value text-gradient">$0</div>
+          <div class="stat-label">100% Free Forever (No Paywalls)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value text-gradient">300 DPI</div>
+          <div class="stat-label">Ultra-High Precision Print Engine</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value text-gradient">15+</div>
+          <div class="stat-label">Integrated SME & Studio Tools</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value text-gradient">256-Bit</div>
+          <div class="stat-label">Hardware KeyStore AES Encryption</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Two Core Pillars Section -->
+  <section class="section">
+    <div class="container">
+      <div class="section-title-wrap">
+        <div class="section-pill">Unified Convergence</div>
+        <h2 class="section-title">The First Dual-Engine Studio for Mobile</h2>
+        <p class="section-subtitle">Why toggle between three disjointed apps? Taksal fuses professional vector design with day-to-day enterprise commerce on your phone.</p>
+      </div>
+
+      <div class="bento-grid">
+        <!-- Pillar 1: Vector Graphic Studio -->
+        <div class="bento-card bento-6">
+          <div class="bento-icon-box icon-purple">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 19l7-7 3 3-7 7-3-3z"></path><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"></path><path d="M2 2l7.586 7.586"></path><circle cx="11" cy="11" r="2"></circle></svg>
+          </div>
+          <h3 class="bento-title">1. Creative Vector Graphic Studio</h3>
+          <p class="bento-desc">
+            A full-fledged vector layout canvas engineered with Google's Skia graphics pipeline. Build double-sided business cards, minimalist logos, promo flyers, festival posters, and social media graphics with zero latency.
+          </p>
+          <ul style="list-style: none; margin-bottom: 20px; display: flex; flex-direction: column; gap: 8px; font-size: 0.9rem; color: var(--text-secondary);">
+            <li>✓ Multi-layer stacking with reordering, locking & opacity</li>
+            <li>✓ Magnetic smart snapping to center, bounds & sibling elements</li>
+            <li>✓ Curated typography library + curved text & letter spacing</li>
+            <li>✓ Magic Layers: AI separating flat artwork into editable elements</li>
+            <li>✓ 300 DPI CMYK-ready print exports (PNG, JPG, PDF, SVG)</li>
+          </ul>
+          <picture>
+            <source srcset="assets/images/screenshots/editorscreen.webp" type="image/webp">
+            <img src="assets/images/screenshots/editorscreen.png" alt="Taksal Vector Canvas Editor Screen" class="bento-preview-img" loading="lazy">
+          </picture>
+        </div>
+
+        <!-- Pillar 2: SME Business Suite -->
+        <div class="bento-card bento-6">
+          <div class="bento-icon-box icon-indigo">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+          </div>
+          <h3 class="bento-title">2. SME Operations & Billing Suite</h3>
+          <p class="bento-desc">
+            Equip your retail storefront or freelance practice with instant commercial management. Issue GST invoices, print thermal POS receipts, manage product inventory with SKU thresholds, and track expenses.
+          </p>
+          <ul style="list-style: none; margin-bottom: 20px; display: flex; flex-direction: column; gap: 8px; font-size: 0.9rem; color: var(--text-secondary);">
+            <li>✓ Professional GST invoices & estimates with PDF generator (iText7)</li>
+            <li>✓ Standard 58mm & 80mm thermal receipt slips for retail counters</li>
+            <li>✓ Inventory stock tracking with SKU & low stock warnings</li>
+            <li>✓ Smart QR Hub: UPI payments (GPay/PhonePe), WhatsApp, Wi-Fi</li>
+            <li>✓ Barcode generator: 1D & 2D formats (Code 128, EAN-13, QR)</li>
+          </ul>
+          <picture>
+            <source srcset="assets/images/screenshots/business-suite-screen.webp" type="image/webp">
+            <img src="assets/images/screenshots/business-suite-screen.png" alt="Taksal Business Suite Tools Screen" class="bento-preview-img" loading="lazy">
+          </picture>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Showcase Tabs -->
+  <section class="section" style="background: var(--bg-surface-subtle);">
+    <div class="container">
+      <div class="section-title-wrap">
+        <div class="section-pill">Interactive Exploration</div>
+        <h2 class="section-title">Engineered For Real Business Workflows</h2>
+        <p class="section-subtitle">Click through the core engines powering thousands of entrepreneurs daily.</p>
+      </div>
+
+      <div class="tab-controls">
+        <button type="button" class="tab-btn active" data-tab="tab-design">Design Canvas</button>
+        <button type="button" class="tab-btn" data-tab="tab-invoicing">GST Invoicing & Bills</button>
+        <button type="button" class="tab-btn" data-tab="tab-ai">Gemini 3.5 AI Studio</button>
+        <button type="button" class="tab-btn" data-tab="tab-qr">Smart QR & Barcode Hub</button>
+        <button type="button" class="tab-btn" data-tab="tab-analytics">Analytics & Reports</button>
+      </div>
+
+      <!-- Tab 1: Design -->
+      <div id="tab-design" class="tab-pane active">
+        <div class="tab-content-grid">
+          <div>
+            <h3 style="font-size: 1.8rem; margin-bottom: 12px;">Zero Latency Vector Graphic Pipeline</h3>
+            <p style="color: var(--text-secondary); line-height: 1.7;">
+              Unlike cloud-tethered graphic editors that lag on mobile connections, Taksal executes graphic operations directly in native Skia C++ graphic shaders. Enjoy infinite pinch-to-zoom, sub-pixel element alignment, and instant PDF vector compilation.
+            </p>
+            <ul class="tab-feature-list">
+              <li class="tab-feature-item">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span><strong>Magnetic Smart Snapping:</strong> Automatic guidelines snap elements to canvas center, borders, and sibling card margins.</span>
+              </li>
+              <li class="tab-feature-item">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span><strong>Brand Kit Integration:</strong> Access your company logo, verified hex palettes, and contact tokens directly from the editor dock.</span>
+              </li>
+              <li class="tab-feature-item">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span><strong>Trash & Revision Vault:</strong> Never lose an accidental deletion. Restore any canvas draft within 30 days from the local vault.</span>
+              </li>
+            </ul>
+            <a href="features.html#design-studio" class="btn btn-secondary">Learn More About Vector Tools →</a>
+          </div>
+          <div>
+            <picture>
+              <source srcset="assets/images/screenshots/templatesscreen.webp" type="image/webp">
+              <img src="assets/images/screenshots/templatesscreen.png" alt="Taksal Templates Gallery" style="border-radius: var(--radius-xl); border: 1px solid var(--border-color); width: 100%; box-shadow: var(--shadow-md);">
+            </picture>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab 2: Invoicing -->
+      <div id="tab-invoicing" class="tab-pane">
+        <div class="tab-content-grid">
+          <div>
+            <h3 style="font-size: 1.8rem; margin-bottom: 12px;">Enterprise GST Invoicing & Thermal POS</h3>
+            <p style="color: var(--text-secondary); line-height: 1.7;">
+              Say goodbye to expensive accounting SaaS. Generate GST tax bills with your verified GSTIN, itemized products, tax calculations, and dynamic UPI payment QR codes embedded directly onto the PDF.
+            </p>
+            <ul class="tab-feature-list">
+              <li class="tab-feature-item">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span><strong>Tax & GST Automation:</strong> Configure default tax percentages (0%, 5%, 12%, 18%, 28% or custom) calculated cleanly per item.</span>
+              </li>
+              <li class="tab-feature-item">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span><strong>Thermal POS Slips:</strong> Render standard 58mm and 80mm thermal receipt slips for instant Bluetooth/USB receipt printing or digital sharing.</span>
+              </li>
+              <li class="tab-feature-item">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span><strong>Quotations to Invoices:</strong> Convert signed customer quotations into settled invoices with a single tap.</span>
+              </li>
+            </ul>
+            <a href="features.html#business-suite" class="btn btn-secondary">Explore Invoicing Tools →</a>
+          </div>
+          <div>
+            <picture>
+              <source srcset="assets/images/screenshots/expense-inventory-quotation-and-invoice-screen.webp" type="image/webp">
+              <img src="assets/images/screenshots/expense-inventory-quotation-and-invoice-screen.png" alt="Invoices, Quotations & Inventory Interface" style="border-radius: var(--radius-xl); border: 1px solid var(--border-color); width: 100%; box-shadow: var(--shadow-md);">
+            </picture>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab 3: AI -->
+      <div id="tab-ai" class="tab-pane">
+        <div class="tab-content-grid">
+          <div>
+            <h3 style="font-size: 1.8rem; margin-bottom: 12px;">Gemini 3.5 AI Studio with Zero Cloud Leak</h3>
+            <p style="color: var(--text-secondary); line-height: 1.7;">
+              Harness state-of-the-art Google Gemini generative models to generate design layout briefs, craft persuasive marketing copy, and spark color inspiration.
+            </p>
+            <ul class="tab-feature-list">
+              <li class="tab-feature-item">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span><strong>Client-Direct Encryption:</strong> Bring your own Google AI Studio API key. It is stored exclusively on your device using hardware-backed AES-256-GCM.</span>
+              </li>
+              <li class="tab-feature-item">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span><strong>Ephemeral Memory Architecture:</strong> AI chat sessions are memory-only. Your commercial prompts and chats are never logged or sold.</span>
+              </li>
+              <li class="tab-feature-item">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span><strong>Intelligent Brief Parser:</strong> Transform rough business descriptions into ready-to-edit vector card layouts in seconds.</span>
+              </li>
+            </ul>
+            <a href="features.html#ai-studio" class="btn btn-secondary">Discover AI Capabilities →</a>
+          </div>
+          <div>
+            <picture>
+              <source srcset="assets/images/screenshots/ai-assistant-screen.webp" type="image/webp">
+              <img src="assets/images/screenshots/ai-assistant-screen.png" alt="Gemini AI Studio Screen" style="border-radius: var(--radius-xl); border: 1px solid var(--border-color); width: 100%; max-height: 480px; object-fit: contain; box-shadow: var(--shadow-md); margin: 0 auto;">
+            </picture>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab 4: QR & Barcodes -->
+      <div id="tab-qr" class="tab-pane">
+        <div class="tab-content-grid">
+          <div>
+            <h3 style="font-size: 1.8rem; margin-bottom: 12px;">Smart QR & Commercial Barcode Hub</h3>
+            <p style="color: var(--text-secondary); line-height: 1.7;">
+              Streamline customer touchpoints with customized QR codes and retail barcodes. Embed your UPI ID to receive instant payments via PhonePe, GPay, Paytm, and BHIM without payment gateway transaction fees.
+            </p>
+            <ul class="tab-feature-list">
+              <li class="tab-feature-item">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span><strong>Direct UPI Payment QRs:</strong> Embed custom amounts, merchant business names, and transaction references for counter billing.</span>
+              </li>
+              <li class="tab-feature-item">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span><strong>Instant WhatsApp & Wi-Fi Cards:</strong> Let store visitors join your Wi-Fi or text your customer desk with one scan.</span>
+              </li>
+              <li class="tab-feature-item">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span><strong>Standard Retail Barcodes:</strong> Generate Code 128, EAN-13, UPC-A, and Data Matrix barcodes for product inventory labels.</span>
+              </li>
+            </ul>
+            <a href="features.html#qr-hub" class="btn btn-secondary">Explore Barcode Specs →</a>
+          </div>
+          <div>
+            <picture>
+              <source srcset="assets/images/screenshots/qr-and-barcode-screen.webp" type="image/webp">
+              <img src="assets/images/screenshots/qr-and-barcode-screen.png" alt="QR and Barcode Generator Screen" style="border-radius: var(--radius-xl); border: 1px solid var(--border-color); width: 100%; box-shadow: var(--shadow-md);">
+            </picture>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab 5: Analytics -->
+      <div id="tab-analytics" class="tab-pane">
+        <div class="tab-content-grid">
+          <div>
+            <h3 style="font-size: 1.8rem; margin-bottom: 12px;">Real-Time Financial Dashboard & Analytics</h3>
+            <p style="color: var(--text-secondary); line-height: 1.7;">
+              Understand your commercial health without hiring a bookkeeper. Inspect daily sales volumes, gross revenue, category expenditures, and inventory valuation at a glance.
+            </p>
+            <ul class="tab-feature-list">
+              <li class="tab-feature-item">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span><strong>Revenue vs. Expense Tracking:</strong> Visual metrics highlighting your net monthly operating profit margin.</span>
+              </li>
+              <li class="tab-feature-item">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span><strong>Top-Selling Product Matrices:</strong> Identify fast-moving stock and forecast replenishments before shortages hit.</span>
+              </li>
+              <li class="tab-feature-item">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span><strong>Lossless Data Export:</strong> Export your ledger, invoice rolls, and expense records in CSV and PDF formats whenever required.</span>
+              </li>
+            </ul>
+            <a href="features.html#analytics" class="btn btn-secondary">View Reporting Architecture →</a>
+          </div>
+          <div>
+            <picture>
+              <source srcset="assets/images/screenshots/dashboard-analytics-and-reports-screen.webp" type="image/webp">
+              <img src="assets/images/screenshots/dashboard-analytics-and-reports-screen.png" alt="Dashboard, Analytics & Reports Screen" style="border-radius: var(--radius-xl); border: 1px solid var(--border-color); width: 100%; box-shadow: var(--shadow-md);">
+            </picture>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Comparison Section -->
+  <section class="section">
+    <div class="container">
+      <div class="section-title-wrap">
+        <div class="section-pill">Why Taksal Wins</div>
+        <h2 class="section-title">The Sovereign Creator Advantage</h2>
+        <p class="section-subtitle">How Taksal Studio compares against traditional subscription software.</p>
+      </div>
+
+      <div class="comparison-wrapper">
+        <table class="comparison-table">
+          <thead>
+            <tr>
+              <th>Feature Capability</th>
+              <th class="highlight-col">Taksal Studio v3.0</th>
+              <th>Subscription Graphic Apps</th>
+              <th>Cloud Invoicing SaaS</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Pricing Model</td>
+              <td class="highlight-col"><strong style="color: var(--success);">100% Free Forever ($0/mo)</strong></td>
+              <td>$12 – $30 / user / month</td>
+              <td>$15 – $50 / organization / month</td>
+            </tr>
+            <tr>
+              <td>300 DPI CMYK Print Exports</td>
+              <td class="highlight-col"><span class="check-icon">✓ Included Free</span></td>
+              <td><span class="cross-icon">✕ Locked behind Pro tier</span></td>
+              <td>N/A</td>
+            </tr>
+            <tr>
+              <td>Offline Operation</td>
+              <td class="highlight-col"><span class="check-icon">✓ 100% Local (No internet required)</span></td>
+              <td><span class="cross-icon">✕ Cloud-dependent</span></td>
+              <td><span class="cross-icon">✕ Fails when offline</span></td>
+            </tr>
+            <tr>
+              <td>Data Storage & Ownership</td>
+              <td class="highlight-col"><span class="check-icon">✓ On-Device SQLite + Android Keystore</span></td>
+              <td>Stored on proprietary servers</td>
+              <td>Stored on third-party cloud</td>
+            </tr>
+            <tr>
+              <td>GST Invoices & Thermal POS Slips</td>
+              <td class="highlight-col"><span class="check-icon">✓ Integrated Native Engines</span></td>
+              <td><span class="cross-icon">✕ Not supported</span></td>
+              <td><span class="check-icon">✓ Supported (Subscription)</span></td>
+            </tr>
+            <tr>
+              <td>Unified Brand Kit Manager</td>
+              <td class="highlight-col"><span class="check-icon">✓ Unlimited Saved Palettes & Logos</span></td>
+              <td><span class="cross-icon">✕ Requires Pro tier</span></td>
+              <td>Basic branding only</td>
+            </tr>
+            <tr>
+              <td>Mandatory Account Creation</td>
+              <td class="highlight-col"><strong style="color: var(--success);">None (Instant Access)</strong></td>
+              <td>Email / Phone verification required</td>
+              <td>Credit card / Company registration</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Screenshot Gallery Section -->
+  <section class="section" style="background: var(--bg-surface-subtle);">
+    <div class="container">
+      <div class="section-title-wrap">
+        <div class="section-pill">Live App Showcase</div>
+        <h2 class="section-title">Designed with Material 3 & Jetpack Compose</h2>
+        <p class="section-subtitle">Click any screenshot to inspect high-resolution UI details.</p>
+      </div>
+
+      <div class="screenshot-grid">
+        <div class="screenshot-card">
+          <picture>
+            <source srcset="assets/images/screenshots/homescreen.webp" type="image/webp">
+            <img src="assets/images/screenshots/homescreen.png" alt="Taksal Studio Home Runway" loading="lazy" data-full="assets/images/screenshots/homescreen.png">
+          </picture>
+          <div class="screenshot-card-body">
+            <h4 class="screenshot-title">Studio Home Hub</h4>
+            <p class="screenshot-caption">Quick-access speed dial and recent project carousel.</p>
+          </div>
+        </div>
+
+        <div class="screenshot-card">
+          <picture>
+            <source srcset="assets/images/screenshots/editorscreen.webp" type="image/webp">
+            <img src="assets/images/screenshots/editorscreen.png" alt="Taksal Vector Canvas Editor" loading="lazy" data-full="assets/images/screenshots/editorscreen.png">
+          </picture>
+          <div class="screenshot-card-body">
+            <h4 class="screenshot-title">Canva Vector Editor</h4>
+            <p class="screenshot-caption">Precision snapping, layer stack, and custom typography.</p>
+          </div>
+        </div>
+
+        <div class="screenshot-card">
+          <picture>
+            <source srcset="assets/images/screenshots/business-suite-screen.webp" type="image/webp">
+            <img src="assets/images/screenshots/business-suite-screen.png" alt="SME Business Management Suite" loading="lazy" data-full="assets/images/screenshots/business-suite-screen.png">
+          </picture>
+          <div class="screenshot-card-body">
+            <h4 class="screenshot-title">Business Suite</h4>
+            <p class="screenshot-caption">Bills, receipts, inventory, catalogs, and branding.</p>
+          </div>
+        </div>
+
+        <div class="screenshot-card">
+          <picture>
+            <source srcset="assets/images/screenshots/qr-and-barcode-screen.webp" type="image/webp">
+            <img src="assets/images/screenshots/qr-and-barcode-screen.png" alt="Smart QR & Barcode Generator" loading="lazy" data-full="assets/images/screenshots/qr-and-barcode-screen.png">
+          </picture>
+          <div class="screenshot-card-body">
+            <h4 class="screenshot-title">Smart QR & Barcodes</h4>
+            <p class="screenshot-caption">UPI payments, WhatsApp chat links, and 1D/2D barcodes.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Preview Section -->
+  <section class="section">
+    <div class="container">
+      <div class="section-title-wrap">
+        <div class="section-pill">Got Questions?</div>
+        <h2 class="section-title">Frequently Asked Questions</h2>
+        <p class="section-subtitle">Straightforward answers about our free model, data security, and export quality.</p>
+      </div>
+
+      <div class="faq-list">
+        <div class="faq-item active">
+          <button type="button" class="faq-question" aria-expanded="true">
+            <span>Is Taksal Studio truly 100% free forever?</span>
+            <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <div class="faq-answer">
+            <p>Yes. Every single creative tool, 300 DPI print export format, VIP template, brand kit, and business billing module is unlocked and completely free for all users. The application is sustained transparently through non-intrusive Google AdMob advertisements with strictly enforced 60-second cooldown limits so your editing is never disrupted.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button type="button" class="faq-question" aria-expanded="false">
+            <span>Are my invoices and business clients uploaded to your cloud?</span>
+            <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <div class="faq-answer">
+            <p>No. Taksal operates on a strict Offline-First architecture. All your business records, product inventory, customer names, invoices, and design files are stored locally on your device's private SQLite database. Sensitive items like API keys and business credentials are encrypted using hardware-backed AES-256-GCM via the Android KeyStore.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button type="button" class="faq-question" aria-expanded="false">
+            <span>Can I print directly to a 58mm or 80mm Bluetooth thermal printer?</span>
+            <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <div class="faq-answer">
+            <p>Yes! Taksal's Thermal Receipt Generator formats retail POS slips specifically to standard 58mm and 80mm thermal widths. You can dispatch receipts directly to connected Bluetooth, USB, or Wi-Fi thermal slip printers via Android's native print service or share them as instant digital PDFs.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button type="button" class="faq-question" aria-expanded="false">
+            <span>What resolution does the graphic export support?</span>
+            <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <div class="faq-answer">
+            <p>Taksal renders graphics at ultra-crisp 300 DPI print-ready quality. Exports are optimized for commercial offset printing, matte cardstock, and merchandise printing in PNG, JPEG, vector SVG, and high-resolution PDF formats.</p>
+          </div>
+        </div>
+      </div>
+
+      <div style="text-align: center; margin-top: var(--space-2xl);">
+        <a href="faq.html" class="btn btn-secondary">View All Frequently Asked Questions →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Download Call-to-Action Banner -->
+  <section class="section-sm">
+    <div class="container">
+      <div class="cta-banner">
+        <h2 class="cta-title">Start Creating & Growing Your Business Today</h2>
+        <p class="cta-desc">
+          Download Taksal Studio now on Google Play. Zero subscription fees. Zero cloud lock-in. 100% sovereign commercial power in your pocket.
+        </p>
+
+        <div class="cta-actions">
+          <a href="https://play.google.com/store/apps/details?id=com.card.mint.cardbuilder" target="_blank" rel="noopener noreferrer" class="play-store-btn" aria-label="Download on Google Play">
+            <img src="assets/images/badges/google-play-badge.svg" alt="Google Play" class="play-icon">
+            <div>
+              <span class="btn-text-small">Download on</span>
+              <span class="btn-text-large">Google Play</span>
+            </div>
+          </a>
+          <a href="features.html" class="btn" style="background: rgba(255, 255, 255, 0.15); color: #FFFFFF; border: 1px solid rgba(255, 255, 255, 0.3); backdrop-filter: blur(8px);">
+            View Feature Index
+          </a>
+        </div>
+
+        <div class="app-specs-row">
+          <span>✓ Android 9.0 (API 28) & Higher</span>
+          <span>✓ Version 3.0.0 (Build 7)</span>
+          <span>✓ Package: com.card.mint.cardbuilder</span>
+          <span>✓ Size: ~15 MB</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="brand-logo">
+            <img src="assets/images/app-icon.png" alt="Taksal Icon" class="brand-icon">
+            <span>Taksal Studio</span>
+          </div>
+          <p>
+            The world's #1 free creative graphic studio and SME business management suite for Android. Empowering solo creators and small businesses to design, bill, and succeed.
+          </p>
+          <div style="margin-top: 16px;">
+            <span class="legal-badge">Google Play Verified</span>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4>Studio Tools</h4>
+          <ul class="footer-links">
+            <li><a href="features.html#design-studio">Vector Canvas Editor</a></li>
+            <li><a href="features.html#business-cards">Business Card Maker</a></li>
+            <li><a href="features.html#logo-creator">Logo Studio</a></li>
+            <li><a href="features.html#brand-kit">Brand Kit Manager</a></li>
+            <li><a href="features.html#ai-studio">Gemini 3.5 AI Studio</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>SME Business Suite</h4>
+          <ul class="footer-links">
+            <li><a href="features.html#invoicing">GST Invoice Generator</a></li>
+            <li><a href="features.html#receipts">Thermal POS Receipts</a></li>
+            <li><a href="features.html#quotations">Estimates & Quotations</a></li>
+            <li><a href="features.html#inventory">Inventory & SKU Manager</a></li>
+            <li><a href="features.html#qr-hub">Smart QR & Barcode Hub</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Support & Legal</h4>
+          <ul class="footer-links">
+            <li><a href="support.html">Help & Support</a></li>
+            <li><a href="faq.html">FAQ</a></li>
+            <li><a href="contact.html">Contact Engineering</a></li>
+            <li><a href="privacy.html">Privacy Policy</a></li>
+            <li><a href="terms.html">Terms & Conditions</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>
+          © 2026 Taksal Studio (com.card.mint.cardbuilder). All rights reserved.
+        </div>
+        <div>
+          Engineered with Jetpack Compose, Material 3 & Android Keystore Security.
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Lightbox Modal for Screenshots -->
+  <div class="lightbox-modal" role="dialog" aria-modal="true" aria-label="Screenshot Preview">
+    <div class="lightbox-content">
+      <button type="button" class="lightbox-close" aria-label="Close modal">&times;</button>
+      <img src="" alt="Screenshot Full Preview">
+    </div>
+  </div>
+
+  <!-- Back to Top Button -->
+  <button type="button" class="back-to-top" aria-label="Scroll back to top">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="18 15 12 9 6 15"></polyline></svg>
+  </button>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,13 @@
+# Operating System Files
+.DS_Store
+Thumbs.db
+*.swp
+*~
+
+# Editor Directories
+.idea/
+.vscode/
+
+# Node modules (if any tools are run locally)
+node_modules/
+.wrangler/
