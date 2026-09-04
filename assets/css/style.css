@@ -196,24 +196,6 @@ section[id], div[id], article[id] {
   overflow: hidden !important;
 }
 
-.skip-link {
-  position: fixed;
-  top: -100px;
-  left: 20px;
-  background: var(--brand-violet);
-  color: #FFFFFF;
-  padding: 12px 20px;
-  z-index: 10000;
-  border-radius: var(--radius-md);
-  font-weight: 700;
-  box-shadow: var(--shadow-xl);
-  transition: top var(--transition-fast) ease;
-}
-
-.skip-link:focus {
-  top: 20px;
-}
-
 .sr-only {
   position: absolute;
   width: 1px;
