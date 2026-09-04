@@ -7,6 +7,23 @@
   <meta name="description" content="Discover the philosophy and engineering behind Taksal Studio. Built to emancipate independent creators and small businesses from expensive SaaS fees through true offline-first Android technology.">
   <link rel="canonical" href="https://taksal.com/about.html">
   <link rel="icon" type="image/png" href="assets/images/app-icon.png">
+  <link rel="apple-touch-icon" href="assets/images/app-icon.png">
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="theme-color" content="#4A148C" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#09090B" media="(prefers-color-scheme: dark)">
+
+  <!-- Preconnect to Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Zero-FOUC Theme Initializer -->
+  <script>
+    (function(){
+      var t = localStorage.getItem('taksal-theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
 
   <!-- Open Graph -->
   <meta property="og:type" content="website">
@@ -14,6 +31,8 @@
   <meta property="og:title" content="About Us — Taksal Studio Philosophy & Mission">
   <meta property="og:description" content="Why pay recurring monthly subscriptions for basic graphic design and billing tools? Discover our 100% free, offline-first Android studio.">
   <meta property="og:image" content="https://taksal.com/assets/images/feature-graphic.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
 
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image">
@@ -21,15 +40,36 @@
   <meta name="twitter:description" content="Why pay recurring monthly subscriptions for basic graphic design and billing tools? Discover our 100% free, offline-first Android studio.">
   <meta name="twitter:image" content="https://taksal.com/assets/images/feature-graphic.png">
 
+  <!-- JSON-LD Breadcrumb Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [{
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://taksal.com/"
+    },{
+      "@type": "ListItem",
+      "position": 2,
+      "name": "About Us",
+      "item": "https://taksal.com/about.html"
+    }]
+  }
+  </script>
+
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
+  <!-- Accessible Skip Link -->
+  <a href="#main" class="skip-link">Skip to main content</a>
 
   <!-- Site Header -->
   <header class="site-header">
     <div class="container nav-container">
       <a href="index.html" class="brand-logo" aria-label="Taksal Home">
-        <img src="assets/images/app-icon.png" alt="Taksal Logo" class="brand-icon">
+        <img src="assets/images/app-icon.png" alt="Taksal Logo" class="brand-icon" width="38" height="38">
         <span>Taksal</span>
         <span class="brand-badge">v3.0</span>
       </a>
@@ -46,12 +86,22 @@
       </nav>
 
       <div class="nav-actions">
-        <button type="button" class="theme-toggle-btn" aria-label="Toggle dark/light theme">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+        <!-- Command Palette Trigger Button -->
+        <button type="button" class="cmd-palette-btn" aria-label="Open Command Palette (Cmd+K)">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          <span>Search</span>
+          <span class="cmd-kbd">⌘K</span>
         </button>
+
+        <button type="button" class="theme-toggle-btn" aria-label="Toggle dark/light theme">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+        </button>
+
         <a href="https://play.google.com/store/apps/details?id=com.card.mint.cardbuilder" target="_blank" rel="noopener noreferrer" class="nav-cta-btn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M3 20.5V3.5C3 2.91 3.34 2.39 3.84 2.15L13.69 12L3.84 21.85C3.34 21.6 3 21.09 3 20.5M16.81 15.12L6.05 21.34L14.54 12.85L16.81 15.12M20.16 10.81C20.5 11.08 20.75 11.5 20.75 12C20.75 12.5 20.53 12.9 20.18 13.18L17.89 14.5L15.39 12L17.89 9.5L20.16 10.81M6.05 2.66L16.81 8.88L14.54 11.15L6.05 2.66Z"/></svg>
           Get Free App
         </a>
+
         <button type="button" class="hamburger-btn" aria-label="Open mobile menu" aria-expanded="false">
           <span></span>
           <span></span>
@@ -78,136 +128,138 @@
     </div>
   </div>
 
-  <!-- Hero Banner -->
-  <section class="section-sm" style="background: var(--grad-hero-aurora); text-align: center; border-bottom: 1px solid var(--border-color);">
-    <div class="container">
-      <div class="section-pill">Our Mission & Story</div>
-      <h1 class="hero-title" style="margin-bottom: 16px;">The Philosophy Behind <span class="text-gradient">Taksal</span></h1>
-      <p class="hero-lead" style="margin-bottom: 0;">
-        How we set out to eliminate recurring software fees for independent creators, shopkeepers, and micro-enterprises worldwide.
-      </p>
-    </div>
-  </section>
-
-  <!-- Content Section -->
-  <section class="section">
-    <div class="container" style="max-width: 960px;">
-      <div class="bento-card" style="margin-bottom: var(--space-3xl);">
-        <h2 style="font-size: 2rem; margin-bottom: 16px;">What Does "Taksal" Mean?</h2>
-        <p style="color: var(--text-secondary); line-height: 1.8; font-size: 1.05rem; margin-bottom: 16px;">
-          The word <strong>Taksal</strong> (टकसाल) historically refers to a <em>Mint</em> — the sovereign institution where legal currency, precious coins, and stamps of authentic value are crafted with meticulous precision.
-        </p>
-        <p style="color: var(--text-secondary); line-height: 1.8; font-size: 1.05rem;">
-          In the modern commercial arena, an entrepreneur's "currency" is their brand identity and verified paperwork: the crisp 300 DPI business card they hand a client, the distinctive logo on their shop signboard, the professional GST invoice that seals a deal, and the instant UPI barcode on their counter. Taksal was built to give every creator their own pocket mint.
+  <main id="main">
+    <!-- Hero Banner -->
+    <section class="section-sm" style="background: var(--grad-hero-aurora); text-align: center; border-bottom: 1px solid var(--border-color);">
+      <div class="container">
+        <div class="section-pill">Our Mission & Story</div>
+        <h1 class="hero-title" style="margin-bottom: 16px;">The Philosophy Behind <span class="text-gradient">Taksal</span></h1>
+        <p class="hero-lead" style="margin-bottom: 0;">
+          How we set out to eliminate recurring software fees for independent creators, shopkeepers, and micro-enterprises worldwide.
         </p>
       </div>
+    </section>
 
-      <div class="section-title-wrap" style="text-align: left; margin-bottom: var(--space-2xl);">
-        <div class="section-pill">The Problem We Solved</div>
-        <h2 class="section-title">The Subscription Trap of Modern Software</h2>
-        <p class="section-subtitle" style="margin-left: 0;">
-          A solo business owner today is told they need:
-        </p>
-      </div>
-
-      <div class="bento-grid" style="margin-bottom: var(--space-3xl);">
-        <div class="bento-card bento-4">
-          <h4 style="color: var(--error); margin-bottom: 8px;">Design Subscription</h4>
-          <p style="color: var(--text-secondary); font-size: 0.95rem;">
-            $12 to $25 / month just to export high-resolution PNGs or access basic brand palettes without watermarks.
+    <!-- Content Section -->
+    <section class="section">
+      <div class="container" style="max-width: 960px;">
+        <div class="bento-card spotlight-card" style="margin-bottom: var(--space-3xl);">
+          <h2 style="font-size: 2rem; margin-bottom: 16px;">What Does "Taksal" Mean?</h2>
+          <p style="color: var(--text-secondary); line-height: 1.8; font-size: 1.05rem; margin-bottom: 16px;">
+            The word <strong>Taksal</strong> (टकसाल) historically refers to a <em>Mint</em> — the sovereign institution where legal currency, precious coins, and stamps of authentic value are crafted with meticulous precision.
+          </p>
+          <p style="color: var(--text-secondary); line-height: 1.8; font-size: 1.05rem;">
+            In the modern commercial arena, an entrepreneur's "currency" is their brand identity and verified paperwork: the crisp 300 DPI business card they hand a client, the distinctive logo on their shop signboard, the professional GST invoice that seals a deal, and the instant UPI barcode on their counter. Taksal was built to give every creator their own pocket mint.
           </p>
         </div>
-        <div class="bento-card bento-4">
-          <h4 style="color: var(--error); margin-bottom: 8px;">Invoicing SaaS</h4>
-          <p style="color: var(--text-secondary); font-size: 0.95rem;">
-            $15 to $35 / month to issue more than 5 invoices or print thermal receipts, holding client data hostage.
+
+        <div class="section-title-wrap" style="text-align: left; margin-bottom: var(--space-2xl);">
+          <div class="section-pill">The Problem We Solved</div>
+          <h2 class="section-title">The Subscription Trap of Modern Software</h2>
+          <p class="section-subtitle" style="margin-left: 0;">
+            A solo business owner today is told they need multiple monthly subscriptions:
           </p>
         </div>
-        <div class="bento-card bento-4">
-          <h4 style="color: var(--error); margin-bottom: 8px;">QR & Barcode Utilities</h4>
-          <p style="color: var(--text-secondary); font-size: 0.95rem;">
-            $5 to $10 / month for simple barcode generators riddled with spammy link redirections.
-          </p>
-        </div>
-      </div>
 
-      <div class="bento-card" style="background: var(--bg-surface-subtle); border-left: 4px solid var(--brand-indigo); margin-bottom: var(--space-3xl);">
-        <h3 style="margin-bottom: 12px; font-size: 1.4rem;">Our Contrarian Manifesto</h3>
-        <p style="color: var(--text-secondary); line-height: 1.8; font-size: 1.05rem;">
-          We believe basic commercial infrastructure — designing an identity, issuing an itemized bill, tracking stock, and accepting payments — is a fundamental human economic right that should not be leased like a luxury utility. By building an ultra-optimized native Android client that runs entirely on the user's hardware, Taksal eliminates cloud infrastructure overhead and offers <strong>100% of its features completely free forever</strong>.
-        </p>
-      </div>
-
-      <div class="section-title-wrap" style="text-align: left; margin-bottom: var(--space-2xl);">
-        <div class="section-pill">Engineering Principles</div>
-        <h2 class="section-title">Built on Native Sovereign Architecture</h2>
-      </div>
-
-      <div class="bento-grid" style="margin-bottom: var(--space-3xl);">
-        <div class="bento-card bento-6">
-          <div class="bento-icon-box icon-emerald">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+        <div class="bento-grid" style="margin-bottom: var(--space-3xl);">
+          <div class="bento-card bento-4 spotlight-card">
+            <h4 style="color: var(--error); margin-bottom: 8px;">Design Subscription</h4>
+            <p style="color: var(--text-secondary); font-size: 0.95rem;">
+              $12 to $25 / month just to export high-resolution PNGs or access basic brand palettes without watermarks.
+            </p>
           </div>
-          <h3 class="bento-title">Hardware-Backed Security (Android KeyStore)</h3>
-          <p class="bento-desc">
-            Your business credentials, tax identifiers, brand profiles, and Gemini AI API keys are protected on-device with 256-bit AES-GCM encryption keys held within the phone's hardware Secure Enclave.
-          </p>
-        </div>
-
-        <div class="bento-card bento-6">
-          <div class="bento-icon-box icon-teal">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect><rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect><line x1="6" y1="6" x2="6.01" y2="6"></line><line x1="6" y1="18" x2="6.01" y2="18"></line></svg>
+          <div class="bento-card bento-4 spotlight-card">
+            <h4 style="color: var(--error); margin-bottom: 8px;">Invoicing SaaS</h4>
+            <p style="color: var(--text-secondary); font-size: 0.95rem;">
+              $15 to $35 / month to issue more than 5 invoices or print thermal receipts, holding client data hostage.
+            </p>
           </div>
-          <h3 class="bento-title">100% Local Storage (Room SQLite)</h3>
-          <p class="bento-desc">
-            Your customer lists, invoice totals, and inventory are stored locally in SQLite tables on your device. We do not maintain any centralized user database, ensuring zero cloud breaches or surveillance.
-          </p>
-        </div>
-
-        <div class="bento-card bento-6">
-          <div class="bento-icon-box icon-purple">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+          <div class="bento-card bento-4 spotlight-card">
+            <h4 style="color: var(--error); margin-bottom: 8px;">QR & Barcode Utilities</h4>
+            <p style="color: var(--text-secondary); font-size: 0.95rem;">
+              $5 to $10 / month for simple barcode generators riddled with spammy link redirections.
+            </p>
           </div>
-          <h3 class="bento-title">Jetpack Compose & Google Skia</h3>
-          <p class="bento-desc">
-            Crafted with modern declarative Kotlin and Jetpack Compose Material 3. Hardware-accelerated 60 FPS vector canvas rendering eliminates lag, even with hundreds of canvas layers.
+        </div>
+
+        <div class="bento-card spotlight-card" style="background: var(--bg-surface-subtle); border-left: 4px solid var(--brand-indigo); margin-bottom: var(--space-3xl);">
+          <h3 style="margin-bottom: 12px; font-size: 1.4rem;">Our Contrarian Manifesto</h3>
+          <p style="color: var(--text-secondary); line-height: 1.8; font-size: 1.05rem;">
+            We believe basic commercial infrastructure — designing an identity, issuing an itemized bill, tracking stock, and accepting payments — is a fundamental human economic right that should not be leased like a luxury utility. By building an ultra-optimized native Android client that runs entirely on the user's hardware, Taksal eliminates cloud infrastructure overhead and offers <strong>100% of its features completely free forever</strong>.
           </p>
         </div>
 
-        <div class="bento-card bento-6">
-          <div class="bento-icon-box icon-indigo">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
-          </div>
-          <h3 class="bento-title">Ethical Monetization with UMP Consent</h3>
-          <p class="bento-desc">
-            Rather than paywalling features, Taksal uses non-disruptive Google AdMob ads with strictly regulated 60-second cooldown timers and full Google User Messaging Platform (UMP) privacy consent controls.
-          </p>
+        <div class="section-title-wrap" style="text-align: left; margin-bottom: var(--space-2xl);">
+          <div class="section-pill">Engineering Principles</div>
+          <h2 class="section-title">Built on Native Sovereign Architecture</h2>
         </div>
-      </div>
 
-    </div>
-  </section>
-
-  <!-- Download CTA Section -->
-  <section class="section-sm">
-    <div class="container">
-      <div class="cta-banner">
-        <h2 class="cta-title">Join the Sovereign Creator Movement</h2>
-        <p class="cta-desc">
-          Experience the freedom of an all-in-one studio designed for your business independence.
-        </p>
-        <div class="cta-actions">
-          <a href="https://play.google.com/store/apps/details?id=com.card.mint.cardbuilder" target="_blank" rel="noopener noreferrer" class="play-store-btn">
-            <img src="assets/images/badges/google-play-badge.svg" alt="Google Play" class="play-icon">
-            <div>
-              <span class="btn-text-small">Download on</span>
-              <span class="btn-text-large">Google Play</span>
+        <div class="bento-grid" style="margin-bottom: var(--space-3xl);">
+          <div class="bento-card bento-6 spotlight-card">
+            <div class="bento-icon-box icon-emerald">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
             </div>
-          </a>
+            <h3 class="bento-title">Hardware-Backed Security (Android KeyStore)</h3>
+            <p class="bento-desc">
+              Your business credentials, tax identifiers, brand profiles, and Gemini AI API keys are protected on-device with 256-bit AES-GCM encryption keys held within the phone's hardware Secure Enclave.
+            </p>
+          </div>
+
+          <div class="bento-card bento-6 spotlight-card">
+            <div class="bento-icon-box icon-teal">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect><rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect><line x1="6" y1="6" x2="6.01" y2="6"></line><line x1="6" y1="18" x2="6.01" y2="18"></line></svg>
+            </div>
+            <h3 class="bento-title">100% Local Storage (Room SQLite)</h3>
+            <p class="bento-desc">
+              Your customer lists, invoice totals, and inventory are stored locally in SQLite tables on your device. We do not maintain any centralized user database, ensuring zero cloud breaches or surveillance.
+            </p>
+          </div>
+
+          <div class="bento-card bento-6 spotlight-card">
+            <div class="bento-icon-box icon-purple">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+            </div>
+            <h3 class="bento-title">Jetpack Compose & Google Skia</h3>
+            <p class="bento-desc">
+              Crafted with modern declarative Kotlin and Jetpack Compose Material 3. Hardware-accelerated 60 FPS vector canvas rendering eliminates lag, even with hundreds of canvas layers.
+            </p>
+          </div>
+
+          <div class="bento-card bento-6 spotlight-card">
+            <div class="bento-icon-box icon-indigo">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+            </div>
+            <h3 class="bento-title">Ethical Monetization with UMP Consent</h3>
+            <p class="bento-desc">
+              Rather than paywalling features, Taksal uses non-disruptive Google AdMob ads with strictly regulated 60-second cooldown timers and full Google User Messaging Platform (UMP) privacy consent controls.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Download CTA Section -->
+    <section class="section-sm">
+      <div class="container">
+        <div class="cta-banner">
+          <h2 class="cta-title">Join the Sovereign Creator Movement</h2>
+          <p class="cta-desc">
+            Experience the freedom of an all-in-one studio designed for your business independence.
+          </p>
+          <div class="cta-actions">
+            <a href="https://play.google.com/store/apps/details?id=com.card.mint.cardbuilder" target="_blank" rel="noopener noreferrer" class="play-store-btn" aria-label="Download on Google Play">
+              <img src="assets/images/badges/google-play-badge.svg" alt="Google Play" class="play-icon" width="32" height="32">
+              <div>
+                <span class="btn-text-small">Download on</span>
+                <span class="btn-text-large">Google Play</span>
+              </div>
+            </a>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
+  </main>
 
   <!-- Site Footer -->
   <footer class="site-footer">
@@ -215,7 +267,7 @@
       <div class="footer-grid">
         <div class="footer-brand">
           <div class="brand-logo">
-            <img src="assets/images/app-icon.png" alt="Taksal Icon" class="brand-icon">
+            <img src="assets/images/app-icon.png" alt="Taksal Icon" class="brand-icon" width="38" height="38">
             <span>Taksal Studio</span>
           </div>
           <p>The world's #1 free creative graphic studio and SME business management suite for Android.</p>

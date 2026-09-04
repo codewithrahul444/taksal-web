@@ -7,6 +7,23 @@
   <meta name="description" content="Official Terms and Conditions for Taksal Studio (com.card.mint.cardbuilder). Clear, fair terms regarding user copyright ownership, commercial use, and offline data sovereignty.">
   <link rel="canonical" href="https://taksal.com/terms.html">
   <link rel="icon" type="image/png" href="assets/images/app-icon.png">
+  <link rel="apple-touch-icon" href="assets/images/app-icon.png">
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="theme-color" content="#4A148C" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#09090B" media="(prefers-color-scheme: dark)">
+
+  <!-- Preconnect to Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Zero-FOUC Theme Initializer -->
+  <script>
+    (function(){
+      var t = localStorage.getItem('taksal-theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
 
   <!-- Open Graph -->
   <meta property="og:type" content="website">
@@ -14,6 +31,8 @@
   <meta property="og:title" content="Terms & Conditions — Taksal Studio">
   <meta property="og:description" content="Official Terms and Conditions for Taksal Studio Android application.">
   <meta property="og:image" content="https://taksal.com/assets/images/feature-graphic.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
 
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image">
@@ -21,16 +40,37 @@
   <meta name="twitter:description" content="Official Terms and Conditions for Taksal Studio Android application.">
   <meta name="twitter:image" content="https://taksal.com/assets/images/feature-graphic.png">
 
+  <!-- JSON-LD Breadcrumb Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [{
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://taksal.com/"
+    },{
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Terms & Conditions",
+      "item": "https://taksal.com/terms.html"
+    }]
+  }
+  </script>
+
   <link rel="stylesheet" href="assets/css/style.css">
   <link rel="stylesheet" href="assets/css/legal.css">
 </head>
 <body>
+  <!-- Accessible Skip Link -->
+  <a href="#main" class="skip-link">Skip to main content</a>
 
   <!-- Site Header -->
   <header class="site-header">
     <div class="container nav-container">
       <a href="index.html" class="brand-logo" aria-label="Taksal Home">
-        <img src="assets/images/app-icon.png" alt="Taksal Logo" class="brand-icon">
+        <img src="assets/images/app-icon.png" alt="Taksal Logo" class="brand-icon" width="38" height="38">
         <span>Taksal</span>
         <span class="brand-badge">Legal</span>
       </a>
@@ -47,6 +87,13 @@
       </nav>
 
       <div class="nav-actions">
+        <!-- Command Palette Trigger Button -->
+        <button type="button" class="cmd-palette-btn" aria-label="Open Command Palette (Cmd+K)">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          <span>Search</span>
+          <span class="cmd-kbd">⌘K</span>
+        </button>
+
         <button type="button" class="theme-toggle-btn" aria-label="Toggle dark/light theme">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
         </button>
@@ -83,7 +130,7 @@
       </aside>
 
       <!-- Main Legal Article -->
-      <main class="legal-article">
+      <main id="main" class="legal-article">
         <header class="legal-header">
           <div class="legal-badge" style="margin-bottom: 12px;">Standard Commercial License · 100% User IP Ownership</div>
           <h1 class="legal-title">Terms & Conditions for Taksal Studio</h1>
